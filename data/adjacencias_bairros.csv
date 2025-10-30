@@ -1,470 +1,71 @@
 bairro_origem,bairro_destino,logradouro,observacao,peso
-Bongi,Mustardinha,Av Manoel Goncalves Da Luz,,1.0
-Guabiraba,Passarinho,Av Da Recuperacao,acesso via ponte sobre Av Da Recuperacao,1.5
-Brejo Da Guabiraba,Guabiraba,Av Embaixador Assis Chateaubriand,,1.0
-Apipucos,Guabiraba,Av Da Recuperacao,acesso via ponte sobre Av Da Recuperacao,1.5
-Brejo Da Guabiraba,Passarinho,Av Presidente Cafe Filho,,1.0
-Apipucos,Passarinho,Av Da Recuperacao,acesso via ponte sobre Av Da Recuperacao,1.5
-Apipucos,Brejo Da Guabiraba,Av Da Recuperacao,acesso via ponte sobre Av Da Recuperacao,1.5
-Cabanga,Pina,Rua Pina-Rio,acesso via ponte sobre Rua Pina-Rio,2.0
-Brejo De Beberibe,Dois Unidos,Rua Muraja,,1.5
-Coelhos,Recife,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Coelhos,Ilha Joana Bezerra,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Coelhos,Ilha Do Leite,Rua Francisco Alves,,1.5
-Coelhos,Santo Amaro,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Coelhos,Derby,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Coelhos,Santana,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Coelhos,Paissandu,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Coelhos,Torre,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Coelhos,Jaqueira,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Coelhos,Madalena,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Coelhos,Iputinga,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Coelhos,Cordeiro,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Coelhos,Ilha Do Retiro,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Afogados,Coelhos,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Apipucos,Coelhos,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Ilha Joana Bezerra,Recife,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Ilha Do Leite,Recife,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Recife,Santo Amaro,Rua Dr Ascanio Peixoto,,1.5
-Derby,Recife,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Recife,Santana,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Paissandu,Recife,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Recife,Torre,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Jaqueira,Recife,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Madalena,Recife,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Iputinga,Recife,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Cordeiro,Recife,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Ilha Do Retiro,Recife,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Afogados,Recife,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Apipucos,Recife,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Ilha Do Leite,Ilha Joana Bezerra,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Ilha Joana Bezerra,Santo Amaro,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Derby,Ilha Joana Bezerra,Av Beira Rio,acesso via ponte sobre Av Beira Rio,1.5
-Ilha Joana Bezerra,Santana,Av Beira Rio,acesso via ponte sobre Av Beira Rio,1.5
-Ilha Joana Bezerra,Paissandu,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Ilha Joana Bezerra,Torre,Av Beira Rio,acesso via ponte sobre Av Beira Rio,1.5
-Ilha Joana Bezerra,Jaqueira,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Ilha Joana Bezerra,Madalena,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Ilha Joana Bezerra,Iputinga,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Cordeiro,Ilha Joana Bezerra,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Ilha Do Retiro,Ilha Joana Bezerra,Rua Padre Teofilo Tworz,,1.5
-Afogados,Ilha Joana Bezerra,Rua Crisopolis,,1.5
-Apipucos,Ilha Joana Bezerra,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Ilha Do Leite,Santo Amaro,Av Governador Agamenon Magalhaes,acesso via ponte sobre Av Governador Agamenon Magalhaes,1.5
-Derby,Ilha Do Leite,Av Governador Agamenon Magalhaes,acesso via ponte sobre Av Governador Agamenon Magalhaes,1.5
-Ilha Do Leite,Santana,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Ilha Do Leite,Paissandu,Rua Estado De Israel,,1.5
-Ilha Do Leite,Torre,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Ilha Do Leite,Jaqueira,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Ilha Do Leite,Madalena,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Ilha Do Leite,Iputinga,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Cordeiro,Ilha Do Leite,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Ilha Do Leite,Ilha Do Retiro,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Afogados,Ilha Do Leite,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Apipucos,Ilha Do Leite,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Derby,Santo Amaro,Av Governador Agamenon Magalhaes,acesso via ponte sobre Av Governador Agamenon Magalhaes,1.5
-Santana,Santo Amaro,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Paissandu,Santo Amaro,Av Governador Agamenon Magalhaes,acesso via ponte sobre Av Governador Agamenon Magalhaes,1.5
-Santo Amaro,Torre,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Jaqueira,Santo Amaro,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Madalena,Santo Amaro,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Iputinga,Santo Amaro,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Cordeiro,Santo Amaro,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Ilha Do Retiro,Santo Amaro,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Afogados,Santo Amaro,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Apipucos,Santo Amaro,Av Norte Miguel Arraes De Alencar,acesso via ponte sobre Av Norte Miguel Arraes De Alencar,1.5
-Derby,Santana,Av Beira Rio,acesso via ponte sobre Av Beira Rio,1.5
-Derby,Paissandu,Rua Vis Do Livramento,,1.5
-Derby,Torre,Av Beira Rio,acesso via ponte sobre Av Beira Rio,1.5
-Derby,Jaqueira,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Derby,Madalena,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Derby,Iputinga,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Cordeiro,Derby,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Derby,Ilha Do Retiro,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Afogados,Derby,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Apipucos,Derby,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Paissandu,Santana,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Santana,Torre,Av Beira Rio,acesso via ponte sobre Av Beira Rio,1.5
-Jaqueira,Santana,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Madalena,Santana,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Iputinga,Santana,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Cordeiro,Santana,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Ilha Do Retiro,Santana,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Afogados,Santana,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Apipucos,Santana,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Paissandu,Torre,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Jaqueira,Paissandu,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Madalena,Paissandu,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Iputinga,Paissandu,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Cordeiro,Paissandu,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Ilha Do Retiro,Paissandu,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Afogados,Paissandu,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Apipucos,Paissandu,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Jaqueira,Torre,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Madalena,Torre,Av Beira Rio Gov Eduardo Campos,,1.0
-Iputinga,Torre,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Cordeiro,Torre,Rua Diogo Alvares,,1.5
-Ilha Do Retiro,Torre,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Afogados,Torre,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Apipucos,Torre,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Jaqueira,Madalena,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Iputinga,Jaqueira,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Cordeiro,Jaqueira,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Ilha Do Retiro,Jaqueira,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Afogados,Jaqueira,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Apipucos,Jaqueira,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Iputinga,Madalena,Av Caxanga,acesso via ponte sobre Av Caxanga,1.5
-Cordeiro,Madalena,Av Engenheiro Abdias De Carvalho,,1.0
-Ilha Do Retiro,Madalena,Av Beira Rio Dep Osvaldo Coelho,,1.0
-Afogados,Madalena,Rua Joao Ivo Da Silva,,1.5
-Apipucos,Madalena,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Cordeiro,Iputinga,Av Camarao,,1.0
-Ilha Do Retiro,Iputinga,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Afogados,Iputinga,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Apipucos,Iputinga,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Cordeiro,Ilha Do Retiro,Av Engenheiro Abdias De Carvalho,,1.0
-Afogados,Cordeiro,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Apipucos,Cordeiro,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Afogados,Ilha Do Retiro,Rua Joao Ivo Da Silva,,1.5
-Apipucos,Ilha Do Retiro,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Afogados,Apipucos,Rua Capibaribe-Rio,acesso via ponte sobre Rua Capibaribe-Rio,2.0
-Curado,Sancho,Av Tempo Feliz,,1.0
-Bongi,Prado,Av Engenheiro Abdias De Carvalho,,1.0
-Afogados,Bongi,Rua Santa Edwirges,,1.5
-Afogados,Prado,Rua Santa Edwirges,,1.5
-Campina Do Barreto,Peixinhos,Av Poeta Vinicius De Morais,,1.0
-Boa Vista,Coelhos,Rua Dos Coqueiros,,1.5
-Prado,Zumbi,Rua Abdias De Oliveira,,1.5
-Macaxeira,Nova Descoberta,Av Joselia,,1.0
-Bongi,San Martin,Av Consul Vilares Fragoso,,1.0
-Boa Viagem,Imbiribeira,Av Dom Joao Vi,,1.0
-Ibura,Ipsep,Av General Bento Da Gama,,1.0
-Brejo Da Guabiraba,Brejo De Beberibe,Av Presidente Cafe Filho,,1.0
-Afogados,Mustardinha,Av Mustardinha,,1.0
-Parnamirim,Tamarineira,Rua Afonso Celso,,1.5
-Santo Amaro,Soledade,Rua Afonso Pena,,1.5
-Boa Vista,Santo Amaro,Av Visconde De Suassuna,,1.0
-Brejo De Beberibe,Nova Descoberta,Rua Agrolandia,,1.5
-Torre,Zumbi,Rua Diogo Alvares,,1.5
-Cordeiro,Zumbi,Rua Diogo Alvares,,1.5
-Imbiribeira,Ipsep,Av Senador Robert Kennedy,,1.0
-Afogados,Mangueira,Rua Alexandre Rodrigues Ferreira,,1.5
-Areias,Barro,Av Des Nestor Diogens De Mello,,1.0
-Cajueiro,Campina Do Barreto,Av Sebastiao Salazar,,1.0
-Brejo Da Guabiraba,Nova Descoberta,Rua Dom Feliciano,,1.5
-Casa Amarela,Monteiro,Av Dr Eurico Chaves,,1.0
-Barro,Cohab,Av Engenho Muribeca,,1.0
-Ibura,Imbiribeira,Av Presidente Dutra,,1.0
-Boa Viagem,Pina,Av Cons Aguiar,,1.0
-Engenho Do Meio,Iputinga,Av Mucio Uchoa Cavalcanti,,1.0
-Afogados,Imbiribeira,Rua Alvorada Do Norte,,1.5
-Encruzilhada,Ponto De Parada,Av Santos Dumont,,1.0
-Cohab,Ibura,Av Dois Rios,,1.0
-Beberibe,Porto Da Madeira,Av Anibal Benevolo,,1.0
-Jaqueira,Tamarineira,Av Conselheiro Rosa E Silva,,1.0
-Dois Unidos,Passarinho,Av Hildebrando De Vasconcelos,,1.0
-Brejo De Beberibe,Passarinho,Av Canaa,,1.0
-Madalena,Prado,Av Engenheiro Abdias De Carvalho,,1.0
-Coqueiral,Sancho,Rua Aprigio Guimaraes,,1.5
-Mustardinha,San Martin,Rua Araguaia,,1.5
-Cajueiro,Porto Da Madeira,Av Sebastiao Salazar,,1.0
-Nova Descoberta,Vasco Da Gama,Rua Arapiraca,,1.5
-Boa Viagem,Ibura,Rua Prof Aurelio De Castro Cavalcanti,,1.5
-Jaqueira,Parnamirim,Av Parnamirim,,1.0
-Brejo De Beberibe,Vasco Da Gama,Av Vereador Otacilio Azevedo,,1.0
-Boa Vista,Ilha Do Leite,Rua Estado De Israel,,1.5
-Boa Vista,Paissandu,Av Lins Petit,,1.0
-Mangueira,San Martin,Rua Bom Jardim,,1.5
-Mangueira,Mustardinha,Av Manoel Goncalves Da Luz,,1.0
-Afogados,San Martin,Rua Bom Jardim,,1.5
-Cordeiro,Prado,Av Jockei Club,,1.0
-Encruzilhada,Rosarinho,Av Santos Dumont,,1.0
-Rosarinho,Tamarineira,Av Engenheiro Agamenon De Magalhaes Melo,,1.0
-Aflitos,Encruzilhada,Av Santos Dumont,,1.0
-Derby,Linha Do Tiro,Prc Poeta Fernando Pessoa,,2.0
-Arruda,Campina Do Barreto,Rua Clara,,1.5
-Arruda,Peixinhos,Av Professor Jose Dos Anjos,,1.0
-Casa Amarela,Parnamirim,Rua Engenheiro Clovis Castro,,1.5
-Beberibe,Linha Do Tiro,Av Anibal Benevolo,,1.0
-Boa Vista,Soledade,Av Oliveira Lima,,1.0
-Alto Do Mandu,Casa Amarela,Av Dr Eurico Chaves,,1.0
-Casa Amarela,Tamarineira,Av Professor Jose Dos Anjos,,1.0
-Ponto De Parada,Rosarinho,Av Santos Dumont,,1.0
-Campo Grande,Encruzilhada,Rua Cristovao Jaques,,1.5
-Madalena,Zumbi,Rua Eduardo Antonio,,1.5
-Dois Unidos,Linha Do Tiro,Av Rio Morno,,1.0
-Aflitos,Espinheiro,Av Conselheiro Rosa E Silva,,1.0
-Casa Forte,Parnamirim,Av Dezessete De Agosto,,1.0
-Casa Amarela,Casa Forte,Rua Ernesto Rufino,,1.5
-Casa Forte,Monteiro,Av Dezessete De Agosto,,1.0
-Monteiro,Parnamirim,Av Dezessete De Agosto,,1.0
-Alto Do Mandu,Monteiro,Av Dr Eurico Chaves,,1.0
-Ilha Do Retiro,Prado,Av Engenheiro Abdias De Carvalho,,1.0
-Coqueiral,Curado,Rua Garcia,,1.5
-Brejo De Beberibe,Linha Do Tiro,Rua Izaltino Lobo,,1.5
-Arruda,Mangabeira,Av Professor Jose Dos Anjos,,1.0
-Arruda,Campo Grande,Av Professor Jose Dos Anjos,,1.0
-Campo Grande,Ponto De Parada,Av Professor Jose Dos Anjos,,1.0
-Parnamirim,Santana,Av Dezessete De Agosto,,1.0
-Encruzilhada,Tamarineira,Rua Dr Jose Maria,,1.5
-Curado,Engenho Do Meio,Av Visconde De Sao Leopoldo,,1.0
-Casa Forte,Santana,Av Dezessete De Agosto,,1.0
-Boa Vista,Espinheiro,Av Montevideu,,1.0
-Casa Amarela,Vasco Da Gama,Rua Paraisopolis,,1.5
-Alto Do Mandu,Apipucos,Rua Mandacaru,,1.5
-Apipucos,Monteiro,Rua Mandacaru,,1.5
-Curado,San Martin,Av Recife,,1.0
-Alto Do Mandu,Macaxeira,Rua Massaranduba,,1.5
-Apipucos,Macaxeira,Rua Massaranduba,,1.5
-Casa Amarela,Nova Descoberta,Rua Paraisopolis,,1.5
-Encruzilhada,Espinheiro,Rua Marques Do Parana,,1.5
-Aflitos,Rosarinho,Av Santos Dumont,,1.0
-Aflitos,Ponto De Parada,Av Santos Dumont,,1.0
-Arruda,Ponto De Parada,Av Beberibe,,1.0
-Campina Do Barreto,Porto Da Madeira,Av Sebastiao Salazar,,1.0
-Areias,Ipsep,Av Recife,,1.0
-Campo Grande,Peixinhos,Av Correia De Brito,,1.0
-Iputinga,Monteiro,Pte Barqueiro Sinval Peixoto Da Silva,acesso via ponte sobre Pte Barqueiro Sinval Peixoto Da Silva,2.5
-Espinheiro,Santo Amaro,Av Joao De Barros,acesso via ponte sobre Av Joao De Barros,1.5
-Campo Grande,Santo Amaro,Av Governador Agamenon Magalhaes,acesso via ponte sobre Av Governador Agamenon Magalhaes,1.5
-Afogados,Cabanga,Av Sul Gov. Cid Sampaio,acesso via ponte sobre Av Sul Gov. Cid Sampaio,1.5
-Curado,Guabiraba,Rua Projetada,acesso via ponte sobre Rua Projetada,2.0
-Curado,Iputinga,Rod Br Cento E Um,acesso via ponte sobre Rod Br Cento E Um,2.5
-Curado,Passarinho,Rua Projetada,acesso via ponte sobre Rua Projetada,2.0
-Barro,Curado,Av Central,acesso via ponte sobre Av Central,1.5
-Brejo Da Guabiraba,Curado,Rod Br Cento E Um,acesso via ponte sobre Rod Br Cento E Um,2.5
-Curado,Ibura,Av Recife,,1.0
-Apipucos,Curado,Rod Br Cento E Um,acesso via ponte sobre Rod Br Cento E Um,2.5
-Cohab,Curado,Rod Br Cento E Um,acesso via ponte sobre Rod Br Cento E Um,2.5
-Guabiraba,Iputinga,Rod Br Cento E Um,acesso via ponte sobre Rod Br Cento E Um,2.5
-Barro,Guabiraba,Rod Br Cento E Um,acesso via ponte sobre Rod Br Cento E Um,2.5
-Guabiraba,Ibura,Rod Br Cento E Um,acesso via ponte sobre Rod Br Cento E Um,2.5
-Cohab,Guabiraba,Rua Limite De Municipio,,1.5
-Iputinga,Passarinho,Rod Br Cento E Um,acesso via ponte sobre Rod Br Cento E Um,2.5
-Barro,Iputinga,Rod Br Cento E Um,acesso via ponte sobre Rod Br Cento E Um,2.5
-Brejo Da Guabiraba,Iputinga,Rod Br Cento E Um,acesso via ponte sobre Rod Br Cento E Um,2.5
-Ibura,Iputinga,Rod Br Cento E Um,acesso via ponte sobre Rod Br Cento E Um,2.5
-Cohab,Iputinga,Rod Br Cento E Um,acesso via ponte sobre Rod Br Cento E Um,2.5
-Barro,Passarinho,Rod Br Cento E Um,acesso via ponte sobre Rod Br Cento E Um,2.5
-Ibura,Passarinho,Rod Br Cento E Um,acesso via ponte sobre Rod Br Cento E Um,2.5
-Cohab,Passarinho,Rua Limite De Municipio,,1.5
-Barro,Brejo Da Guabiraba,Rod Br Cento E Um,acesso via ponte sobre Rod Br Cento E Um,2.5
-Barro,Ibura,Rua Tejipio-Rio,acesso via ponte sobre Rua Tejipio-Rio,2.0
-Apipucos,Barro,Rod Br Cento E Um,acesso via ponte sobre Rod Br Cento E Um,2.5
-Brejo Da Guabiraba,Ibura,Rod Br Cento E Um,acesso via ponte sobre Rod Br Cento E Um,2.5
-Brejo Da Guabiraba,Cohab,Rod Br Cento E Um,acesso via ponte sobre Rod Br Cento E Um,2.5
-Apipucos,Ibura,Rod Br Cento E Um,acesso via ponte sobre Rod Br Cento E Um,2.5
-Apipucos,Cohab,Rod Br Cento E Um,acesso via ponte sobre Rod Br Cento E Um,2.5
-Curado,Ipsep,Av Recife,,1.0
-Areias,Curado,Av Recife,,1.0
-Curado,Pina,Rua Tejipio-Rio,acesso via ponte sobre Rua Tejipio-Rio,2.0
-Curado,Imbiribeira,Av Central,acesso via ponte sobre Av Central,1.5
-Afogados,Curado,Av Central,acesso via ponte sobre Av Central,1.5
-Barro,Ipsep,Rua Tejipio-Rio,acesso via ponte sobre Rua Tejipio-Rio,2.0
-Coqueiral,Ipsep,Rua Tejipio-Rio,acesso via ponte sobre Rua Tejipio-Rio,2.0
-Ipsep,Pina,Rua Tejipio-Rio,acesso via ponte sobre Rua Tejipio-Rio,2.0
-Afogados,Ipsep,Rua Tejipio-Rio,acesso via ponte sobre Rua Tejipio-Rio,2.0
-Areias,Coqueiral,Av Central,acesso via ponte sobre Av Central,1.5
-Areias,Pina,Rua Tejipio-Rio,acesso via ponte sobre Rua Tejipio-Rio,2.0
-Areias,Ibura,Av Recife,,1.0
-Areias,Imbiribeira,Av Central,acesso via ponte sobre Av Central,1.5
-Afogados,Areias,Av Central,acesso via ponte sobre Av Central,1.5
-Barro,Coqueiral,Av Central,acesso via ponte sobre Av Central,1.5
-Barro,Pina,Rua Tejipio-Rio,acesso via ponte sobre Rua Tejipio-Rio,2.0
-Barro,Imbiribeira,Av Central,acesso via ponte sobre Av Central,1.5
-Afogados,Barro,Av Central,acesso via ponte sobre Av Central,1.5
-Coqueiral,Pina,Rua Tejipio-Rio,acesso via ponte sobre Rua Tejipio-Rio,2.0
-Coqueiral,Ibura,Rua Tejipio-Rio,acesso via ponte sobre Rua Tejipio-Rio,2.0
-Coqueiral,Imbiribeira,Av Central,acesso via ponte sobre Av Central,1.5
-Afogados,Coqueiral,Av Central,acesso via ponte sobre Av Central,1.5
-Ibura,Pina,Rua Tejipio-Rio,acesso via ponte sobre Rua Tejipio-Rio,2.0
-Imbiribeira,Pina,Rua Sao Jose,,1.5
-Afogados,Pina,Rua Tejipio-Rio,acesso via ponte sobre Rua Tejipio-Rio,2.0
-Afogados,Ibura,Rua Tejipio-Rio,acesso via ponte sobre Rua Tejipio-Rio,2.0
-Guabiraba,Peixinhos,Rua Limite De Municipio,,1.5
-Passarinho,Peixinhos,Rua Limite De Municipio,,1.5
-Coqueiral,Peixinhos,Rua Limite De Municipio,,1.5
-Boa Viagem,Peixinhos,Rua Limite De Municipio,,1.5
-Cohab,Peixinhos,Rua Limite De Municipio,,1.5
-Campina Do Barreto,Guabiraba,Rua Limite De Municipio,,1.5
-Campina Do Barreto,Passarinho,Rua Limite De Municipio,,1.5
-Campina Do Barreto,Coqueiral,Rua Limite De Municipio,,1.5
-Boa Viagem,Campina Do Barreto,Rua Limite De Municipio,,1.5
-Campina Do Barreto,Cohab,Rua Limite De Municipio,,1.5
-Coqueiral,Guabiraba,Rua Limite De Municipio,,1.5
-Boa Viagem,Guabiraba,Rua Limite De Municipio,,1.5
-Coqueiral,Passarinho,Rua Limite De Municipio,,1.5
-Boa Viagem,Passarinho,Rua Limite De Municipio,,1.5
-Boa Viagem,Coqueiral,Rua Limite De Municipio,,1.5
-Cohab,Coqueiral,Rua Limite De Municipio,,1.5
-Boa Viagem,Cohab,Rua Limite De Municipio,,1.5
-Dois Unidos,Peixinhos,Rua Beberibe-Rio,acesso via ponte sobre Rua Beberibe-Rio,2.0
-Campina Do Barreto,Dois Unidos,Rua Beberibe-Rio,acesso via ponte sobre Rua Beberibe-Rio,2.0
-Arruda,Dois Unidos,Rua Beberibe-Rio,acesso via ponte sobre Rua Beberibe-Rio,2.0
-Cajueiro,Dois Unidos,Rua Beberibe-Rio,acesso via ponte sobre Rua Beberibe-Rio,2.0
-Dois Unidos,Porto Da Madeira,Rua Beberibe-Rio,acesso via ponte sobre Rua Beberibe-Rio,2.0
-Beberibe,Dois Unidos,Av Hildebrando De Vasconcelos,,1.0
-Campo Grande,Dois Unidos,Rua Beberibe-Rio,acesso via ponte sobre Rua Beberibe-Rio,2.0
-Cajueiro,Peixinhos,Rua Beberibe-Rio,acesso via ponte sobre Rua Beberibe-Rio,2.0
-Peixinhos,Porto Da Madeira,Rua Beberibe-Rio,acesso via ponte sobre Rua Beberibe-Rio,2.0
-Beberibe,Peixinhos,Rua Beberibe-Rio,acesso via ponte sobre Rua Beberibe-Rio,2.0
-Beberibe,Campina Do Barreto,Rua Beberibe-Rio,acesso via ponte sobre Rua Beberibe-Rio,2.0
-Campina Do Barreto,Campo Grande,Rua Beberibe-Rio,acesso via ponte sobre Rua Beberibe-Rio,2.0
-Arruda,Cajueiro,Av Beberibe,,1.0
-Arruda,Porto Da Madeira,Av Beberibe,,1.0
-Arruda,Passarinho,Rua Beberibe-Rio,acesso via ponte sobre Rua Beberibe-Rio,2.0
-Arruda,Beberibe,Av Beberibe,,1.0
-Cajueiro,Passarinho,Rua Beberibe-Rio,acesso via ponte sobre Rua Beberibe-Rio,2.0
-Beberibe,Cajueiro,Av Beberibe,,1.0
-Cajueiro,Campo Grande,Rua Beberibe-Rio,acesso via ponte sobre Rua Beberibe-Rio,2.0
-Passarinho,Porto Da Madeira,Rua Beberibe-Rio,acesso via ponte sobre Rua Beberibe-Rio,2.0
-Campo Grande,Porto Da Madeira,Rua Beberibe-Rio,acesso via ponte sobre Rua Beberibe-Rio,2.0
-Beberibe,Passarinho,Av Hildebrando De Vasconcelos,,1.0
-Campo Grande,Passarinho,Rua Beberibe-Rio,acesso via ponte sobre Rua Beberibe-Rio,2.0
-Beberibe,Campo Grande,Rua Beberibe-Rio,acesso via ponte sobre Rua Beberibe-Rio,2.0
-Parnamirim,Torre,Vdo Governador Cordeiro De Farias,acesso via ponte sobre Vdo Governador Cordeiro De Farias,2.5
-Boa Viagem,Cabanga,Av Sul Gov. Cid Sampaio,acesso via ponte sobre Av Sul Gov. Cid Sampaio,1.5
-Linha Do Tiro,Porto Da Madeira,Av Anibal Benevolo,,1.0
-Cordeiro,Engenho Do Meio,Rua Bom Pastor,,1.5
-Boa Vista,Derby,Av Governador Carlos De Lima Cavalcanti,,1.0
-Bongi,Madalena,Av Engenheiro Abdias De Carvalho,,1.0
-Monteiro,Santana,Av Dezessete De Agosto,,1.0
-Encruzilhada,Santo Amaro,Av Joao De Barros,acesso via ponte sobre Av Joao De Barros,1.5
-Boa Vista,Encruzilhada,Av Joao De Barros,acesso via ponte sobre Av Joao De Barros,1.5
-Espinheiro,Soledade,Av Joao De Barros,acesso via ponte sobre Av Joao De Barros,1.5
-Encruzilhada,Soledade,Av Joao De Barros,acesso via ponte sobre Av Joao De Barros,1.5
-Dois Unidos,Vasco Da Gama,Rua Tupiracaba,,1.5
-Espinheiro,Ilha Do Leite,Av Governador Agamenon Magalhaes,acesso via ponte sobre Av Governador Agamenon Magalhaes,1.5
-Campo Grande,Ilha Do Leite,Av Governador Agamenon Magalhaes,acesso via ponte sobre Av Governador Agamenon Magalhaes,1.5
-Boa Vista,Campo Grande,Av Governador Agamenon Magalhaes,acesso via ponte sobre Av Governador Agamenon Magalhaes,1.5
-Derby,Espinheiro,Av Governador Agamenon Magalhaes,acesso via ponte sobre Av Governador Agamenon Magalhaes,1.5
-Espinheiro,Paissandu,Av Governador Agamenon Magalhaes,acesso via ponte sobre Av Governador Agamenon Magalhaes,1.5
-Campo Grande,Espinheiro,Av Governador Agamenon Magalhaes,acesso via ponte sobre Av Governador Agamenon Magalhaes,1.5
-Campo Grande,Derby,Av Governador Agamenon Magalhaes,acesso via ponte sobre Av Governador Agamenon Magalhaes,1.5
-Campo Grande,Paissandu,Av Governador Agamenon Magalhaes,acesso via ponte sobre Av Governador Agamenon Magalhaes,1.5
-Brejo Da Guabiraba,Macaxeira,Rua Alto Do Reservatorio,,1.5
-Pina,Recife,Rua Praia Do Pina,,1.5
-Curado,Santo Amaro,Rua Projetada,acesso via ponte sobre Rua Projetada,2.0
-Campo Grande,Curado,Rua Projetada,acesso via ponte sobre Rua Projetada,2.0
-Guabiraba,Santo Amaro,Rua Projetada,acesso via ponte sobre Rua Projetada,2.0
-Campo Grande,Guabiraba,Rua Projetada,acesso via ponte sobre Rua Projetada,2.0
-Passarinho,Santo Amaro,Rua Projetada,acesso via ponte sobre Rua Projetada,2.0
-Bongi,Cordeiro,Av Engenheiro Abdias De Carvalho,,1.0
-Bongi,Ilha Do Retiro,Av Engenheiro Abdias De Carvalho,,1.0
-Prado,San Martin,Av Engenheiro Abdias De Carvalho,,1.0
-Madalena,San Martin,Av Engenheiro Abdias De Carvalho,,1.0
-Cordeiro,San Martin,Av Engenheiro Abdias De Carvalho,,1.0
-Ilha Do Retiro,San Martin,Av Engenheiro Abdias De Carvalho,,1.0
-Monteiro,Tamarineira,Est Do Arraial,,2.0
-Arruda,Encruzilhada,Av Beberibe,,1.0
-Cajueiro,Encruzilhada,Av Beberibe,,1.0
-Cajueiro,Ponto De Parada,Av Beberibe,,1.0
-Encruzilhada,Porto Da Madeira,Av Beberibe,,1.0
-Ponto De Parada,Porto Da Madeira,Av Beberibe,,1.0
-Beberibe,Encruzilhada,Av Beberibe,,1.0
-Beberibe,Ponto De Parada,Av Beberibe,,1.0
-Brejo Da Guabiraba,Vasco Da Gama,Av Vereador Otacilio Azevedo,,1.0
-Iputinga,Zumbi,Av Caxanga,acesso via ponte sobre Av Caxanga,1.5
-Curado,Ilha Joana Bezerra,Av Central,acesso via ponte sobre Av Central,1.5
-Curado,Mangueira,Av Central,acesso via ponte sobre Av Central,1.5
-Ilha Joana Bezerra,Mangueira,Av Central,acesso via ponte sobre Av Central,1.5
-Areias,Ilha Joana Bezerra,Av Central,acesso via ponte sobre Av Central,1.5
-Barro,Ilha Joana Bezerra,Av Central,acesso via ponte sobre Av Central,1.5
-Coqueiral,Ilha Joana Bezerra,Av Central,acesso via ponte sobre Av Central,1.5
-Ilha Joana Bezerra,Imbiribeira,Av Central,acesso via ponte sobre Av Central,1.5
-Areias,Mangueira,Av Central,acesso via ponte sobre Av Central,1.5
-Barro,Mangueira,Av Central,acesso via ponte sobre Av Central,1.5
-Coqueiral,Mangueira,Av Central,acesso via ponte sobre Av Central,1.5
-Imbiribeira,Mangueira,Av Central,acesso via ponte sobre Av Central,1.5
-Peixinhos,Rosarinho,Av Professor Jose Dos Anjos,,1.0
-Peixinhos,Tamarineira,Av Professor Jose Dos Anjos,,1.0
-Mangabeira,Peixinhos,Av Professor Jose Dos Anjos,,1.0
-Casa Amarela,Peixinhos,Av Professor Jose Dos Anjos,,1.0
-Peixinhos,Ponto De Parada,Av Professor Jose Dos Anjos,,1.0
-Arruda,Rosarinho,Av Professor Jose Dos Anjos,,1.0
-Mangabeira,Rosarinho,Av Professor Jose Dos Anjos,,1.0
-Casa Amarela,Rosarinho,Av Professor Jose Dos Anjos,,1.0
-Campo Grande,Rosarinho,Av Professor Jose Dos Anjos,,1.0
-Arruda,Tamarineira,Av Professor Jose Dos Anjos,,1.0
-Arruda,Casa Amarela,Av Professor Jose Dos Anjos,,1.0
-Mangabeira,Tamarineira,Av Professor Jose Dos Anjos,,1.0
-Campo Grande,Tamarineira,Av Professor Jose Dos Anjos,,1.0
-Ponto De Parada,Tamarineira,Av Professor Jose Dos Anjos,,1.0
-Casa Amarela,Mangabeira,Av Professor Jose Dos Anjos,,1.0
-Campo Grande,Mangabeira,Av Professor Jose Dos Anjos,,1.0
-Mangabeira,Ponto De Parada,Av Professor Jose Dos Anjos,,1.0
-Campo Grande,Casa Amarela,Av Professor Jose Dos Anjos,,1.0
-Casa Amarela,Ponto De Parada,Av Professor Jose Dos Anjos,,1.0
-Casa Forte,Jaqueira,Rua Leonardo Bezerra Cavalcanti,acesso via ponte sobre Rua Leonardo Bezerra Cavalcanti,2.0
-Bongi,Mangueira,Av Manoel Goncalves Da Luz,,1.0
-Rosarinho,Santo Amaro,Av Norte Miguel Arraes De Alencar,acesso via ponte sobre Av Norte Miguel Arraes De Alencar,1.5
-Espinheiro,Rosarinho,Av Norte Miguel Arraes De Alencar,acesso via ponte sobre Av Norte Miguel Arraes De Alencar,1.5
-Alto Do Mandu,Rosarinho,Av Norte Miguel Arraes De Alencar,acesso via ponte sobre Av Norte Miguel Arraes De Alencar,1.5
-Rosarinho,Vasco Da Gama,Av Norte Miguel Arraes De Alencar,acesso via ponte sobre Av Norte Miguel Arraes De Alencar,1.5
-Macaxeira,Rosarinho,Av Norte Miguel Arraes De Alencar,acesso via ponte sobre Av Norte Miguel Arraes De Alencar,1.5
-Nova Descoberta,Rosarinho,Av Norte Miguel Arraes De Alencar,acesso via ponte sobre Av Norte Miguel Arraes De Alencar,1.5
-Apipucos,Rosarinho,Av Norte Miguel Arraes De Alencar,acesso via ponte sobre Av Norte Miguel Arraes De Alencar,1.5
-Santo Amaro,Tamarineira,Av Norte Miguel Arraes De Alencar,acesso via ponte sobre Av Norte Miguel Arraes De Alencar,1.5
-Mangabeira,Santo Amaro,Av Norte Miguel Arraes De Alencar,acesso via ponte sobre Av Norte Miguel Arraes De Alencar,1.5
-Casa Amarela,Santo Amaro,Av Norte Miguel Arraes De Alencar,acesso via ponte sobre Av Norte Miguel Arraes De Alencar,1.5
-Alto Do Mandu,Santo Amaro,Av Norte Miguel Arraes De Alencar,acesso via ponte sobre Av Norte Miguel Arraes De Alencar,1.5
-Santo Amaro,Vasco Da Gama,Av Norte Miguel Arraes De Alencar,acesso via ponte sobre Av Norte Miguel Arraes De Alencar,1.5
-Macaxeira,Santo Amaro,Av Norte Miguel Arraes De Alencar,acesso via ponte sobre Av Norte Miguel Arraes De Alencar,1.5
-Nova Descoberta,Santo Amaro,Av Norte Miguel Arraes De Alencar,acesso via ponte sobre Av Norte Miguel Arraes De Alencar,1.5
-Espinheiro,Tamarineira,Av Conselheiro Rosa E Silva,,1.0
-Espinheiro,Mangabeira,Av Norte Miguel Arraes De Alencar,acesso via ponte sobre Av Norte Miguel Arraes De Alencar,1.5
-Casa Amarela,Espinheiro,Av Norte Miguel Arraes De Alencar,acesso via ponte sobre Av Norte Miguel Arraes De Alencar,1.5
-Alto Do Mandu,Espinheiro,Av Norte Miguel Arraes De Alencar,acesso via ponte sobre Av Norte Miguel Arraes De Alencar,1.5
-Espinheiro,Vasco Da Gama,Av Norte Miguel Arraes De Alencar,acesso via ponte sobre Av Norte Miguel Arraes De Alencar,1.5
-Espinheiro,Macaxeira,Av Norte Miguel Arraes De Alencar,acesso via ponte sobre Av Norte Miguel Arraes De Alencar,1.5
-Espinheiro,Nova Descoberta,Av Norte Miguel Arraes De Alencar,acesso via ponte sobre Av Norte Miguel Arraes De Alencar,1.5
-Apipucos,Espinheiro,Av Norte Miguel Arraes De Alencar,acesso via ponte sobre Av Norte Miguel Arraes De Alencar,1.5
-Alto Do Mandu,Tamarineira,Av Norte Miguel Arraes De Alencar,acesso via ponte sobre Av Norte Miguel Arraes De Alencar,1.5
-Tamarineira,Vasco Da Gama,Av Norte Miguel Arraes De Alencar,acesso via ponte sobre Av Norte Miguel Arraes De Alencar,1.5
-Macaxeira,Tamarineira,Av Norte Miguel Arraes De Alencar,acesso via ponte sobre Av Norte Miguel Arraes De Alencar,1.5
-Nova Descoberta,Tamarineira,Av Norte Miguel Arraes De Alencar,acesso via ponte sobre Av Norte Miguel Arraes De Alencar,1.5
-Apipucos,Tamarineira,Av Norte Miguel Arraes De Alencar,acesso via ponte sobre Av Norte Miguel Arraes De Alencar,1.5
-Encruzilhada,Mangabeira,Av Norte Miguel Arraes De Alencar,acesso via ponte sobre Av Norte Miguel Arraes De Alencar,1.5
-Alto Do Mandu,Mangabeira,Av Norte Miguel Arraes De Alencar,acesso via ponte sobre Av Norte Miguel Arraes De Alencar,1.5
-Mangabeira,Vasco Da Gama,Av Norte Miguel Arraes De Alencar,acesso via ponte sobre Av Norte Miguel Arraes De Alencar,1.5
-Macaxeira,Mangabeira,Av Norte Miguel Arraes De Alencar,acesso via ponte sobre Av Norte Miguel Arraes De Alencar,1.5
-Mangabeira,Nova Descoberta,Av Norte Miguel Arraes De Alencar,acesso via ponte sobre Av Norte Miguel Arraes De Alencar,1.5
-Apipucos,Mangabeira,Av Norte Miguel Arraes De Alencar,acesso via ponte sobre Av Norte Miguel Arraes De Alencar,1.5
-Casa Amarela,Encruzilhada,Av Norte Miguel Arraes De Alencar,acesso via ponte sobre Av Norte Miguel Arraes De Alencar,1.5
-Casa Amarela,Macaxeira,Av Norte Miguel Arraes De Alencar,acesso via ponte sobre Av Norte Miguel Arraes De Alencar,1.5
-Apipucos,Casa Amarela,Av Norte Miguel Arraes De Alencar,acesso via ponte sobre Av Norte Miguel Arraes De Alencar,1.5
-Alto Do Mandu,Encruzilhada,Av Norte Miguel Arraes De Alencar,acesso via ponte sobre Av Norte Miguel Arraes De Alencar,1.5
-Encruzilhada,Vasco Da Gama,Av Norte Miguel Arraes De Alencar,acesso via ponte sobre Av Norte Miguel Arraes De Alencar,1.5
-Encruzilhada,Macaxeira,Av Norte Miguel Arraes De Alencar,acesso via ponte sobre Av Norte Miguel Arraes De Alencar,1.5
-Encruzilhada,Nova Descoberta,Av Norte Miguel Arraes De Alencar,acesso via ponte sobre Av Norte Miguel Arraes De Alencar,1.5
-Apipucos,Encruzilhada,Av Norte Miguel Arraes De Alencar,acesso via ponte sobre Av Norte Miguel Arraes De Alencar,1.5
-Alto Do Mandu,Vasco Da Gama,Av Norte Miguel Arraes De Alencar,acesso via ponte sobre Av Norte Miguel Arraes De Alencar,1.5
-Alto Do Mandu,Nova Descoberta,Av Norte Miguel Arraes De Alencar,acesso via ponte sobre Av Norte Miguel Arraes De Alencar,1.5
-Macaxeira,Vasco Da Gama,Av Norte Miguel Arraes De Alencar,acesso via ponte sobre Av Norte Miguel Arraes De Alencar,1.5
-Apipucos,Vasco Da Gama,Av Norte Miguel Arraes De Alencar,acesso via ponte sobre Av Norte Miguel Arraes De Alencar,1.5
-Apipucos,Nova Descoberta,Av Norte Miguel Arraes De Alencar,acesso via ponte sobre Av Norte Miguel Arraes De Alencar,1.5
-Cabanga,Imbiribeira,Av Sul Gov. Cid Sampaio,acesso via ponte sobre Av Sul Gov. Cid Sampaio,1.5
-Afogados,Boa Viagem,Av Sul Gov. Cid Sampaio,acesso via ponte sobre Av Sul Gov. Cid Sampaio,1.5
-Bongi,Ilha Joana Bezerra,Rua Padre Teofilo Tworz,,1.5
-Ilha Joana Bezerra,Prado,Rua Padre Teofilo Tworz,,1.5
-Engenho Do Meio,Ipsep,Av Recife,,1.0
-Engenho Do Meio,San Martin,Av Recife,,1.0
-Areias,Engenho Do Meio,Av Recife,,1.0
-Engenho Do Meio,Ibura,Av Recife,,1.0
-Ipsep,San Martin,Av Recife,,1.0
-Areias,San Martin,Av Recife,,1.0
-Ibura,San Martin,Av Recife,,1.0
-Aflitos,Tamarineira,Av Conselheiro Rosa E Silva,,1.0
-Aflitos,Jaqueira,Av Conselheiro Rosa E Silva,,1.0
-Espinheiro,Jaqueira,Av Conselheiro Rosa E Silva,,1.0
-Beberibe,Brejo De Beberibe,Rua Uriel De Holanda,,1.5
-Curado,Mustardinha,Rua Vinte E Um De Abril,,1.5
-Dois Unidos,Guabiraba,Rua Morno-Rio,,1.5
-Brejo Da Guabiraba,Dois Unidos,Rua Morno-Rio,,1.5
-Beberibe,Guabiraba,Rua Morno-Rio,,1.5
-Guabiraba,Linha Do Tiro,Rua Morno-Rio,,1.5
-Brejo De Beberibe,Guabiraba,Rua Morno-Rio,,1.5
-Linha Do Tiro,Passarinho,Rua Morno-Rio,,1.5
-Beberibe,Brejo Da Guabiraba,Rua Morno-Rio,,1.5
-Brejo Da Guabiraba,Linha Do Tiro,Rua Morno-Rio,,1.5
-Ilha Joana Bezerra,Pina,Viaduto Capitão Temudo / Ponte Paulo Guerra / Av Herculano Bandeira,acesso via ponte sobre Viaduto Capitão Temudo / Ponte Paulo Guerra,1.5
+Recife, Santo Amaro, Av. Norte, Acesso via Pte. do Limoeiro,0
+Recife, São José, Pte. 12 de Setembro,,0
+Recife, Santo Antônio, Pte. Buarque de Macedo,,0
+Santo Amaro, Boa Vista
+Santo Amaro, Soledade
+Santo Amaro, Espinheiro
+Santo Amaro, Torreão
+Boa Vista, Soledade
+Boa Vista, São José
+Boa Vista, Ilha do Leite
+Boa Vista, Derby
+Cabanga, Afogados
+Cabanga, Pina
+Cabanga, Ilha de Joana Bezerra
+Ilha do Leite, Ilha do Retiro
+Ilha do Leite, Ilha de Joana Bezerra
+Paissandu, Derby
+Paissandu, Ilha do Retiro
+Paissandu, Ilha do Leite
+Paissandu, Ilha de Joana Bezerra
+Santo Antônio, São José
+Santo Antônio, Boa Vista
+Soledade, Derby
+Coelhos, Ilha do Leite
+Coelhos, Boa Vista
+Ilha Joana Bezerra, Afogados
+Arruda, Ponto de Parada
+Arruda, Água Fria
+Arruda, Campina do Barreto
+Arruda, Rosarinho
+Campina do Barreto, Cajueiro
+Campina do Barreto, Fundão
+Campina do Barreto, Peixinhos
+Campo Grande, Encruzilhada
+Campo Grande, Hipódromo
+Campo Grande, Peixinhos
+Encruzilhada, Aflitos
+Encruzilhada, Espinheiro
+Encruzilhada, Torreão
+Encruzilhada, Tamarineira
+Hipódromo, Encruzilhada
+Peixinhos, Cajueiro
+Ponto de Parada, Arruda
+Ponto de Parada, Tamarineira
+Ponto de Parada, Encruzilhada
+Ponto de Parada, Campo Grande
+Rosarinho, Encruzilhada
+Rosarinho, Jaqueira
+Rosarinho, Tamarineira
+
+São José, Cabanga
+São José, Ilha Joana Bezerra
+São José, Coelhos
+Derby, Graças
+Derby, Madalena
+Derby, Ilha do Retiro
+Derby, Ilha do Leite
+Graças, Espinheiro, 
+Graças, Torre, 
+Graças, Aflitos, 
+Graças, Jaqueira, 
+Jaqueira, Parnamirim 
+Jaqueira, Tamarineira 
+Jaqueira, Aflitos,  
+Espinheiro, Torreão
+Espinheiro, Encruzilhada
+Espinheiro, Aflitos
+Torreão, Campo Grande
+
+
