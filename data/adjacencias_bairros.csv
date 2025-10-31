@@ -21,7 +21,7 @@ Paissandu, Ilha do Leite
 Paissandu, Ilha de Joana Bezerra
 Santo Antônio, São José
 Santo Antônio, Boa Vista
-Soledade, Derby
+Soledade, Derby, Errado?, A boa vista está entre eles
 Coelhos, Ilha do Leite
 Coelhos, Boa Vista
 Ilha Joana Bezerra, Afogados
@@ -40,32 +40,79 @@ Encruzilhada, Espinheiro
 Encruzilhada, Torreão
 Encruzilhada, Tamarineira
 Hipódromo, Encruzilhada
-Peixinhos, Cajueiro
+Peixinhos, Cajueiro, Errado?, Muito distantes entres si,
 Ponto de Parada, Arruda
 Ponto de Parada, Tamarineira
 Ponto de Parada, Encruzilhada
 Ponto de Parada, Campo Grande
+Ponto de Parada, Rosarinho
 Rosarinho, Encruzilhada
-Rosarinho, Jaqueira
+Rosarinho, Jaqueira, Errado?
 Rosarinho, Tamarineira
+Torreão, Campo Grande
+Torreão, Espinheiro
+Água Fria, Bomba do Hemetério
+Água Fria, Fundão
+Água Fria, Alto Santa Teresinha
+Água Fria, Linha Do Tiro
+Água Fria, Beberibe
+Água Fria, Porto Da Madeira
+Alto Santa Teresinha, Alto José do Pinho
+Alto Santa Teresinha, Alto José Bonifácio
+Alto Santa Teresinha, Linha do Tiro
+Bomba Do Hemetério, Alto Santa Teresinha
+Bomba Do Hemetério, Mangabeira
+Bomba Do Hemetério, Alto José do Pinho
+Bomba Do Hemetério, Arruda
+Cajueiro, Porto da Madeira
+Cajueiro, Fundão
+Fundão, Porto da Madeira
+Porto da Madeira, Beberibe
+Beberibe, Dois Unidos
+Beberibe, Linha do Tiro
+Linha Do Tiro, Alto José Bonifácio
+Linha Do Tiro, Dois Unidos
+Dois Unidos, Brejo De Beberibe
+Aflitos, Graças
+Aflitos, Espinheiro
+Alto Do Mandu, Casa Amarela
+Alto Do Mandu, Monteiro
+Alto Do Mandu, Macaxeira
+Alto Do Mandu, Apipucos
+Apipucos, Macaxeira
+Apipucos, Iputinga
+Apipucos, Monteiro
+Apipucos, Caxangá
+Apipucos, Dois Irmãos
+Casa Amarela, Monteiro
+Casa Amarela, Vasco da Gama
+Casa Amarela, Parnamirim
+Casa Amarela, Casa Forte
+Casa Amarela, Morro da Conceição
+Casa Amarela, Alto José Do Pinho
+Casa Amarela, Tamarineira
+Casa Forte, Santana
+Casa Forte, Parnamirim
+Derby, Graças
+Derby, Madalena
+Derby, Ilha do Retiro, Errado?
+Derby, Ilha do Leite, Errado?
+Dois Irmãos, Caxangá
+Dois Irmãos, Sítio Dos Pintos
+Dois Irmãos, Córrego Do Jenipapo
+Espinheiro, Graças
+Espinheiro, Boa Vista
+Graças, Torre, 
+Graças, Jaqueira, 
+Graças, Boa Vista, 
+Jaqueira, Parnamirim 
+Jaqueira, Tamarineira 
+Parnamirim, Santana
+
 
 São José, Cabanga
 São José, Ilha Joana Bezerra
 São José, Coelhos
-Derby, Graças
-Derby, Madalena
-Derby, Ilha do Retiro
-Derby, Ilha do Leite
-Graças, Espinheiro, 
-Graças, Torre, 
-Graças, Aflitos, 
-Graças, Jaqueira, 
-Jaqueira, Parnamirim 
-Jaqueira, Tamarineira 
-Jaqueira, Aflitos,  
-Espinheiro, Torreão
-Espinheiro, Encruzilhada
-Espinheiro, Aflitos
-Torreão, Campo Grande
+
 
 
