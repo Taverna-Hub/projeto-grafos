@@ -1,0 +1,9 @@
+Peso Arestas
+REMOVER - DEPOIS
+
+Rua (R) - 1
+Avenida (Av) - 2
+Viaduto ? - 3
+Ponte (Pte) - 4
+Rodovia (Rod) - 5
+Estrada (Estr) - 6 ?
