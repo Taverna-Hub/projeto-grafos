@@ -26,7 +26,6 @@ São José, Coelhos
 Soledade, Derby, Errado?, A boa vista está entre eles
 Coelhos, Ilha do Leite
 Coelhos, Boa Vista
-Ilha Joana Bezerra, Afogados
 Arruda, Ponto de Parada
 Arruda, Água Fria
 Arruda, Campina do Barreto
@@ -97,8 +96,6 @@ Casa Forte, Santana
 Casa Forte, Parnamirim
 Derby, Graças
 Derby, Madalena
-Derby, Ilha do Retiro, Errado? R: acho que sim, o derby se comunica com a madalena e a madalena se comunica com a ilha do retiro
-Derby, Ilha do Leite, Errado? R: acho que sim tbm, o derby se conecta com boa vista e boa vista se conecta com ilha do leite
 Dois Irmãos, Caxangá
 Dois Irmãos, Sítio Dos Pintos
 Dois Irmãos, Córrego Do Jenipapo
@@ -110,6 +107,7 @@ Graças, Boa Vista,
 Jaqueira, Parnamirim 
 Jaqueira, Tamarineira 
 Parnamirim, Santana
+Parnamirim, Torre
 Poço, Santana
 Poço, Casa Forte
 Poço, Monteiro
@@ -147,8 +145,76 @@ Passarinho, Brejo de Beberibe
 Pau-Ferro, Guabiraba
 Cordeiro, Torrões
 Cordeiro, Iputinga
-Cordeiro, Madalena
+Cordeiro, Zumbi
 Cordeiro, Torre
 Cordeiro, San Martin
 Ilha Do Retiro, Madalena
 Ilha Do Retiro, Afogados
+Ilha Do Retiro, Prado
+Iputinga, Caxangá
+Iputinga, Várzea
+Iputinga, Cidade Universitária
+Iputinga, Engenho do Meio
+Madalena, Torre
+Madalena, Prado
+Madalena, Zumbi
+Prado, Zumbi
+Prado, Bongi
+Torre, Zumbi
+Engenho do Meio, Torrões
+Engenho do Meio, Cidade Universitária
+Engenho do Meio, Cordeiro
+Engenho do Meio, Curado
+Torrões, Curado
+Torrões, San Martin
+Caxangá, Várzea
+Cidade Universitária, Várzea
+Cidade Universitária, Curado
+Várzea, Curado
+Afogados, Mangueira
+Afogados, Jiquiá
+Afogados, Mustardinha
+Afogados, Imbiribeira
+Bongi, San Martin
+Bongi, Afogados
+Bongi, Mustardinha
+Mangueira, Mustardinha
+Mangueira, San Martin
+Mangueira, Jiquiá
+Mustardinha, San Martin
+San Martin, Jiquiá
+San Martin, Jardim São Paulo
+Areias, Jiquiá
+Areias, Barro
+Areias, Estância
+Areias, Jardim São Paulo
+Areias, Caçote
+Areias, Ibura
+Estância, Jardim São Paulo
+Estância, Jiquiá
+Barro, Ibura
+Barro, Jardim São Paulo
+Barro, Cohab
+Barro, Tejipió
+Coqueiral, Tejipió
+Coqueiral, Sancho
+Coqueiral, Totó
+Curado, Totó
+Curado, Sancho
+Curado, Jardim São Paulo
+Jardim São Paulo, Tejipió
+Sancho, Tejipió
+Sancho, Totó
+Boa Viagem, Imbiribeira
+Boa Viagem, Pina
+Boa Viagem, Ibura
+Boa Viagem, Jordão
+Imbiribeira, Ipsep
+Imbiribeira, Ibura
+Ipsep, Ibura
+Ipsep, Areias
+Pina, Brasília Teimosa
+Ibura, Caçote
+Ibura, Jordão
+Ibura, Cohab
+Jordão, Cohab
