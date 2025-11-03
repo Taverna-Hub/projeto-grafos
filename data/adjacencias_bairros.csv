@@ -13,7 +13,6 @@ Boa Vista, Derby
 Cabanga, Afogados
 Cabanga, Pina
 Cabanga, Ilha de Joana Bezerra
-Ilha do Leite, Ilha do Retiro
 Ilha do Leite, Ilha de Joana Bezerra
 Paissandu, Derby
 Paissandu, Ilha do Retiro
@@ -21,6 +20,9 @@ Paissandu, Ilha do Leite
 Paissandu, Ilha de Joana Bezerra
 Santo Antônio, São José
 Santo Antônio, Boa Vista
+São José, Cabanga
+São José, Ilha Joana Bezerra
+São José, Coelhos
 Soledade, Derby, Errado?, A boa vista está entre eles
 Coelhos, Ilha do Leite
 Coelhos, Boa Vista
@@ -70,9 +72,9 @@ Fundão, Porto da Madeira
 Porto da Madeira, Beberibe
 Beberibe, Dois Unidos
 Beberibe, Linha do Tiro
+Dois Unidos, Brejo De Beberibe
 Linha Do Tiro, Alto José Bonifácio
 Linha Do Tiro, Dois Unidos
-Dois Unidos, Brejo De Beberibe
 Aflitos, Graças
 Aflitos, Espinheiro
 Alto Do Mandu, Casa Amarela
@@ -95,7 +97,7 @@ Casa Forte, Santana
 Casa Forte, Parnamirim
 Derby, Graças
 Derby, Madalena
-Derby, Ilha do Retiro, Errado?
+Derby, Ilha do Retiro, Errado? R: acho que sim, o derby se comunica com a madalena e a madalena se comunica com a ilha do retiro
 Derby, Ilha do Leite, Errado?
 Dois Irmãos, Caxangá
 Dois Irmãos, Sítio Dos Pintos
@@ -108,11 +110,45 @@ Graças, Boa Vista,
 Jaqueira, Parnamirim 
 Jaqueira, Tamarineira 
 Parnamirim, Santana
-
-
-São José, Cabanga
-São José, Ilha Joana Bezerra
-São José, Coelhos
-
-
-
+Poço, Santana
+Poço, Casa Forte
+Poço, Monteiro
+Sítio dos Pintos, Dois Irmãos
+Sítio dos Pintos, Caxangá
+Alto José Bonifácio, Vasco da Gama
+Alto José Bonifácio, Morro da Conceição
+Alto José Bonifácio, Brejo De Beberibe
+Alto José Do Pinho, Mangabeira
+Alto José Do Pinho, Morro da Conceição
+Alto José Do Pinho, Tamarineira, R. Monte Horebe
+Mangabeira, Tamarineira
+Mangabeira, Arruda
+Morro Da Conceição, Vasco da Gama
+Vasco Da Gama, Nova Descoberta
+Vasco Da Gama, Brejo De Beberibe
+Brejo Da Guabiraba, Passarinho
+Brejo Da Guabiraba, Brejo De Beberibe
+Brejo Da Guabiraba, Nova Descoberta
+Brejo De Beberibe, Linha do Tiro
+Brejo De Beberibe, Nova Descoberta
+Córrego Do Jenipapo, Brejo da Guabiraba
+Córrego Do Jenipapo, Nova Descoberta
+Córrego Do Jenipapo, Macaxeira
+Córrego Do Jenipapo, Apipucos
+Córrego Do Jenipapo, Dois Irmãos
+Guabiraba, Brejo da Guabiraba
+Guabiraba, Córrego do Jenipapo
+Guabiraba, Passarinho
+Guabiraba, Dois Irmãos
+Macaxeira, Nova Descoberta
+Nova Descoberta, Alto do Mandu
+Passarinho, Dois Unidos
+Passarinho, Brejo de Beberibe
+Pau-Ferro, Guabiraba
+Cordeiro, Torrões
+Cordeiro, Iputinga
+Cordeiro, Madalena
+Cordeiro, Torre
+Cordeiro, San Martin
+Ilha Do Retiro, Madalena
+Ilha Do Retiro, Afogados
