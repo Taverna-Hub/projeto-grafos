@@ -16,7 +16,7 @@ melted = df.melt(value_name="bairro", var_name="microrregiao")[
     ["bairro", "microrregiao"]
 ]
 melted = melted.dropna(subset=["bairro"])
-melted["bairro"] = melted["bairro"].apply(normalize_nome)
+melted["bairro"] = melted["bairro"].apply(normalize_name)
 melted["bairro"] = melted["bairro"].replace({"Setúbal": "Boa Viagem (Setúbal)"})
 
 bairros_unique = melted.drop_duplicates().reset_index(drop=True)
