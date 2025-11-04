@@ -3,7 +3,7 @@ Recife,Santo Amaro,Av. Norte,Acesso via Pte. do Limoeiro,2
 Recife,São José,Pte. 12 de Setembro,,4
 Recife,Santo Antônio,Pte. Buarque de Macedo,,4
 Santo Amaro,Boa Vista,Av. Gov. Agamenon Magalhães,,2
-? Santo Amaro,Soledade,Av. João de Barros / R. do Príncipe,Av se torna na Rua. qual colocar de fato?,2 | 1
+Santo Amaro,Soledade,Av. João de Barros,Av se torna a R. do Príncipe,2
 Santo Amaro,Espinheiro,Av. Norte Miguel Arraes de Alencar,,2
 Santo Amaro,Torreão,Av. Norte Miguel Arraes de Alencar,,2
 Boa Vista,Soledade,Av. Conde da Boa Vista,,2
@@ -12,24 +12,22 @@ Boa Vista,Ilha do Leite,R. Gen. Joaquim Inácio,,1
 Boa Vista,Derby,R. Joaquim Nabuco | R. Dom Bôsco,,1
 Cabanga,Afogados,Av. Sul Gov. Cid Sampaio,Acesso via ponte,2
 Cabanga,Pina,Pte. Gov. Paulo Guerra,,4
-? Cabanga,Ilha de Joana Bezerra,R. Dom Paulo II,Remover? Muito distante entre si,1
 Ilha do Leite,Ilha de Joana Bezerra,Av. Gov. Agamenon Magalhães,,2
 Paissandu,Derby,R. do Paissandú,,1
 Paissandu,Ilha do Retiro,R. do Paissandú,,1
 Paissandu,Ilha do Leite,R. Pref. Jorge Martins,,1
 Paissandu,Ilha de Joana Bezerra,Av. Gov. Agamenon Magalhães,,2
 Santo Antônio,São José,R. Floriano Peixoto,,1
-? Santo Antônio,Boa Vista,Pte. Boa Vista | Av. Capibaribe-Rio,Tem acesso tanto pela Pte quanto pela Avenida,4 | 2
+Santo Antônio,Boa Vista,Pte. Boa Vista,Tem acesso tanto pela Pte,4
 São José,Cabanga,Viaduto Cap. Tenudo,,3
 São José,Ilha Joana Bezerra,R. Dom Paulo II,,1
-? São José,Coelhos,Ponte Viaduto Joaquim Cardozo,Ponte E viaduto?,4 | 3
-? Soledade,Derby,Errado?,A boa vista está entre eles
+São José,Coelhos,Ponte Viaduto Joaquim Cardozo,,4
 Coelhos,Ilha do Leite,R. José de Alencar,,1
 Coelhos,Boa Vista,R. Dr José Mariano,,1
 Arruda,Ponto de Parada,R. Petrolina Botelho,Acessos via ponte,1
 Arruda,Água Fria,R. Alegre,,1
 Arruda,Campina do Barreto,R. Expedicionário Jamil Dagli,,1
-? Arruda,Rosarinho,Av. Prof. José dos Anjos,Acesso pelo canal do arruda,2
+Arruda,Rosarinho,Av. Prof. José dos Anjos,Acesso pelo canal do arruda,2
 Campina do Barreto,Cajueiro,R. Cel. Urbano Ribeiro de Sena,,1
 Campina do Barreto,Fundão,R. Cel. Urbano Ribeiro de Sena,,1
 Campina do Barreto,Peixinhos,R. Dr. Elias Gomes,,
@@ -74,102 +72,100 @@ Aflitos,Graças,Av. Santos Dummont,,2
 Aflitos,Espinheiro,R. Quarenta e Oito,,1
 Alto Do Mandu,Casa Amarela,Av. Dr. Euríco Chaves,,2
 Alto Do Mandu,Monteiro,R. Mandacaru,,1
-? Alto Do Mandu,Macaxeira,Av. Norte Miguel Arraes de Alencar,,2
-? Alto Do Mandu,Apipucos,R. Massaranduba,,1
+Alto Do Mandu,Macaxeira,Av. Norte Miguel Arraes de Alencar,,2
+Alto Do Mandu,Apipucos,R. Massaranduba,,1
 Apipucos,Macaxeira,R. Cel Jão Batista do Rêgo Barros,A partir dessa rua têm acesso a ponte,1
-Apipucos,Iputinga,,,
-Apipucos,Monteiro,,,
-Apipucos,Caxangá,,,
-Apipucos,Dois Irmãos,,,
-Casa Amarela,Monteiro,,,
-Casa Amarela,Vasco da Gama,,,
-Casa Amarela,Parnamirim,,,
-Casa Amarela,Casa Forte,,,
-Casa Amarela,Morro da Conceição,,,
-Casa Amarela,Alto José Do Pinho,,,
-Casa Amarela,Tamarineira,,,
-Casa Forte,Santana,,,
-Casa Forte,Parnamirim,,,
-Derby,Graças,,,
-Derby,Madalena,,,
-Dois Irmãos,Caxangá,,,
-Dois Irmãos,Sítio Dos Pintos,,,
-Dois Irmãos,Córrego Do Jenipapo,,,
-Espinheiro,Graças,,,
-Espinheiro,Boa Vista,,,
-Graças,Torre,,,
-Graças,Jaqueira,,,
-Graças,Boa Vista,,,
-Jaqueira,Parnamirim,,,
-Jaqueira,Tamarineira,,,
-Parnamirim,Santana,,,
-Parnamirim,Torre,,,
-Poço,Santana,,,
-Poço,Casa Forte,,,
-Poço,Monteiro,,,
-Sítio dos Pintos,Dois Irmãos,,,
-Sítio dos Pintos,Caxangá,,,
-Alto José Bonifácio,Vasco da Gama,,,
-Alto José Bonifácio,Morro da Conceição,,,
-Alto José Bonifácio,Brejo De Beberibe,,,
-Alto José Do Pinho,Mangabeira,,,
-Alto José Do Pinho,Morro da Conceição,,,
-Alto José Do Pinho,Tamarineira,R. Monte Horebe
-Mangabeira,Tamarineira,,,
-Mangabeira,Arruda,,,
-Morro Da Conceição,Vasco da Gama,,,
-Vasco Da Gama,Nova Descoberta,,,
-Vasco Da Gama,Brejo De Beberibe,,,
-Brejo Da Guabiraba,Passarinho,,,
-Brejo Da Guabiraba,Brejo De Beberibe,,,
-Brejo Da Guabiraba,Nova Descoberta,,,
-Brejo De Beberibe,Linha do Tiro,,,
-Brejo De Beberibe,Nova Descoberta,,,
-Córrego Do Jenipapo,Brejo da Guabiraba,,,
-Córrego Do Jenipapo,Nova Descoberta,,,
-Córrego Do Jenipapo,Macaxeira,,,
-Córrego Do Jenipapo,Apipucos,,,
-Córrego Do Jenipapo,Dois Irmãos,,,
-Guabiraba,Brejo da Guabiraba,,,
-Guabiraba,Córrego do Jenipapo,,,
-Guabiraba,Passarinho,,,
-Guabiraba,Dois Irmãos,,,
-Macaxeira,Nova Descoberta,,,
-Nova Descoberta,Alto do Mandu,,,
-Passarinho,Dois Unidos,,,
-Passarinho,Brejo de Beberibe,,,
-Pau-Ferro,Guabiraba,,,
-Cordeiro,Torrões,,,
-Cordeiro,Iputinga,,,
-Cordeiro,Zumbi,,,
-Cordeiro,Torre,,,
-Cordeiro,San Martin,,,
-Ilha Do Retiro,Madalena,,,
-Ilha Do Retiro,Afogados,,,
-Ilha Do Retiro,Prado,,,
-Iputinga,Caxangá,,,
-Iputinga,Várzea,,,
-Iputinga,Cidade Universitária,,,
-Iputinga,Engenho do Meio,,,
-Madalena,Torre,,,
-Madalena,Prado,,,
-Madalena,Zumbi,,,
-Prado,Zumbi,,,
-Prado,Bongi,,,
-Torre,Zumbi,,,
-Engenho do Meio,Torrões,,,
-Engenho do Meio,Cidade Universitária,,,
-Engenho do Meio,Cordeiro,,,
-Engenho do Meio,Curado,,,
-Torrões,Curado,,,
-Torrões,San Martin,,,
-Caxangá,Várzea,,,
-Cidade Universitária,Várzea,,,
-Cidade Universitária,Curado,,,
-Várzea,Curado,,,
-Afogados,Mangueira,,,
-Afogados,Jiquiá,,,
-Afogados,Mustardinha,,,
+Apipucos,Iputinga,Av. da Recuperação,BR 101,2
+Apipucos,Monteiro,R. de Apipucos,,1
+Apipucos,Caxangá,Av. da Recuperação,BR 101,2
+Apipucos,Dois Irmãos,Av. da Recuperação,BR 101,2
+Casa Amarela,Monteiro,Est. do Arraial,,6
+Casa Amarela,Vasco da Gama,Av. Norte Miguel Arraes de Alencar,,2
+Casa Amarela,Parnamirim,Estr. do Encanamento,,6
+Casa Amarela,Casa Forte,Estrada das Ubaias,,6
+Casa Amarela,Morro da Conceição,Av. Norte Miguel Arraes de Alencar,,2
+Casa Amarela,Alto José Do Pinho,Av. Norte Miguel Arraes de Alencar,,2
+Casa Amarela,Tamarineira,Av. Norte Miguel Arraes de Alencar,,2
+Casa Forte,Santana,Av. Dezessete de Agosto,,2
+Casa Forte,Parnamirim,Estr. do Encanamento,,6
+Derby,Graças,R. Amaro Bezerra,Quando chega nas graças - ela vira a R. das Creoulas,1
+Derby,Madalena,R. Joaquim Nabuco,Acesso pela ponte,1
+Dois Irmãos,Caxangá,Av. da Recuperação,BR 101,2
+Dois Irmãos,Sítio Dos Pintos,R. Manuel de Medeiros,,1
+Espinheiro,Graças,R. do Espinheiro,,1
+Espinheiro,Boa Vista,Av. João de Barros,,2
+Graças,Torre,R. Amélia,Quando chega na Torre - ela vira Rua Conde de Irajá,1
+Graças,Jaqueira,Av. Conselheiro Rosa e Silva,,2
+Graças,Boa Vista,Av. Gov. Agamenon Magalhães,,2
+Jaqueira,Parnamirim,Av. Rui Barbosa,,2
+Jaqueira,Tamarineira,Av. Conselheiro Rosa e Silva,,2
+Parnamirim,Santana,Av. Dezessete de Agosto,,2
+Parnamirim,Torre,R. José Bonifácio,Acesso pela ponte,1
+Poço,Santana,R. Sant'Anna,,1
+Poço,Casa Forte,Av. Dezessete de Agosto,,2
+Poço,Monteiro,Av. Dezessete de Agosto,,2
+Sítio dos Pintos,Caxangá,R. Manuel de Medeiros,,1
+Alto José Bonifácio,Vasco da Gama,R. Alto Nossa Sra. de Fátima,,1
+Alto José Bonifácio,Morro da Conceição,R. Córrego do Euclídes,,1
+Alto José Bonifácio,Brejo De Beberibe,R. Alto José Bonifácio,no Cruzamento com  Av. Ver. Otacilio Azevedo,1
+Alto José Do Pinho,Mangabeira,R. Severino Bernadino Pereira,,1
+Alto José Do Pinho,Morro da Conceição,R. C,1
+Alto José Do Pinho,Tamarineira,R. Monte Horebe,,1
+Mangabeira,Tamarineira,Av. Norte Miguel Arraes de Alencar,,2
+Mangabeira,Arruda,Av. Prof. José dos Anjos,,2
+Morro Da Conceição,Vasco da Gama,R. Corrego do Ouro,,1
+Vasco Da Gama,Nova Descoberta,Av. Vereador Otacilio Azevedo,,2
+Vasco Da Gama,Brejo De Beberibe,Av. Vereador Otacilio Azevedo,,2
+Brejo Da Guabiraba,Passarinho,Av. da Recuperação, BR 101,2
+Brejo Da Guabiraba,Brejo De Beberibe,Av. Vereador Otacilio Azevedo,,2
+Brejo Da Guabiraba,Nova Descoberta,R. Alto José Idalino,,1
+Brejo De Beberibe,Linha do Tiro,Av. Vereador Otacilio Azevedo,,2
+Brejo De Beberibe,Nova Descoberta,R. Nova Descoberta,,1
+Córrego Do Jenipapo,Brejo da Guabiraba,Av. da Recuperação, BR 101,2
+Córrego Do Jenipapo,Nova Descoberta,R. Alto Santa Luzia,,1
+Córrego Do Jenipapo,Macaxeira,Av Norte Miguel Arraes de Alencar,,2
+Córrego Do Jenipapo,Apipucos,Av. da Recuperação, BR 101,2
+Córrego Do Jenipapo,Dois Irmãos,Av. Norte Miguel Arraes de Alencar,Pelo giradourou / retorno,2
+Guabiraba,Brejo da Guabiraba,Av. da Recuperação, BR 101,2
+Guabiraba,Córrego do Jenipapo,Av. da Recuperação, BR 101,2
+Guabiraba,Passarinho,Estr. Da Mumbeca,,6
+Guabiraba,Dois Irmãos,Av. da Recuperação, BR 101,2
+Macaxeira,Nova Descoberta,R. Corrego de Areia,,1
+Nova Descoberta,Alto do Mandu,R. Nova descoberta,,1
+Passarinho,Dois Unidos,Estr. do Passarinho,,6
+Passarinho,Brejo de Beberibe,R. Santa Tereza,,1
+Pau-Ferro,Guabiraba,Estr. do Orfanato,,6
+Cordeiro,Torrões,Estr. do Forte do Arraial Noo d Bom Jesus,,6
+Cordeiro,Iputinga,Av. Maurício de Nassau,,2
+Cordeiro,Zumbi,Av. Caxangá,PE 005,2
+Cordeiro,Torre,R. Marquês de Maricá,Muda para: R. Dianópolis,1
+Cordeiro,San Martin,Av. Gen. San Martin,,2
+Ilha Do Retiro,Madalena,Estr. dos Remédios,,6
+Ilha Do Retiro,Afogados,Estr. dos Remédios,,6
+Ilha Do Retiro,Prado,Av. Abdias de Carvalho,BR 232,2
+Iputinga,Caxangá,Av. Luís de Lacerda,Muda para: R. Min. João Alberto,2
+Iputinga,Várzea,Av. Caxangá,PE 005,2
+Iputinga,Cidade Universitária,Viaduto Caxangá,BR 101,3
+Iputinga,Engenho do Meio,R. Antônio Curado,Muda de nome para: R. Manoel Estevão da Costa e R. Bom Pastor,
+Madalena,Torre,R. Real da Torre,,1
+Madalena,Prado,R. Carlos Gomes,,1
+Madalena,Zumbi,R. Dom Manoel da Costa,,1
+Prado,Zumbi,R. Fidélis Moliterno,Muda de nome para: R. Austro Costa,1
+Prado,Bongi,R. Santa Edwirges,,1
+Torre,Zumbi,R. Conselheiro Theodoro,,1
+Engenho do Meio,Torrões,R. Manuel Alves Deus Dara,Muda de nome para: Av. Bicentenário da Revolução Francesa,1
+Engenho do Meio,Cidade Universitária,R. Costa Sepúlveda,,1
+Engenho do Meio,Cordeiro,R. Dr. Miguel Viêira Ferreira,,1
+Engenho do Meio,Curado,Tv. Washington Duarte Espíndola,,7
+Torrões,Curado,Av. Eng. Abdias de Carvalho,BR 232,2
+Torrões,San Martin,R. Delmiro Gouvêia,,1
+Caxangá,Várzea,R. Ribeiro Pessoa,Desemboca na R. Gastão Vidigal,
+Cidade Universitária,Várzea,R. Gen. Polidoro,,1
+Cidade Universitária,Curado,Av. Prof. Luiz Freire,,2
+Várzea,Curado,Av. Prof. Luiz Freire,,2
+Afogados,Mangueira,R. Vinte e Um de Abril,,1
+Afogados,Jiquiá,R. São Miguel,Via PE-007,1
+Afogados,Mustardinha,Av. Mustardinha,,2
 Afogados,Imbiribeira,Pte. Motocolombó,,4
 Bongi,San Martin,R. Itapemirim,,1
 Bongi,Afogados,Estr. do Bongi,,6
