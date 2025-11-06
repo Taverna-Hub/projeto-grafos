@@ -102,3 +102,11 @@ class Graph:
 
     def get_weight(self, first_node: str, second_node: str) -> float:
         return self.weights.get((first_node, second_node), float("inf"))
+
+    def get_ego_network(self, node: str):
+        if node not in self.adjacencies:
+            return Graph()
+
+        ego_vertices = {node} | self.get_neighbors(node)
+
+        return self.get_subgraph(ego_vertices)

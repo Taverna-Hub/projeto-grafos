@@ -1,5 +1,6 @@
 import json
 import os
+import csv
 from pathlib import Path
 from typing import Dict, List, Set
 import pandas as pd
@@ -96,9 +97,32 @@ def compute_microregion_metrics(
     return results
 
 
+def compute_ego_metrics(graph: Graph) -> List[Dict]:
+    results = []
+
+    for bairro in sorted(graph.get_vertices()):
+        grau = graph.get_degree(bairro)
+
+        ego_graph = graph.get_ego_network(bairro)
+        ego_metrics = ego_graph.get_metrics()
+
+        result = {
+            "bairro": bairro,
+            "grau": grau,
+            "ordem_ego": ego_metrics.ordem,
+            "tamanho_ego": ego_metrics.tamanho,
+            "densidade_ego": ego_metrics.densidade,
+        }
+
+        results.append(result)
+
+    return results
+
+
 def save_results(
     global_metrics: Dict,
     microregion_metrics: List[Dict],
+    ego_metrics: List[Dict],
     output_dir: str = "out",
 ) -> None:
     Path(output_dir).mkdir(parents=True, exist_ok=True)
@@ -110,6 +134,14 @@ def save_results(
     microregion_path = Path(output_dir) / "microrregioes.json"
     with open(microregion_path, "w", encoding="utf-8") as f:
         json.dump(microregion_metrics, f, indent=2, ensure_ascii=False)
+
+    ego_path = Path(output_dir) / "ego_bairro.csv"
+    with open(ego_path, "w", encoding="utf-8", newline="") as f:
+        if ego_metrics:
+            fieldnames = ["bairro", "grau", "ordem_ego", "tamanho_ego", "densidade_ego"]
+            writer = csv.DictWriter(f, fieldnames=fieldnames)
+            writer.writeheader()
+            writer.writerows(ego_metrics)
 
 
 def main():
@@ -123,8 +155,9 @@ def main():
 
     global_metrics = compute_global_metrics(graph)
     microregion_metrics = compute_microregion_metrics(graph, neighborhood_microregions)
+    ego_metrics = compute_ego_metrics(graph)
 
-    save_results(global_metrics, microregion_metrics)
+    save_results(global_metrics, microregion_metrics, ego_metrics)
 
 
 if __name__ == "__main__":
