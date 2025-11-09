@@ -2,8 +2,6 @@ bairro,grau,ordem_ego,tamanho_ego,densidade_ego
 Brasília Teimosa,1,2,1,1.0
 Caçote,2,3,3,1.0
 Hipódromo,2,3,3,1.0
-Ilha De Joana Bezerra,2,3,3,1.0
-Ilha Joana Bezerra,2,3,3,1.0
 Pau-Ferro,1,2,1,1.0
 Soledade,2,3,3,1.0
 Sítio Dos Pintos,2,3,3,1.0
@@ -18,14 +16,16 @@ Santana,3,4,5,0.8333333333333334
 Santo Antônio,3,4,5,0.8333333333333334
 Totó,3,4,5,0.8333333333333334
 Cidade Universitária,4,5,8,0.8
+Coelhos,4,5,8,0.8
 Macaxeira,4,5,8,0.8
 Mangueira,4,5,8,0.8
 Mustardinha,4,5,8,0.8
 Beberibe,4,5,7,0.7
 Casa Forte,4,5,7,0.7
-Coelhos,4,5,7,0.7
 Dois Unidos,4,5,7,0.7
 Fundão,4,5,7,0.7
+Ilha Do Leite,4,5,7,0.7
+Ilha Joana Bezerra,4,5,7,0.7
 Mangabeira,4,5,7,0.7
 Morro Da Conceição,4,5,7,0.7
 Passarinho,4,5,7,0.7
@@ -50,7 +50,6 @@ Boa Viagem,4,5,6,0.6
 Bongi,4,5,6,0.6
 Caxangá,5,6,9,0.6
 Dois Irmãos,5,6,9,0.6
-Ilha Do Leite,4,5,6,0.6
 Imbiribeira,4,5,6,0.6
 Monteiro,4,5,6,0.6
 Ponto De Parada,5,6,9,0.6
