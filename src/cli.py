@@ -32,7 +32,7 @@ Exemplos de uso:
   %(prog)s analyze                      # Executa análise completa do grafo -> ego_bairro.csv, graus.csv, microrregioes.json e recife_global.json
   %(prog)s path "Boa Viagem" "Graças"   # Encontra caminho entre bairros
   %(prog)s process                      # Processa dados de entrada -> bairros_unique.csv
-  %(prog)s distances                    # Calcula distâncias em lote -> distancias_enderecos.csv
+  %(prog)s distances                    # Calcula distâncias em lote -> distancias_enderecos.csv e percurso_nova_descoberta_setubal.json
   %(prog)s info --type global           # Mostra métricas globais
   %(prog)s info --type microregions     # Mostra métricas por microrregião
   %(prog)s info --type ego              # Mostra ranking por densidade ego
@@ -71,7 +71,7 @@ Exemplos de uso:
         # Comando: distances
         distances_parser = subparsers.add_parser(
             'distances',
-            help='Calcula distâncias em lote para pares de endereços -> distancias_enderecos.csv'
+            help='Calcula distâncias em lote para pares de endereços -> distancias_enderecos.csv e percurso_nova_descoberta_setubal.json'
         )
         
         # Comando: info
