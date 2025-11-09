@@ -116,6 +116,17 @@ def compute_ego_metrics(graph: Graph) -> List[Dict]:
 
         results.append(result)
 
+    results.sort(key=lambda x: x["densidade_ego"], reverse=True)
+    return results
+
+
+def ranking_degree(graph: Graph) -> List[Dict]:
+    results = []
+    for bairro in sorted(graph.get_vertices()):
+        grau = graph.get_degree(bairro)
+        results.append({"bairro": bairro, "grau": grau})
+
+    results.sort(key=lambda x: x["grau"], reverse=True)
     return results
 
 
@@ -123,6 +134,7 @@ def save_results(
     global_metrics: Dict,
     microregion_metrics: List[Dict],
     ego_metrics: List[Dict],
+    rank_metrics: List[Dict],
     output_dir: str = "out",
 ) -> None:
     Path(output_dir).mkdir(parents=True, exist_ok=True)
@@ -143,6 +155,14 @@ def save_results(
             writer.writeheader()
             writer.writerows(ego_metrics)
 
+    ranking_path = Path(output_dir) / "graus.csv"
+    with open(ranking_path, "w", encoding="utf-8", newline="") as f:
+        if rank_metrics:
+            fieldnames = ["bairro", "grau"]
+            writer = csv.DictWriter(f, fieldnames=fieldnames)
+            writer.writeheader()
+            writer.writerows(rank_metrics)
+
 
 def main():
     adjacencies_path = "data/adjacencias_bairros.csv"
@@ -156,8 +176,9 @@ def main():
     global_metrics = compute_global_metrics(graph)
     microregion_metrics = compute_microregion_metrics(graph, neighborhood_microregions)
     ego_metrics = compute_ego_metrics(graph)
+    ranking = ranking_degree(graph)
 
-    save_results(global_metrics, microregion_metrics, ego_metrics)
+    save_results(global_metrics, microregion_metrics, ego_metrics, ranking)
 
 
 if __name__ == "__main__":
