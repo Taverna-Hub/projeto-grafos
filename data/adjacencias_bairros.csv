@@ -12,23 +12,23 @@ Boa Vista,Ilha do Leite,R. Gen. Joaquim Inácio,,1
 Boa Vista,Derby,R. Dom Bôsco,,1
 Cabanga,Afogados,Av. Sul Gov. Cid Sampaio,Acesso via ponte,2
 Cabanga,Pina,Pte. Gov. Paulo Guerra,,4
-? Ilha do Leite,Ilha Joana Bezerra,Av. Gov. Agamenon Magalhães,,2
+Ilha do Leite,Ilha Joana Bezerra,Av. Gov. Agamenon Magalhães,Precisa verificar,2
 Paissandu,Derby,R. Viscondessa do Livramento,,1
 Paissandu,Ilha do Retiro,R. do Paissandú,,1
 Paissandu,Ilha do Leite,R. Pref. Jorge Martins,,1
-? Paissandu,Ilha de Joana Bezerra,Av. Gov. Agamenon Magalhães,,2
+Paissandu,Ilha de Joana Bezerra,Av. Gov. Agamenon Magalhães,Precisa verificar,2
 Santo Antônio,São José,R. Floriano Peixoto,,1
 Santo Antônio,Boa Vista,Pte. Boa Vista,,4
 São José,Cabanga,Viaduto Cap. Tenudo,,3
 São José,Ilha Joana Bezerra,R. Dom Paulo II,,1
-? São José,Coelhos,Ponte Viaduto Joaquim Cardozo,,4
+São José,Coelhos,Ponte Viaduto Joaquim Cardozo,Precisa verificar,4
 Coelhos,Ilha do Leite,R. José de Alencar,,1
 Coelhos,Boa Vista,R. Dr José Mariano,,1
-? Coelhos,Ilha Joana Bezerra,Ponte Viaduto Joaquim Cardozo,,4
+Coelhos,Ilha Joana Bezerra,Ponte Viaduto Joaquim Cardozo,Precisa verificar,4
 Arruda,Ponto de Parada,R. Petrolina Botelho,Acessos via ponte,1
 Arruda,Água Fria,R. Alegre,,1
 Arruda,Campina do Barreto,R. Expedicionário Jamil Dagli,,1
-? Arruda,Rosarinho,Av. Prof. José dos Anjos,Acesso pelo canal do arruda,2
+Arruda,Rosarinho,Av. Prof. José dos Anjos,Precisa verificar | Acesso pelo canal do arruda,2
 Campina do Barreto,Cajueiro,R. dos Craveiros,,1
 Campina do Barreto,Fundão,R. Cel. Urbano Ribeiro de Sena,,1
 Campina do Barreto,Peixinhos,R. Dr. Elias Gomes,,
@@ -39,7 +39,7 @@ Encruzilhada,Aflitos,R. Teles Júnior,,1
 Encruzilhada,Espinheiro,R. Marquês do Paraná,Cruza a Avenida Norte e vira R. Mal. Deodoro,1
 Encruzilhada,Torreão,R. Padre Miguelinho,,1
 Encruzilhada,Hipódromo,R. Frederico,,1
-? Ponto de Parada,Tamarineira,Av. Prof. José dos Anjos,,2
+Ponto de Parada,Tamarineira,Av. Prof. José dos Anjos,Precisa verificar,2
 Ponto de Parada,Encruzilhada,Av. Beberibe Santa Cruz Futebol,,2
 Ponto de Parada,Campo Grande,R. Prof. Jerônimo Gueiros,,1
 Ponto de Parada,Rosarinho,Av. Santos Dummont,,2
@@ -73,12 +73,12 @@ Aflitos,Graças,R. Conselheiro Portela,,2
 Aflitos,Espinheiro,R. Quarenta e Oito,,1
 Alto Do Mandu,Casa Amarela,Av. Dr. Euríco Chaves,,2
 Alto Do Mandu,Monteiro,R. Mandacaru,,1
-? Alto Do Mandu,Macaxeira,Av. Norte Miguel Arraes de Alencar,,2
+Alto Do Mandu,Macaxeira,Av. Norte Miguel Arraes de Alencar,Precisa verificar,2
 Alto Do Mandu,Apipucos,R. Massaranduba,,1
 Apipucos,Macaxeira,R. Cel Jão Batista do Rêgo Barros,A partir dessa rua têm acesso a ponte,1
-? Apipucos,Iputinga,Av. da Recuperação,BR 101,2
+Apipucos,Iputinga,Av. da Recuperação,Precisa verificar | BR 101,2
 Apipucos,Monteiro,R. de Apipucos,,1
-? Apipucos,Caxangá,Av. da Recuperação,BR 101,2
+Apipucos,Caxangá,Av. da Recuperação,Precisa verificar | BR 101,2
 Apipucos,Dois Irmãos,R. Dois Irmãos,Atravessa a BR 101,1
 Casa Amarela,Monteiro,Estr. do Arraial,,6
 Casa Amarela,Vasco da Gama,R. Vasco da Gama,Atravessa a Avenida Norte e chega na Rua Padre Lemos,1
@@ -91,7 +91,7 @@ Casa Forte,Santana,Rua Dona Olegarinha,A partir da rua chega na Avenida Dezesset
 Casa Forte,Parnamirim,Av. Dezessete de Agosto,,2
 Derby,Graças,R. Amaro Bezerra,Quando chega nas graças - ela vira a R. das Creoulas,1
 Derby,Madalena,R. Joaquim Nabuco,Acesso pela ponte,1
-? Dois Irmãos,Caxangá,R. Manuel de Medeiros,,1
+Dois Irmãos,Caxangá,R. Manuel de Medeiros,Precisa verificar,1
 Dois Irmãos,Sítio Dos Pintos,Estr. dos Pintos,Utiliza a Estrada para chegar na Rua Manuel de Medeiros,6
 Espinheiro,Graças,R. do Espinheiro,,1
 Espinheiro,Boa Vista,Av. João de Barros,,2
@@ -105,7 +105,7 @@ Parnamirim,Torre,R. José Bonifácio,Acesso pela ponte,1
 Poço,Santana,R. Sant'Anna,,1
 Poço,Casa Forte,R. Oliveira Góes,A partir da rua - atravessa a Avenida 17 de agosto para chegar na Praça de Casa Forte,1
 Poço,Monteiro,R. Tapacurá,,1
-? Sítio dos Pintos,Caxangá,R. Manuel de Medeiros,,1
+Sítio dos Pintos,Caxangá,R. Manuel de Medeiros,Precisa verificar,1
 Alto José Bonifácio,Vasco da Gama,R. Alto Nossa Sra. de Fátima,,1
 Alto José Bonifácio,Morro da Conceição,R. Córrego do Euclídes,,1
 Alto José Bonifácio,Brejo De Beberibe,R. Alto José Bonifácio,no Cruzamento com  Av. Ver. Otacilio Azevedo,1
@@ -126,11 +126,11 @@ Córrego Do Jenipapo,Brejo da Guabiraba,R. Córrego da Loira,,1
 Córrego Do Jenipapo,Nova Descoberta,R. Alto Santa Luzia,,1
 Córrego Do Jenipapo,Macaxeira,R. Alto do Formoso,,1
 Córrego Do Jenipapo,Apipucos,R. Erundina Negreiros de Araújo,Por meio da rua - chega na avenida norte para Apipucos,1
-? Córrego Do Jenipapo,Dois Irmãos,Av. Norte Miguel Arraes de Alencar,Pelo giradourou / retorno,2
+Córrego Do Jenipapo,Dois Irmãos,Av. Norte Miguel Arraes de Alencar,Precisa verificar | Pelo giradourou / retorno,2
 Guabiraba,Brejo da Guabiraba,Estr. dos Macacos,A partir da Estrada - chega na Avenida da Recuperação,6
-? Guabiraba,Córrego do Jenipapo,Av. da Recuperação,BR 101,2
+Guabiraba,Córrego do Jenipapo,Av. da Recuperação,Precisa verificar | BR 101,2
 Guabiraba,Passarinho,Estr. Da Mumbeca,,6
-? Guabiraba,Dois Irmãos,Estr. dos Macacos,Faz mais sentido essa ter a estrada dos macados,2
+Guabiraba,Dois Irmãos,Estr. dos Macacos,Precisa verificar,2
 Macaxeira,Nova Descoberta,R. Corrego de Areia,,1
 Nova Descoberta,Alto do Mandu,R. Nova descoberta,A partir da Rua Imbiriba chega na Nova Descoberta,1
 Passarinho,Dois Unidos,Estr. do Passarinho,,6
@@ -182,7 +182,7 @@ Areias,Barro,Av. Dr. José Rufino,,2
 Areias,Estância,Av. Tapajós,,2
 Areias,Jardim São Paulo,R. José Natário,Chega na rua por meio da Avenida São Paulo,1
 Areias,Caçote,R. Dona Ana Aurora,,1
-? Areias,Ibura,Av. Recife,,2
+Areias,Ibura,Av. Recife,Precisa verificar,2
 Estância,Jardim São Paulo,R. Senador Alberto Pasqualini,,1
 Estância,Jiquiá,R. João Texeira,,1
 Barro,Ibura,Rod. Governador Mario Covas,,5
@@ -205,9 +205,9 @@ Boa Viagem,Jordão,R. Remígio,R. Emigio acessa a Av. Centenário Alberto Santos
 Imbiribeira,Ipsep,R. Jean Emile Favre,,1
 Imbiribeira,Ibura,Av. Mascarenhas de Morais,,2
 Ipsep,Ibura,R. São Nicolau,pela Rua São Nicolau (Ipsep) acessa Av. Dom Hélder Câmara (Ibura),1
-? Ipsep,Areias,Av. Recife,,2
+Ipsep,Areias,Av. Recife,Precisa verificar,2
 Pina,Brasília Teimosa,R. Dagoberto Pires,,1
-? Ibura,Caçote,Av. Recife,,2
+Ibura,Caçote,Av. Recife,Precisa verificar,2
 Ibura,Jordão,R. Nova Canaã,,1
 Ibura,Cohab,Av. Dois Rios,,2
-? Jordão,Cohab,Rod. Governador Mario Covas,Pegando o retorno perto da R. Jaguaratema,5
+Jordão,Cohab,Rod. Governador Mario Covas,Precisa verificar | Pegando o retorno perto da R. Jaguaratema,5
