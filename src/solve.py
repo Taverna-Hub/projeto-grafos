@@ -1,185 +1,211 @@
-import json
-import os
 import csv
-from pathlib import Path
-from typing import Dict, List, Set
+import json
 import pandas as pd
+from pathlib import Path
 from graphs.graph import Graph
+from utils.normalize import normalize_name
+from typing import Dict, List, Set, Optional
 
+from constants import (
+    ADJACENCIES_PATH,
+    BAIRROS_UNIQUE_PATH,
+    OUT_DIR,
+    RECIFE_GLOBAL_PATH,
+    MICRORREGIOES_PATH,
+    EGO_BAIRRO_PATH,
+    GRAUS_PATH,
+)
 
-def normalize_name(name: str) -> str:
-    if pd.isna(name) or name is None:
-        return None
+class GraphAnalyzer:
+    
+    def __init__(self, adjacencies_path: str = ADJACENCIES_PATH, neighborhoods_path: str = BAIRROS_UNIQUE_PATH):
+        self.adjacencies_path = adjacencies_path
+        self.neighborhoods_path = neighborhoods_path
+        self.graph: Optional[Graph] = None
+        self.neighborhood_microregions: Dict[str, str] = {}
+        
+    def load_adjacencies(self, filepath: Optional[str] = None) -> pd.DataFrame:
+        filepath = filepath or self.adjacencies_path
+        df = pd.read_csv(filepath, encoding="utf-8")
 
-    name = str(name).strip()
-    return " ".join(name.title().split())
+        df["bairro_origem"] = df["bairro_origem"].apply(normalize_name)
+        df["bairro_destino"] = df["bairro_destino"].apply(normalize_name)
 
+        df = df.dropna(subset=["bairro_origem", "bairro_destino"])
 
-def load_adjacencies(filepath: str) -> pd.DataFrame:
-    df = pd.read_csv(filepath, encoding="utf-8")
+        return df
 
-    df["bairro_origem"] = df["bairro_origem"].apply(normalize_name)
-    df["bairro_destino"] = df["bairro_destino"].apply(normalize_name)
+    def load_neighborhoods_microregions(self, filepath: Optional[str] = None) -> Dict[str, str]:
+        filepath = filepath or self.neighborhoods_path
+        df = pd.read_csv(filepath, encoding="utf-8")
+        df["bairro"] = df["bairro"].apply(normalize_name)
+        df = df.drop_duplicates(subset=["bairro"], keep="first")
 
-    df = df.dropna(subset=["bairro_origem", "bairro_destino"])
+        mapping = dict(zip(df["bairro"], df["microrregiao"]))
+        self.neighborhood_microregions = mapping
 
-    return df
+        return mapping
 
+    def build_graph(self, adjacencies_df: Optional[pd.DataFrame] = None) -> Graph:
+        if adjacencies_df is None:
+            adjacencies_df = self.load_adjacencies()
+            
+        graph = Graph()
 
-def load_neighborhoods_microregions(filepath: str) -> Dict[str, str]:
-    df = pd.read_csv(filepath, encoding="utf-8")
-    df["bairro"] = df["bairro"].apply(normalize_name)
-    df = df.drop_duplicates(subset=["bairro"], keep="first")
+        for _, row in adjacencies_df.iterrows():
+            origem = row["bairro_origem"]
+            destino = row["bairro_destino"]
+            peso = row.get("peso", 1.0)
 
-    mapping = dict(zip(df["bairro"], df["microrregiao"]))
+            if pd.isna(peso):
+                peso = 1.0
+            else:
+                peso = float(peso)
 
-    return mapping
+            graph.add_edge(origem, destino, peso)
 
+        self.graph = graph
+        return graph
 
-def build_graph(adjacencies_df: pd.DataFrame) -> Graph:
-    graph = Graph()
+    def compute_global_metrics(self, graph: Optional[Graph] = None) -> Dict:
+        graph = graph or self.graph
+        if graph is None:
+            raise ValueError("Grafo não foi construído. Execute build_graph() primeiro.")
+            
+        metrics = graph.get_metrics()
+        return metrics.to_dict()
 
-    for _, row in adjacencies_df.iterrows():
-        origem = row["bairro_origem"]
-        destino = row["bairro_destino"]
-        peso = row.get("peso", 1.0)
+    def compute_microregion_metrics(self, graph: Optional[Graph] = None, neighborhood_microregions: Optional[Dict[str, str]] = None) -> List[Dict]:
+        graph = graph or self.graph
+        if graph is None:
+            raise ValueError("Grafo não foi construído. Execute build_graph() primeiro.")
+            
+        neighborhood_microregions = neighborhood_microregions or self.neighborhood_microregions
+        if not neighborhood_microregions:
+            self.load_neighborhoods_microregions()
+            neighborhood_microregions = self.neighborhood_microregions
+            
+        microregion_neighborhoods: Dict[str, Set[str]] = {}
 
-        if pd.isna(peso):
-            peso = 1.0
-        else:
-            peso = float(peso)
+        for bairro, microregion in neighborhood_microregions.items():
+            if microregion not in microregion_neighborhoods:
+                microregion_neighborhoods[microregion] = set()
+            microregion_neighborhoods[microregion].add(bairro)
 
-        graph.add_edge(origem, destino, peso)
+        results = []
 
-    return graph
+        for microregion in sorted(microregion_neighborhoods.keys()):
+            neighborhoods = microregion_neighborhoods[microregion]
 
+            neighborhoods_in_graph = {n for n in neighborhoods if graph.has_node(n)}
 
-def compute_global_metrics(graph: Graph) -> Dict:
-    metrics = graph.get_metrics()
-    result = metrics.to_dict()
+            if not neighborhoods_in_graph:
+                continue
 
-    return result
+            subgraph = graph.get_subgraph(neighborhoods_in_graph)
+            metrics = subgraph.get_metrics()
 
+            result = {
+                "microrregiao": microregion,
+                "bairros": sorted(list(neighborhoods_in_graph)),
+                "ordem": metrics.ordem,
+                "tamanho": metrics.tamanho,
+                "densidade": metrics.densidade,
+            }
 
-def compute_microregion_metrics(
-    graph: Graph, neighborhood_microregions: Dict[str, str]
-) -> List[Dict]:
-    microregion_neighborhoods: Dict[str, Set[str]] = {}
+            results.append(result)
 
-    for bairro, microregion in neighborhood_microregions.items():
-        if microregion not in microregion_neighborhoods:
-            microregion_neighborhoods[microregion] = set()
-        microregion_neighborhoods[microregion].add(bairro)
+        return results
 
-    results = []
+    def compute_ego_metrics(self, graph: Optional[Graph] = None) -> List[Dict]:
+        graph = graph or self.graph
+        if graph is None:
+            raise ValueError("Grafo não foi construído. Execute build_graph() primeiro.")
+            
+        results = []
 
-    for microregion in sorted(microregion_neighborhoods.keys()):
-        neighborhoods = microregion_neighborhoods[microregion]
+        for bairro in sorted(graph.get_vertices()):
+            grau = graph.get_degree(bairro)
 
-        neighborhoods_in_graph = {n for n in neighborhoods if graph.has_node(n)}
+            ego_graph = graph.get_ego_network(bairro)
+            ego_metrics = ego_graph.get_metrics()
 
-        if not neighborhoods_in_graph:
-            continue
+            result = {
+                "bairro": bairro,
+                "grau": grau,
+                "ordem_ego": ego_metrics.ordem,
+                "tamanho_ego": ego_metrics.tamanho,
+                "densidade_ego": ego_metrics.densidade,
+            }
 
-        subgraph = graph.get_subgraph(neighborhoods_in_graph)
-        metrics = subgraph.get_metrics()
+            results.append(result)
 
-        result = {
-            "microrregiao": microregion,
-            "bairros": sorted(list(neighborhoods_in_graph)),
-            "ordem": metrics.ordem,
-            "tamanho": metrics.tamanho,
-            "densidade": metrics.densidade,
-        }
+        results.sort(key=lambda x: x["densidade_ego"], reverse=True)
+        return results
 
-        results.append(result)
+    def ranking_degree(self, graph: Optional[Graph] = None) -> List[Dict]:
+        graph = graph or self.graph
+        if graph is None:
+            raise ValueError("Grafo não foi construído. Execute build_graph() primeiro.")
+            
+        results = []
+        for bairro in sorted(graph.get_vertices()):
+            grau = graph.get_degree(bairro)
+            results.append({"bairro": bairro, "grau": grau})
 
-    return results
+        results.sort(key=lambda x: x["grau"], reverse=True)
+        return results
 
+    def save_results(self, global_metrics: Dict, microregion_metrics: List[Dict], ego_metrics: List[Dict], rank_metrics: List[Dict], output_dir: str = OUT_DIR) -> None:
+        Path(output_dir).mkdir(parents=True, exist_ok=True)
 
-def compute_ego_metrics(graph: Graph) -> List[Dict]:
-    results = []
+        global_path = Path(RECIFE_GLOBAL_PATH)
+        with open(global_path, "w", encoding="utf-8") as f:
+            json.dump(global_metrics, f, indent=2, ensure_ascii=False)
 
-    for bairro in sorted(graph.get_vertices()):
-        grau = graph.get_degree(bairro)
+        microregion_path = Path(MICRORREGIOES_PATH)
+        with open(microregion_path, "w", encoding="utf-8") as f:
+            json.dump(microregion_metrics, f, indent=2, ensure_ascii=False)
 
-        ego_graph = graph.get_ego_network(bairro)
-        ego_metrics = ego_graph.get_metrics()
+        ego_path = Path(EGO_BAIRRO_PATH)
+        with open(ego_path, "w", encoding="utf-8", newline="") as f:
+            if ego_metrics:
+                fieldnames = ["bairro", "grau", "ordem_ego", "tamanho_ego", "densidade_ego"]
+                writer = csv.DictWriter(f, fieldnames=fieldnames)
+                writer.writeheader()
+                writer.writerows(ego_metrics)
 
-        result = {
-            "bairro": bairro,
-            "grau": grau,
-            "ordem_ego": ego_metrics.ordem,
-            "tamanho_ego": ego_metrics.tamanho,
-            "densidade_ego": ego_metrics.densidade,
-        }
+        ranking_path = Path(GRAUS_PATH)
+        with open(ranking_path, "w", encoding="utf-8", newline="") as f:
+            if rank_metrics:
+                fieldnames = ["bairro", "grau"]
+                writer = csv.DictWriter(f, fieldnames=fieldnames)
+                writer.writeheader()
+                writer.writerows(rank_metrics)
+                
+        print(f"✓ Resultados salvos em {output_dir}/")
 
-        results.append(result)
+    def run_full_analysis(self) -> None:
+        print("Carregando dados...")
+        adjacencies_df = self.load_adjacencies()
+        self.load_neighborhoods_microregions()
 
-    results.sort(key=lambda x: x["densidade_ego"], reverse=True)
-    return results
+        print("Construindo grafo...")
+        self.build_graph(adjacencies_df)
 
+        print("Calculando métricas...")
+        global_metrics = self.compute_global_metrics()
+        microregion_metrics = self.compute_microregion_metrics()
+        ego_metrics = self.compute_ego_metrics()
+        ranking = self.ranking_degree()
 
-def ranking_degree(graph: Graph) -> List[Dict]:
-    results = []
-    for bairro in sorted(graph.get_vertices()):
-        grau = graph.get_degree(bairro)
-        results.append({"bairro": bairro, "grau": grau})
-
-    results.sort(key=lambda x: x["grau"], reverse=True)
-    return results
-
-
-def save_results(
-    global_metrics: Dict,
-    microregion_metrics: List[Dict],
-    ego_metrics: List[Dict],
-    rank_metrics: List[Dict],
-    output_dir: str = "out",
-) -> None:
-    Path(output_dir).mkdir(parents=True, exist_ok=True)
-
-    global_path = Path(output_dir) / "recife_global.json"
-    with open(global_path, "w", encoding="utf-8") as f:
-        json.dump(global_metrics, f, indent=2, ensure_ascii=False)
-
-    microregion_path = Path(output_dir) / "microrregioes.json"
-    with open(microregion_path, "w", encoding="utf-8") as f:
-        json.dump(microregion_metrics, f, indent=2, ensure_ascii=False)
-
-    ego_path = Path(output_dir) / "ego_bairro.csv"
-    with open(ego_path, "w", encoding="utf-8", newline="") as f:
-        if ego_metrics:
-            fieldnames = ["bairro", "grau", "ordem_ego", "tamanho_ego", "densidade_ego"]
-            writer = csv.DictWriter(f, fieldnames=fieldnames)
-            writer.writeheader()
-            writer.writerows(ego_metrics)
-
-    ranking_path = Path(output_dir) / "graus.csv"
-    with open(ranking_path, "w", encoding="utf-8", newline="") as f:
-        if rank_metrics:
-            fieldnames = ["bairro", "grau"]
-            writer = csv.DictWriter(f, fieldnames=fieldnames)
-            writer.writeheader()
-            writer.writerows(rank_metrics)
-
+        print("Salvando resultados...")
+        self.save_results(global_metrics, microregion_metrics, ego_metrics, ranking)
+        print("✓ Análise completa!")
 
 def main():
-    adjacencies_path = "data/adjacencias_bairros.csv"
-    neighborhoods_path = "data/bairros_unique.csv"
-
-    adjacencies_df = load_adjacencies(adjacencies_path)
-    neighborhood_microregions = load_neighborhoods_microregions(neighborhoods_path)
-
-    graph = build_graph(adjacencies_df)
-
-    global_metrics = compute_global_metrics(graph)
-    microregion_metrics = compute_microregion_metrics(graph, neighborhood_microregions)
-    ego_metrics = compute_ego_metrics(graph)
-    ranking = ranking_degree(graph)
-
-    save_results(global_metrics, microregion_metrics, ego_metrics, ranking)
-
+    analyzer = GraphAnalyzer()
+    analyzer.run_full_analysis()
 
 if __name__ == "__main__":
     main()

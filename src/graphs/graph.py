@@ -1,7 +1,6 @@
 from typing import Dict, Set, List, Tuple
 from dataclasses import dataclass
 
-
 @dataclass
 class GraphMetrics:
     ordem: int
@@ -14,7 +13,6 @@ class GraphMetrics:
             "tamanho": self.tamanho,
             "densidade": self.densidade,
         }
-
 
 class Graph:
     def __init__(self):

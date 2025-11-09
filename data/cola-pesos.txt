@@ -6,5 +6,5 @@ Avenida (Av) - 2
 Viaduto ? - 3
 Ponte (Pte) - 4
 Rodovia (Rod) - 5
-Estrada (Estr) - 6 ?
-Travessa (Tv.) - 7 ?
+Estrada (Estr) - 6 
+Travessa (Tv.) - 7 
