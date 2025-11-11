@@ -1,0 +1,233 @@
+[
+  {
+    "microrregiao": 1.1,
+    "bairros": [
+      "Recife",
+      "Santo Amaro"
+    ],
+    "ordem": 2,
+    "tamanho": 1,
+    "densidade": 1.0
+  },
+  {
+    "microrregiao": 1.2,
+    "bairros": [
+      "Boa Vista",
+      "Cabanga",
+      "Ilha Do Leite",
+      "Paissandu",
+      "Santo Antônio",
+      "Soledade",
+      "São José"
+    ],
+    "ordem": 7,
+    "tamanho": 7,
+    "densidade": 0.3333333333333333
+  },
+  {
+    "microrregiao": 1.3,
+    "bairros": [
+      "Coelhos",
+      "Ilha Joana Bezerra"
+    ],
+    "ordem": 2,
+    "tamanho": 1,
+    "densidade": 1.0
+  },
+  {
+    "microrregiao": 2.1,
+    "bairros": [
+      "Arruda",
+      "Campina Do Barreto",
+      "Campo Grande",
+      "Encruzilhada",
+      "Hipódromo",
+      "Peixinhos",
+      "Ponto De Parada",
+      "Rosarinho",
+      "Torreão"
+    ],
+    "ordem": 9,
+    "tamanho": 13,
+    "densidade": 0.3611111111111111
+  },
+  {
+    "microrregiao": 2.2,
+    "bairros": [
+      "Alto Santa Teresinha",
+      "Beberibe",
+      "Bomba Do Hemetério",
+      "Cajueiro",
+      "Dois Unidos",
+      "Fundão",
+      "Linha Do Tiro",
+      "Porto Da Madeira",
+      "Água Fria"
+    ],
+    "ordem": 9,
+    "tamanho": 15,
+    "densidade": 0.4166666666666667
+  },
+  {
+    "microrregiao": 3.1,
+    "bairros": [
+      "Aflitos",
+      "Alto Do Mandu",
+      "Apipucos",
+      "Casa Amarela",
+      "Casa Forte",
+      "Derby",
+      "Dois Irmãos",
+      "Espinheiro",
+      "Graças",
+      "Jaqueira",
+      "Monteiro",
+      "Parnamirim",
+      "Poço",
+      "Santana",
+      "Sítio Dos Pintos",
+      "Tamarineira"
+    ],
+    "ordem": 16,
+    "tamanho": 23,
+    "densidade": 0.19166666666666668
+  },
+  {
+    "microrregiao": 3.2,
+    "bairros": [
+      "Alto José Bonifácio",
+      "Alto José Do Pinho",
+      "Mangabeira",
+      "Morro Da Conceição",
+      "Vasco Da Gama"
+    ],
+    "ordem": 5,
+    "tamanho": 5,
+    "densidade": 0.5
+  },
+  {
+    "microrregiao": 3.3,
+    "bairros": [
+      "Brejo Da Guabiraba",
+      "Brejo De Beberibe",
+      "Córrego Do Jenipapo",
+      "Guabiraba",
+      "Macaxeira",
+      "Nova Descoberta",
+      "Passarinho",
+      "Pau-Ferro"
+    ],
+    "ordem": 8,
+    "tamanho": 12,
+    "densidade": 0.42857142857142855
+  },
+  {
+    "microrregiao": 4.1,
+    "bairros": [
+      "Cordeiro",
+      "Ilha Do Retiro",
+      "Iputinga",
+      "Madalena",
+      "Prado",
+      "Torre",
+      "Zumbi"
+    ],
+    "ordem": 7,
+    "tamanho": 10,
+    "densidade": 0.47619047619047616
+  },
+  {
+    "microrregiao": 4.2,
+    "bairros": [
+      "Engenho Do Meio",
+      "Torrões"
+    ],
+    "ordem": 2,
+    "tamanho": 1,
+    "densidade": 1.0
+  },
+  {
+    "microrregiao": 4.3,
+    "bairros": [
+      "Caxangá",
+      "Cidade Universitária",
+      "Várzea"
+    ],
+    "ordem": 3,
+    "tamanho": 2,
+    "densidade": 0.6666666666666666
+  },
+  {
+    "microrregiao": 5.1,
+    "bairros": [
+      "Afogados",
+      "Bongi",
+      "Mangueira",
+      "Mustardinha",
+      "San Martin"
+    ],
+    "ordem": 5,
+    "tamanho": 8,
+    "densidade": 0.8
+  },
+  {
+    "microrregiao": 5.2,
+    "bairros": [
+      "Areias",
+      "Caçote",
+      "Estância",
+      "Jiquiá"
+    ],
+    "ordem": 4,
+    "tamanho": 4,
+    "densidade": 0.6666666666666666
+  },
+  {
+    "microrregiao": 5.3,
+    "bairros": [
+      "Barro",
+      "Coqueiral",
+      "Curado",
+      "Jardim São Paulo",
+      "Sancho",
+      "Tejipió",
+      "Totó"
+    ],
+    "ordem": 7,
+    "tamanho": 11,
+    "densidade": 0.5238095238095238
+  },
+  {
+    "microrregiao": 6.1,
+    "bairros": [
+      "Boa Viagem",
+      "Boa Viagem (Setúbal)",
+      "Brasília Teimosa",
+      "Imbiribeira",
+      "Ipsep",
+      "Pina"
+    ],
+    "ordem": 6,
+    "tamanho": 5,
+    "densidade": 0.3333333333333333
+  },
+  {
+    "microrregiao": 6.2,
+    "bairros": [
+      "Ibura",
+      "Jordão"
+    ],
+    "ordem": 2,
+    "tamanho": 1,
+    "densidade": 1.0
+  },
+  {
+    "microrregiao": 6.3,
+    "bairros": [
+      "Cohab"
+    ],
+    "ordem": 1,
+    "tamanho": 0,
+    "densidade": 0.0
+  }
+]
