@@ -4,6 +4,7 @@ from pathlib import Path
 from solve import GraphAnalyzer
 from graphs.io import CSVLoader
 from graphs.algorithms import Algorithms
+from viz import GraphVisualizer
 
 from constants import (
     ADJACENCIES_PATH,
@@ -33,6 +34,7 @@ Exemplos de uso:
   %(prog)s path "Boa Viagem" "Graças"   # Encontra caminho entre bairros
   %(prog)s process                      # Processa dados de entrada -> bairros_unique.csv
   %(prog)s distances                    # Calcula distâncias em lote -> distancias_enderecos.csv e percurso_nova_descoberta_setubal.json
+  %(prog)s visualize [json_file]        # Gera visualização de árvore de percurso a partir de JSON
   %(prog)s info --type global           # Mostra métricas globais
   %(prog)s info --type microregions     # Mostra métricas por microrregião
   %(prog)s info --type ego              # Mostra ranking por densidade ego
@@ -72,6 +74,18 @@ Exemplos de uso:
         distances_parser = subparsers.add_parser(
             'distances',
             help='Calcula distâncias em lote para pares de endereços -> distancias_enderecos.csv e percurso_nova_descoberta_setubal.json'
+        )
+        
+        # Comando: visualize
+        visualize_parser = subparsers.add_parser(
+            'visualize',
+            help='Gera visualização de árvore de percurso a partir de arquivo JSON'
+        )
+        visualize_parser.add_argument(
+            'json_file',
+            nargs='?',
+            default=str(PERCURSO_NOVA_DESCOBERTA_SETUBAL_PATH),
+            help=f'Caminho para o arquivo JSON com dados do percurso (padrão: {PERCURSO_NOVA_DESCOBERTA_SETUBAL_PATH})'
         )
         
         # Comando: info
@@ -185,6 +199,44 @@ Exemplos de uso:
             print(f"❌ Erro ao calcular distâncias: {e}", file=sys.stderr)
             return 1
     
+    def cmd_visualize(self, args) -> int:
+        try:
+            import json
+            
+            print("=" * 60)
+            print("GERAÇÃO DE VISUALIZAÇÃO DE ÁRVORE DE PERCURSO")
+            print("=" * 60)
+            
+            json_path = Path(args.json_file)
+            
+            if not json_path.exists():
+                print(f"Erro: Arquivo {json_path} não encontrado!")
+                print("\n Dica: Execute primeiro um dos comandos:")
+                return 1
+            
+            print(f"\nCarregando dados de: {json_path}")
+            with open(json_path, "r", encoding="utf-8") as f:
+                data = json.load(f)
+            
+            visualizer = GraphVisualizer(output_dir="out")
+            
+            visualizer.viz_path_tree(
+                caminho=data["caminho"],
+                origem=data["origem"],
+                destino=data["destino"],
+                custo=data["custo"]
+            )
+            
+            print("\nÁrvore de caminho gerada com sucesso!")
+            print("=" * 60)
+            return 0
+            
+        except Exception as e:
+            print(f"Erro ao gerar visualização: {e}", file=sys.stderr)
+            import traceback
+            traceback.print_exc()
+            return 1
+    
     def cmd_info(self, args) -> int:
         try:
             import json
@@ -276,6 +328,7 @@ Exemplos de uso:
             'path': self.cmd_path,
             'process': self.cmd_process,
             'distances': self.cmd_distances,
+            'visualize': self.cmd_visualize,
             'info': self.cmd_info
         }
         

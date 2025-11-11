@@ -247,6 +247,94 @@ class GraphVisualizer:
 
         return stats
 
+    def viz_path_tree(
+        self, caminho: str, origem: str, destino: str, custo: float
+    ):
+        lista = caminho.split("->")
+        bairros = [b.strip() for b in lista]
+        n = len(bairros)
+
+        _ , ax = plt.subplots(figsize=(16, 10))
+
+        positions = {}
+        for i, bairro in enumerate(bairros):
+            x = i * 2
+            y = 0
+            positions[bairro] = (x, y)
+
+        for i in range(len(bairros) - 1):
+            u = bairros[i]
+            v = bairros[i + 1]
+            x1, y1 = positions[u]
+            x2, y2 = positions[v]
+            
+            ax.annotate(
+                "",
+                xy=(x2, y2),
+                xytext=(x1, y1),
+                arrowprops=dict(
+                    arrowstyle="->",
+                    color="darkblue",
+                    lw=5,
+                    alpha=0.7,
+                ),
+                zorder=1,
+            )
+
+        for i, bairro in enumerate(bairros):
+            x, y = positions[bairro]
+            
+            if i == 0:
+                color = "#4CAF50"
+            elif i == n - 1:
+                color = "#F44336"
+            else:
+                color = "#2196F3"
+            if len(bairro.split()) > 1:
+                label = "\n".join(bairro.split())
+            else:
+                label = bairro
+
+            
+            ax.scatter(
+                x, y, s=5000, c=color, edgecolors="black", zorder=2, alpha=0.9
+            )
+            
+            ax.text(
+                x,
+                y,
+                label,
+                fontsize=11,
+                fontweight="bold",
+                ha="center",
+                va="center",
+                zorder=3,
+                color="black",
+                 
+            )
+
+        ax.set_title(
+            f"Árvore de Caminho: {origem} → {destino}\n"
+            f"Custo Total: {custo:.1f} | Número de Passos: {n - 1}",
+            fontweight="bold",
+            fontsize=14,
+            pad=20,
+        )
+        
+        ax.axis("equal")
+        ax.axis("off")
+        
+        margin = 1.5
+        ax.set_xlim(-margin, (n - 1) * 2 + margin)
+        ax.set_ylim(-margin * 3, margin * 3)
+
+        plt.tight_layout()
+        output_path = self.output_dir / "arvore_percurso.png"
+        plt.savefig(output_path, dpi=300, bbox_inches="tight")
+        plt.close()
+        
+        print(f"Visualização salva em: {output_path}")
+
 
 def main():
     from solve import GraphAnalyzer
