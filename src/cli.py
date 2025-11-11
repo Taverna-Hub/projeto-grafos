@@ -35,6 +35,7 @@ Exemplos de uso:
   %(prog)s process                      # Processa dados de entrada -> bairros_unique.csv
   %(prog)s distances                    # Calcula distâncias em lote -> distancias_enderecos.csv e percurso_nova_descoberta_setubal.json
   %(prog)s visualize [json_file]        # Gera visualização de árvore de percurso a partir de JSON
+  %(prog)s interactive                  # Gera grafo interativo HTML com caminho destacado
   %(prog)s info --type global           # Mostra métricas globais
   %(prog)s info --type microregions     # Mostra métricas por microrregião
   %(prog)s info --type ego              # Mostra ranking por densidade ego
@@ -86,6 +87,12 @@ Exemplos de uso:
             nargs='?',
             default=str(PERCURSO_NOVA_DESCOBERTA_SETUBAL_PATH),
             help=f'Caminho para o arquivo JSON com dados do percurso (padrão: {PERCURSO_NOVA_DESCOBERTA_SETUBAL_PATH})'
+        )
+        
+        # Comando: interactive
+        interactive_parser = subparsers.add_parser(
+            'interactive',
+            help='Gera grafo interativo HTML com tooltip, busca e caminho destacado'
         )
         
         # Comando: info
@@ -237,6 +244,51 @@ Exemplos de uso:
             traceback.print_exc()
             return 1
     
+    def cmd_interactive(self, args) -> int:
+        try:
+            import json
+            
+            print("=" * 60)
+            print("GERAÇÃO DE GRAFO INTERATIVO HTML")
+            print("=" * 60)
+            
+            # Carrega o grafo
+            analyzer = GraphAnalyzer()
+            adjacencies_df = analyzer.load_adjacencies()
+            analyzer.load_neighborhoods_microregions()
+            graph = analyzer.build_graph(adjacencies_df)
+            
+            # Carrega o caminho Nova Descoberta -> Boa Viagem
+            caminho_destaque = None
+            json_path = Path(PERCURSO_NOVA_DESCOBERTA_SETUBAL_PATH)
+            
+            if json_path.exists():
+                print(f"Carregando caminho destacado de: {json_path}")
+                with open(json_path, "r", encoding="utf-8") as f:
+                    data = json.load(f)
+                    # Converte "A -> B -> C" em ["A", "B", "C"]
+                    caminho_destaque = [b.strip() for b in data["caminho"].split("->")]
+            else:
+                print("Caminho Nova Descoberta -> Boa Viagem não encontrado")
+                return 1
+            
+            visualizer = GraphVisualizer(output_dir="out")
+            output_path = visualizer.viz_interactive_graph(
+                graph=graph,
+                caminho_destacado=caminho_destaque
+            )
+            
+            print("\nGrafo interativo gerado com sucesso!")
+            print(f"Arquivo: {output_path}")
+            print("=" * 60)
+            return 0
+            
+        except Exception as e:
+            print(f"Erro ao gerar grafo interativo: {e}", file=sys.stderr)
+            import traceback
+            traceback.print_exc()
+            return 1
+    
     def cmd_info(self, args) -> int:
         try:
             import json
@@ -329,6 +381,7 @@ Exemplos de uso:
             'process': self.cmd_process,
             'distances': self.cmd_distances,
             'visualize': self.cmd_visualize,
+            'interactive': self.cmd_interactive,
             'info': self.cmd_info
         }
         

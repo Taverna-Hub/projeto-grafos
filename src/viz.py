@@ -2,6 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from pathlib import Path
 from utils.normalize import normalize_name
+from pyvis.network import Network
 
 from graphs.graph import Graph
 from constants import EGO_BAIRRO_PATH, BAIRROS_UNIQUE_PATH, OUT_DIR
@@ -334,6 +335,224 @@ class GraphVisualizer:
         plt.close()
         
         print(f"Visualização salva em: {output_path}")
+
+    def viz_interactive_graph(
+        self,
+        graph: Graph,
+        ego_path: str = EGO_BAIRRO_PATH,
+        bairros_path: str = BAIRROS_UNIQUE_PATH,
+        caminho_destacado: list = None
+    ) :
+        
+        # Carrega dados
+        ego_df = pd.read_csv(ego_path)
+        bairros_df = pd.read_csv(bairros_path)
+        
+        # Normaliza nomes
+        ego_df["bairro"] = ego_df["bairro"].apply(normalize_name)
+        bairros_df["bairro"] = bairros_df["bairro"].apply(normalize_name)
+        
+        # Merge dos dados
+        merged = ego_df.merge(bairros_df, on="bairro", how="left")
+        
+        # Cria dicionários para acesso rápido
+        info_bairros = {}
+        for _, row in merged.iterrows():
+            info_bairros[row["bairro"]] = {
+                "grau": row["grau"],
+                "microrregiao": row.get("microrregiao", "N/A"),
+                "densidade_ego": row["densidade_ego"]
+            }
+        
+        net = Network(
+            height="800px",
+            width="100%",
+            bgcolor="#ffffff",
+            notebook=False,
+            cdn_resources='in_line',  
+            select_menu=True, 
+            filter_menu=False
+        )
+        
+        # Configura física para melhor visualização
+        net.set_options("""
+        {
+          "physics": {
+            "barnesHut": {
+              "gravitationalConstant": -30000,
+              "centralGravity": 0.3,
+              "springLength": 150,
+              "springConstant": 0.04,
+              "damping": 0.09,
+              "avoidOverlap": 0.5
+            },
+            "minVelocity": 0.75
+          },
+          "interaction": {
+            "hover": true,
+            "tooltipDelay": 100
+          }
+        }
+        """)
+        
+        # Define se bairro está no caminho destacado
+        caminho_set = set(caminho_destacado) if caminho_destacado else set()
+        
+        # Adiciona bairros
+        for vertice in graph.get_vertices():
+            info = info_bairros.get(vertice, {
+                "grau": 0,
+                "microrregiao": "N/A",
+                "densidade_ego": 0.0
+            })
+            
+            # Tooltip com informações
+            titulo = f"""
+            {vertice}
+            Grau: {info['grau']}
+            Microrregião: {info['microrregiao']}
+            Densidade Ego: {info['densidade_ego']:.3f}
+            """
+            
+            # Define cor e tamanho baseado no grau
+            grau = info["grau"]
+            tamanho = 20 + grau * 3
+            
+            # Se está no caminho destacado, usa cor especial
+            if vertice in caminho_set:
+                cor = "#FF4444"  # Vermelho para caminho
+                tamanho = tamanho * 1.5
+            elif grau >= 8:
+                cor = "#FFA500"  
+            elif grau >= 5:
+                cor = "#4CAF50"  
+            else:
+                cor = "#2196F3"  
+            
+            net.add_node(
+                vertice,
+                label=vertice,
+                title=titulo,
+                size=tamanho,
+                color=cor
+            )
+        
+        # Adiciona arestas
+        for u in graph.get_vertices():
+            for v in graph.get_neighbors(u):
+                peso = graph.get_weight(u, v)
+                
+                # Se aresta faz parte do caminho, destaca
+                if caminho_destacado and len(caminho_destacado) > 1:
+                    for i in range(len(caminho_destacado) - 1):
+                        if ((u == caminho_destacado[i] and v == caminho_destacado[i+1]) or
+                            (v == caminho_destacado[i] and u == caminho_destacado[i+1])):
+                            net.add_edge(u, v, value=peso, color="#FF0000", width=5)
+                            break
+                    else:
+                        net.add_edge(u, v, value=peso, color="#999999", width=1)
+                else:
+                    net.add_edge(u, v, value=peso, color="#999999", width=1)
+        
+        output_path = self.output_dir / "grafo_interativo.html"
+
+        net.save_graph(str(output_path))
+        self._customize_html(output_path, caminho_destacado)
+        
+        print(f"Grafo interativo salvo em: {output_path}")
+        return str(output_path)
+    
+    def _customize_html(self, html_path: Path, caminho: list = None):
+        """Adiciona CSS personalizado e instruções ao HTML"""
+        
+        with open(html_path, "r", encoding="utf-8") as f:
+            content = f.read()
+        
+        caminho_texto = " → ".join(caminho) if caminho else "N/A"
+        
+        custom_html = f"""
+        <style>
+            body {{
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 20px;
+                background-color: #f5f5f5;
+            }}
+            .header {{
+                background: #667eea;
+                color: white;
+                padding: 20px;
+                border-radius: 10px;
+                margin-bottom: 20px;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            }}
+            .header h1 {{
+                margin: 0 0 10px 0;
+            }}
+            .legenda {{
+                background: white;
+                padding: 15px;
+                border-radius: 10px;
+                margin-bottom: 20px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }}
+            .legenda h3 {{
+                margin-top: 0;
+            }}
+            .legenda-item {{
+                display: inline-block;
+                margin-right: 20px;
+                margin-bottom: 10px;
+            }}
+            .legenda-cor {{
+                display: inline-block;
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                margin-right: 5px;
+                vertical-align: middle;
+            }}
+            .caminho-destaque {{
+                background: #fff3cd;
+                border: 2px solid #ffc107;
+                padding: 10px;
+                border-radius: 5px;
+                margin-top: 10px;
+            }}
+        </style>
+        <div class="header">
+            <h1>🗺️ Grafo Interativo - Bairros do Recife</h1>
+            <p>Análise de conectividade entre bairros da cidade</p>
+        </div>
+        <div class="legenda">
+            <h3>📋 Legenda</h3>
+            <div class="legenda-item">
+                <span class="legenda-cor" style="background: #FF4444;"></span>
+                <strong>Vermelho:</strong> Caminho destacado
+            </div>
+            <div class="legenda-item">
+                <span class="legenda-cor" style="background: #FFA500;"></span>
+                <strong>Laranja:</strong> Hubs (≥8 conexões)
+            </div>
+            <div class="legenda-item">
+                <span class="legenda-cor" style="background: #4CAF50;"></span>
+                <strong>Verde:</strong> Bem conectados (5-7 conexões)
+            </div>
+            <div class="legenda-item">
+                <span class="legenda-cor" style="background: #2196F3;"></span>
+                <strong>Azul:</strong> Conexões normais (<5)
+            </div>
+            <div class="caminho-destaque">
+                <strong>🚩 Caminho Destacado:</strong> {caminho_texto}
+            </div>
+        </div>
+        """
+        
+        # Insere após o body
+        content = content.replace("<body>", f"<body>{custom_html}")
+        
+        with open(html_path, "w", encoding="utf-8") as f:
+            f.write(content)
 
 
 def main():
