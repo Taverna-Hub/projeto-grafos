@@ -1,22 +1,23 @@
 bairro,grau,ordem_ego,tamanho_ego,densidade_ego
+Boa Viagem (Setúbal),1,2,1,1.0
 Brasília Teimosa,1,2,1,1.0
-Caçote,2,3,3,1.0
+Caçote,1,2,1,1.0
 Hipódromo,2,3,3,1.0
+Ipsep,2,3,3,1.0
 Pau-Ferro,1,2,1,1.0
 Soledade,2,3,3,1.0
-Sítio Dos Pintos,2,3,3,1.0
 Aflitos,3,4,5,0.8333333333333334
 Cajueiro,3,4,5,0.8333333333333334
+Coelhos,3,4,5,0.8333333333333334
 Cohab,3,4,5,0.8333333333333334
 Coqueiral,3,4,5,0.8333333333333334
 Estância,3,4,5,0.8333333333333334
-Ipsep,3,4,5,0.8333333333333334
 Jordão,3,4,5,0.8333333333333334
+Rosarinho,3,4,5,0.8333333333333334
 Santana,3,4,5,0.8333333333333334
 Santo Antônio,3,4,5,0.8333333333333334
 Totó,3,4,5,0.8333333333333334
 Cidade Universitária,4,5,8,0.8
-Coelhos,4,5,8,0.8
 Macaxeira,4,5,8,0.8
 Mangueira,4,5,8,0.8
 Mustardinha,4,5,8,0.8
@@ -24,67 +25,67 @@ Beberibe,4,5,7,0.7
 Casa Forte,4,5,7,0.7
 Dois Unidos,4,5,7,0.7
 Fundão,4,5,7,0.7
-Ilha Do Leite,4,5,7,0.7
-Ilha Joana Bezerra,4,5,7,0.7
 Mangabeira,4,5,7,0.7
 Morro Da Conceição,4,5,7,0.7
 Passarinho,4,5,7,0.7
 Porto Da Madeira,4,5,7,0.7
-Rosarinho,4,5,7,0.7
 Sancho,4,5,7,0.7
 Torreão,4,5,7,0.7
 Torrões,4,5,7,0.7
 Várzea,4,5,7,0.7
 Zumbi,4,5,7,0.7
 Bomba Do Hemetério,5,6,10,0.6666666666666666
-Brejo Da Guabiraba,5,6,10,0.6666666666666666
 Engenho Do Meio,5,6,10,0.6666666666666666
+Ilha Joana Bezerra,3,4,4,0.6666666666666666
 Peixinhos,2,3,2,0.6666666666666666
 Poço,3,4,4,0.6666666666666666
 Recife,3,4,4,0.6666666666666666
+Sítio Dos Pintos,2,3,2,0.6666666666666666
 Alto Do Mandu,5,6,9,0.6
 Alto José Bonifácio,5,6,9,0.6
 Alto Santa Teresinha,5,6,9,0.6
 Barro,5,6,9,0.6
-Boa Viagem,4,5,6,0.6
 Bongi,4,5,6,0.6
-Caxangá,5,6,9,0.6
-Dois Irmãos,5,6,9,0.6
+Brejo Da Guabiraba,5,6,9,0.6
+Córrego Do Jenipapo,5,6,9,0.6
+Ilha Do Leite,4,5,6,0.6
 Imbiribeira,4,5,6,0.6
+Iputinga,5,6,9,0.6
 Monteiro,4,5,6,0.6
-Ponto De Parada,5,6,9,0.6
 Prado,4,5,6,0.6
 Tejipió,4,5,6,0.6
 Vasco Da Gama,5,6,9,0.6
-Córrego Do Jenipapo,6,7,12,0.5714285714285714
 Espinheiro,6,7,12,0.5714285714285714
 Linha Do Tiro,6,7,12,0.5714285714285714
 Campo Grande,5,6,8,0.5333333333333333
-Guabiraba,5,6,8,0.5333333333333333
 Jiquiá,5,6,8,0.5333333333333333
 Madalena,5,6,8,0.5333333333333333
+Ponto De Parada,5,6,8,0.5333333333333333
 Santo Amaro,5,6,8,0.5333333333333333
 Alto José Do Pinho,6,7,11,0.5238095238095238
-Iputinga,6,7,11,0.5238095238095238
 Nova Descoberta,6,7,11,0.5238095238095238
 Brejo De Beberibe,7,8,14,0.5
 Cabanga,3,4,3,0.5
 Campina Do Barreto,4,5,5,0.5
+Caxangá,4,5,5,0.5
 Derby,4,5,5,0.5
+Dois Irmãos,4,5,5,0.5
+Guabiraba,4,5,5,0.5
 Ilha Do Retiro,4,5,5,0.5
 Jaqueira,3,4,3,0.5
-Paissandu,4,5,5,0.5
+Paissandu,3,4,3,0.5
 Pina,3,4,3,0.5
+Apipucos,6,7,10,0.47619047619047616
+Areias,6,7,10,0.47619047619047616
 Cordeiro,6,7,10,0.47619047619047616
-São José,6,7,10,0.47619047619047616
+Arruda,5,6,7,0.4666666666666667
+Boa Viagem,5,6,7,0.4666666666666667
 Parnamirim,5,6,7,0.4666666666666667
+São José,5,6,7,0.4666666666666667
 Torre,5,6,7,0.4666666666666667
-Apipucos,7,8,13,0.4642857142857143
-Areias,7,8,13,0.4642857142857143
 Encruzilhada,7,8,13,0.4642857142857143
+Ibura,7,8,13,0.4642857142857143
 Água Fria,7,8,13,0.4642857142857143
-Ibura,8,9,16,0.4444444444444444
-Arruda,6,7,9,0.42857142857142855
 Graças,6,7,9,0.42857142857142855
 Jardim São Paulo,6,7,9,0.42857142857142855
 Tamarineira,6,7,9,0.42857142857142855
@@ -92,4 +93,4 @@ Curado,7,8,11,0.39285714285714285
 San Martin,7,8,11,0.39285714285714285
 Casa Amarela,8,9,13,0.3611111111111111
 Afogados,7,8,10,0.35714285714285715
-Boa Vista,9,10,16,0.35555555555555557
+Boa Vista,9,10,15,0.3333333333333333

@@ -1,18 +1,18 @@
 bairro_origem,bairro_destino,logradouro,observacao,peso
-Recife,Santo Amaro,Av. Norte Miguel Arraes de Alencar,Acesso via Pte. do Limoeiro,2
+Recife,Santo Amaro,Pte. do Limoeiro,Acesso pela Avenida Norte,4
 Recife,São José,Pte. 12 de Setembro,,4
 Recife,Santo Antônio,Pte. Buarque de Macedo,,4
 Santo Amaro,Boa Vista,R. Dr. Leopoldo Lins,Essa rua se torna a R. dos Palmares em Santo Amaro,1
 Santo Amaro,Soledade,R. do Príncipe,Se torna a Avenid João de Barros,1
 Santo Amaro,Espinheiro,R. Dr. Fernando Alain,Acesso pela ponte na Av. Agamenon que desagua na Rua Barros Barreto,2
-Santo Amaro,Torreão,Av. Norte Miguel Arraes de Alencar,,2
+Santo Amaro,Torreão,R. Retorno Um,Acesso tamném pela Rua Retorno Dois,1
 Boa Vista,Soledade,Av. Conde da Boa Vista,,2
 Boa Vista,São José,R. Velha,Acesso via Pte,1
 Boa Vista,Ilha do Leite,R. Gen. Joaquim Inácio,,1
 Boa Vista,Derby,R. Dom Bôsco,,1
 Cabanga,Afogados,Av. Sul Gov. Cid Sampaio,Acesso via ponte,2
 Cabanga,Pina,Pte. Gov. Paulo Guerra,,4
-Ilha do Leite,Ilha Joana Bezerra,Pte. José de Barros Lima,,2
+Ilha do Leite,Ilha Joana Bezerra,Pte. José de Barros Lima,,4
 Paissandu,Derby,R. Viscondessa do Livramento,,1
 Paissandu,Ilha do Retiro,R. do Paissandú,,1
 Paissandu,Ilha do Leite,R. Pref. Jorge Martins,,1
@@ -36,7 +36,7 @@ Encruzilhada,Aflitos,R. Teles Júnior,,1
 Encruzilhada,Espinheiro,R. Marquês do Paraná,Cruza a Avenida Norte e vira R. Mal. Deodoro,1
 Encruzilhada,Torreão,R. Padre Miguelinho,,1
 Encruzilhada,Hipódromo,R. Frederico,,1
-Ponto de Parada,Tamarineira,Av. Prof. José dos Anjos,Precisa verificar,2
+Ponto de Parada,Tamarineira,Av. Prof. José dos Anjos,,2
 Ponto de Parada,Encruzilhada,Av. Beberibe Santa Cruz Futebol,,2
 Ponto de Parada,Campo Grande,R. Prof. Jerônimo Gueiros,,1
 Ponto de Parada,Rosarinho,Av. Santos Dummont,,2
@@ -70,11 +70,11 @@ Aflitos,Graças,R. Conselheiro Portela,,2
 Aflitos,Espinheiro,R. Quarenta e Oito,,1
 Alto Do Mandu,Casa Amarela,Av. Dr. Euríco Chaves,,2
 Alto Do Mandu,Monteiro,R. Mandacaru,,1
-Alto Do Mandu,Macaxeira,Av. Norte Miguel Arraes de Alencar,Precisa verificar,2
+Alto Do Mandu,Macaxeira,R. Bujaru,,1
 Alto Do Mandu,Apipucos,R. Massaranduba,,1
 Apipucos,Macaxeira,R. Cel Jão Batista do Rêgo Barros,A partir dessa rua têm acesso a ponte,1
 Apipucos,Monteiro,R. de Apipucos,,1
-Apipucos,Caxangá,Av. da Recuperação,Precisa verificar | BR 101,2
+Apipucos,Caxangá,Av. da Recuperação,BR 101,2
 Apipucos,Dois Irmãos,R. Dois Irmãos,Atravessa a BR 101,1
 Casa Amarela,Monteiro,Estr. do Arraial,,6
 Casa Amarela,Vasco da Gama,R. Vasco da Gama,Atravessa a Avenida Norte e chega na Rua Padre Lemos,1
@@ -100,7 +100,7 @@ Parnamirim,Torre,R. José Bonifácio,Acesso pela ponte,1
 Poço,Santana,R. Sant'Anna,,1
 Poço,Casa Forte,R. Oliveira Góes,A partir da rua - atravessa a Avenida 17 de agosto para chegar na Praça de Casa Forte,1
 Poço,Monteiro,R. Tapacurá,,1
-Sítio dos Pintos,Caxangá,R. Manuel de Medeiros,Precisa verificar,1
+Sítio dos Pintos,Caxangá,R. Manuel de Medeiros,,1
 Alto José Bonifácio,Vasco da Gama,R. Alto Nossa Sra. de Fátima,,1
 Alto José Bonifácio,Morro da Conceição,R. Córrego do Euclídes,,1
 Alto José Bonifácio,Brejo De Beberibe,R. Alto José Bonifácio,no Cruzamento com  Av. Ver. Otacilio Azevedo,1
@@ -121,11 +121,10 @@ Córrego Do Jenipapo,Brejo da Guabiraba,R. Córrego da Loira,,1
 Córrego Do Jenipapo,Nova Descoberta,R. Alto Santa Luzia,,1
 Córrego Do Jenipapo,Macaxeira,R. Alto do Formoso,,1
 Córrego Do Jenipapo,Apipucos,R. Erundina Negreiros de Araújo,Por meio da rua - chega na avenida norte para Apipucos,1
-Córrego Do Jenipapo,Dois Irmãos,Av. Norte Miguel Arraes de Alencar,Precisa verificar | Pelo giradourou / retorno,2
+Córrego Do Jenipapo,Dois Irmãos,Av. Norte Miguel Arraes de Alencar, Pelo giradourou / retorno,2
 Guabiraba,Brejo da Guabiraba,Estr. dos Macacos,A partir da Estrada - chega na Avenida da Recuperação,6
-Guabiraba,Córrego do Jenipapo,Av. da Recuperação,Precisa verificar | BR 101,2
 Guabiraba,Passarinho,Estr. Da Mumbeca,,6
-Guabiraba,Dois Irmãos,Estr. dos Macacos,Precisa verificar,2
+Guabiraba,Dois Irmãos,Estr. da Fop,,6
 Macaxeira,Nova Descoberta,R. Corrego de Areia,,1
 Nova Descoberta,Alto do Mandu,R. Nova descoberta,A partir da Rua Imbiriba chega na Nova Descoberta,1
 Passarinho,Dois Unidos,Estr. do Passarinho,,6
@@ -177,10 +176,10 @@ Areias,Barro,Av. Dr. José Rufino,,2
 Areias,Estância,Av. Tapajós,,2
 Areias,Jardim São Paulo,R. José Natário,Chega na rua por meio da Avenida São Paulo,1
 Areias,Caçote,R. Dona Ana Aurora,,1
-Areias,Ibura,Av. Recife,Precisa verificar,2
+Areias,Ibura,Av. Recife,,2
 Estância,Jardim São Paulo,R. Senador Alberto Pasqualini,,1
 Estância,Jiquiá,R. João Texeira,,1
-Barro,Ibura,Rod. Governador Mario Covas,,5
+Barro,Ibura,Rua Desembargador Pedro Ribeiro Malta,Essa rua desagua na Rua Pintor Agenor de Abuquerque César,1
 Barro,Jardim São Paulo,Av. Central,,1
 Barro,Cohab,Av. Engenhho Muribeca,,2
 Barro,Tejipió,Rua Luiz Soares,Continuação da Avenida Central,1
@@ -200,9 +199,8 @@ Boa Viagem,Jordão,R. Remígio,R. Emigio acessa a Av. Centenário Alberto Santos
 Imbiribeira,Ipsep,R. Jean Emile Favre,,1
 Imbiribeira,Ibura,Av. Mascarenhas de Morais,,2
 Ipsep,Ibura,R. São Nicolau,pela Rua São Nicolau (Ipsep) acessa Av. Dom Hélder Câmara (Ibura),1
-Ipsep,Areias,Av. Recife,Precisa verificar,2
 Pina,Brasília Teimosa,R. Dagoberto Pires,,1
-Ibura,Caçote,Av. Recife,Precisa verificar,2
 Ibura,Jordão,R. Nova Canaã,,1
 Ibura,Cohab,Av. Dois Rios,,2
-Jordão,Cohab,Rod. Governador Mario Covas,Precisa verificar | Pegando o retorno perto da R. Jaguaratema,5
+Jordão,Cohab,Rod. Governador Mario Covas,Pegando o retorno perto da R. Jaguaratema,5
+Boa Viagem,Boa Viagem (Setúbal),R. Mario Souto Maior,,1

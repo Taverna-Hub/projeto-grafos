@@ -521,11 +521,11 @@ class GraphVisualizer:
             }}
         </style>
         <div class="header">
-            <h1>🗺️ Grafo Interativo - Bairros do Recife</h1>
+            <h1>Grafo Interativo - Bairros do Recife</h1>
             <p>Análise de conectividade entre bairros da cidade</p>
         </div>
         <div class="legenda">
-            <h3>📋 Legenda</h3>
+            <h3>Legenda</h3>
             <div class="legenda-item">
                 <span class="legenda-cor" style="background: #FF4444;"></span>
                 <strong>Vermelho:</strong> Caminho destacado

@@ -147,7 +147,7 @@ Exemplos de uso:
             print(f"Custo total: {cost}")
             print(f"Caminho: {path}")
 
-            if args.start == "Nova Descoberta" and args.end == "Boa Viagem":
+            if args.start == "Nova Descoberta" and args.end == "Boa Viagem (Setúbal)":
                 import json
                 result = {
                     "origem": args.start,

@@ -91,7 +91,7 @@ class Algorithms:
                     writer.writerow([x, y, bairro_x, bairro_y, weight, path])
                     count += 1
 
-                    if bairro_x == "Nova Descoberta" and bairro_y == "Boa Viagem":
+                    if bairro_x == "Nova Descoberta" and bairro_y == "Boa Viagem (Setúbal)":
                         Path(PERCURSO_NOVA_DESCOBERTA_SETUBAL_PATH).parent.mkdir(parents=True, exist_ok=True)
                         with open(PERCURSO_NOVA_DESCOBERTA_SETUBAL_PATH, "w", encoding="utf-8") as f:
                             json.dump({
@@ -100,7 +100,7 @@ class Algorithms:
                                 "custo": weight,
                                 "caminho": path
                             }, f, indent=2, ensure_ascii=False)
-                        print(f"✓ Caminho Nova Descoberta → Boa Viagem salvo em {PERCURSO_NOVA_DESCOBERTA_SETUBAL_PATH}")
+                        print(f"✓ Caminho Nova Descoberta → Boa Viagem (Setúbal) salvo em {PERCURSO_NOVA_DESCOBERTA_SETUBAL_PATH}")
                     
                     if count % 10 == 0:
                         print(f"  Processados {count} pares de endereços...")
