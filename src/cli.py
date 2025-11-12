@@ -36,6 +36,7 @@ Exemplos de uso:
   %(prog)s distances                    # Calcula distâncias em lote -> distancias_enderecos.csv e percurso_nova_descoberta_setubal.json
   %(prog)s visualize [json_file]        # Gera visualização de árvore de percurso a partir de JSON
   %(prog)s interactive                  # Gera grafo interativo HTML com caminho destacado
+  %(prog)s plots                        # Gera todos os gráficos estáticos (densidade, subgrafo, histograma)
   %(prog)s info --type global           # Mostra métricas globais
   %(prog)s info --type microregions     # Mostra métricas por microrregião
   %(prog)s info --type ego              # Mostra ranking por densidade ego
@@ -93,6 +94,12 @@ Exemplos de uso:
         interactive_parser = subparsers.add_parser(
             'interactive',
             help='Gera grafo interativo HTML com tooltip, busca e caminho destacado'
+        )
+        
+        # Comando: plots
+        plots_parser = subparsers.add_parser(
+            'plots',
+            help='Gera todos os gráficos estáticos (densidade, subgrafo top10, histograma)'
         )
         
         # Comando: info
@@ -289,6 +296,56 @@ Exemplos de uso:
             traceback.print_exc()
             return 1
     
+    def cmd_plots(self, args) -> int:
+        try:
+            print("=" * 60)
+            print("GERAÇÃO DE GRÁFICOS ESTÁTICOS")
+            print("=" * 60)
+            
+            # Carrega o grafo
+            print("\nCarregando grafo...")
+            analyzer = GraphAnalyzer()
+            adjacencies_df = analyzer.load_adjacencies()
+            analyzer.load_neighborhoods_microregions()
+            graph = analyzer.build_graph(adjacencies_df)
+            
+            print("Inicializando visualizador...")
+            visualizer = GraphVisualizer(output_dir="out")
+            
+            # Gera ranking de densidade por microrregião
+            print("\n1/3 - Gerando ranking de densidade por microrregião...")
+            visualizer.viz_ranking_density_ego_per_microregion()
+            print("    ✓ ranking_densidade_microrregiao.png")
+            print("    ✓ ranking_densidade_microrregiao.csv")
+            
+            # Gera subgrafo dos top 10 bairros
+            print("\n2/3 - Gerando subgrafo dos top 10 bairros...")
+            visualizer.viz_subgraph_top10_neighborhoods(graph)
+            print("    ✓ subgrafo_top10_bairros.png")
+            
+            # Gera histograma de distribuição de graus
+            print("\n3/3 - Gerando histograma de distribuição de graus...")
+            stats = visualizer.viz_histograma_distribuicao_graus()
+            print("    ✓ histograma_distribuicao_graus.png")
+            print(f"\n    Estatísticas de grau:")
+            print(f"      • Média: {stats['média']:.2f}")
+            print(f"      • Mediana: {stats['mediana']:.1f}")
+            print(f"      • Mínimo: {stats['mínimo']}")
+            print(f"      • Máximo: {stats['máximo']}")
+            print(f"      • Desvio padrão: {stats['desvio_padrão']:.2f}")
+            
+            print("\n" + "=" * 60)
+            print("✓ Todos os gráficos foram gerados com sucesso!")
+            print("✓ Arquivos salvos no diretório: out/")
+            print("=" * 60)
+            return 0
+            
+        except Exception as e:
+            print(f"❌ Erro ao gerar gráficos: {e}", file=sys.stderr)
+            import traceback
+            traceback.print_exc()
+            return 1
+    
     def cmd_info(self, args) -> int:
         try:
             import json
@@ -382,6 +439,7 @@ Exemplos de uso:
             'distances': self.cmd_distances,
             'visualize': self.cmd_visualize,
             'interactive': self.cmd_interactive,
+            'plots': self.cmd_plots,
             'info': self.cmd_info
         }
         
