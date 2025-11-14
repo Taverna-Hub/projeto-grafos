@@ -56,24 +56,75 @@ class Algorithms:
             for neighbor, weight in graph.get(current_node, []):
                 if neighbor not in visited:
                     heapq.heappush(
-                        priority_queue, (current_weight + weight, neighbor, path)
+                        priority_queue, (current_weight + weight, neighbor, path) # type: ignore
                     )
 
         return float("inf"), "No path found"
     
     def bfs(self, start: str, end: str, graph: Optional[Dict[str, List[Tuple[str, float]]]] = None) -> Tuple[int, str]:
-        pass
+        graph = graph or self.graph
+        queue = deque([(start, [start])])
+        visited = {start}
+        
+        while queue:
+            current_node, path = queue.popleft()
+            
+            if current_node == end:
+                return len(path) - 1, " -> ".join(path)
+            
+            for neighbor, _ in graph.get(current_node, []):
+                if neighbor not in visited:
+                    visited.add(neighbor)
+                    queue.append((neighbor, path + [neighbor]))
+        
+        return -1, "No path found"
     
-    def dfs(self, start: str, end: str, graph: Optional[Dict[str, List[Tuple[str, float]]]] = None) -> Tuple[bool, str]:
-        pass
+    def dfs(self, start: str, end: str, graph: Optional[Dict[str, List[Tuple[str, float]]]] = None) -> Tuple[bool, str]:   
+        graph = graph or self.graph
+        visited = set()
+        path = []
+        
+        def dfs_recursive(node: str) -> bool:
+            visited.add(node)
+            path.append(node)
+            
+            if node == end:
+                return True
+            
+            for neighbor, _ in graph.get(node, []):
+                if neighbor not in visited:
+                    if dfs_recursive(neighbor):
+                        return True
+            
+            path.pop()
+            return False
+        
+        found = dfs_recursive(start)
+        return found, " -> ".join(path)
+    
     
     def bellman_ford(self, start: str, graph: Optional[Dict[str, List[Tuple[str, float]]]] = None) -> Dict[str, float]:
-        pass
+        graph = graph or self.graph
+        distances = {node: float("inf") for node in graph}
+        distances[start] = 0.0
+        
+        num_nodes = len(graph)
+        for _ in range(num_nodes - 1):
+            for node in graph:
+                for neighbor, weight in graph[node]:
+                    if distances[node] + weight < distances[neighbor]:
+                        distances[neighbor] = distances[node] + weight
+        
+        for node in graph:
+            for neighbor, weight in graph[node]:
+                if distances[node] + weight < distances[neighbor]:
+                    print(f"Warning: Negative cycle detected in graph")
+                    break
+        
+        return distances
+    
     
     def compute_distances_batch(self, addresses_path: str = ENDERECOS_PATH, output_path: str = DISTANCIAS_ENDERECOS_PATH) -> None:
-        if not self.graph:
-            raise ValueError("Grafo não foi carregado. Execute load_graph_from_csv() primeiro.")
-        
         Path(output_path).parent.mkdir(parents=True, exist_ok=True)
         
         with open(addresses_path, "r", encoding="utf-8") as file:

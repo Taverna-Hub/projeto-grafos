@@ -2,3 +2,4 @@ venv/
 __pycache__/
 main.py
 count_logradouros.py
+test.py
