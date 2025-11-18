@@ -7,6 +7,7 @@ from graphs.algorithms import Algorithms
 from viz import GraphVisualizer
 
 from constants import (
+    PART1_DIR,
     ADJACENCIES_PATH,
     BAIRROS_UNIQUE_PATH,
     ENDERECOS_PATH,
@@ -232,7 +233,7 @@ Exemplos de uso:
             with open(json_path, "r", encoding="utf-8") as f:
                 data = json.load(f)
             
-            visualizer = GraphVisualizer(output_dir="out")
+            visualizer = GraphVisualizer(PART1_DIR)
             
             visualizer.viz_path_tree(
                 caminho=data["caminho"],
@@ -276,10 +277,10 @@ Exemplos de uso:
                     # Converte "A -> B -> C" em ["A", "B", "C"]
                     caminho_destaque = [b.strip() for b in data["caminho"].split("->")]
             else:
-                print("Caminho Nova Descoberta -> Boa Viagem não encontrado")
+                print("Caminho Nova Descoberta -> Boa Viagem (Setúbal) não encontrado")
                 return 1
             
-            visualizer = GraphVisualizer(output_dir="out")
+            visualizer = GraphVisualizer(PART1_DIR)
             output_path = visualizer.viz_interactive_graph(
                 graph=graph,
                 caminho_destacado=caminho_destaque
@@ -310,7 +311,7 @@ Exemplos de uso:
             graph = analyzer.build_graph(adjacencies_df)
             
             print("Inicializando visualizador...")
-            visualizer = GraphVisualizer(output_dir="out")
+            visualizer = GraphVisualizer(PART1_DIR)
             
             # Gera ranking de densidade por microrregião
             print("\n1/3 - Gerando ranking de densidade por microrregião...")
