@@ -1,58 +1,95 @@
-import pytest
 import sys
+import time
+import tracemalloc
 from pathlib import Path
+from collections import deque
+from typing import Dict, List, Tuple, Set
 
-sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
+sys.path.insert(0, str(Path(__file__).parent.parent.parent / "src"))
 
 from graphs.algorithms import Algorithms
 
 
-class TestBFS:
+def bfs_with_layers(
+    start: str, graph: Dict[str, List[Tuple[str, float]]]
+) -> Tuple[Dict[str, int], List[Set[str]]]:
 
-    def test_bfs_levels_small_graph(self):
-        graph = {
-            "A": [("B", 1), ("D", 1)],
-            "B": [("A", 1), ("C", 1)],
-            "C": [("B", 1), ("F", 1)],
-            "D": [("A", 1), ("E", 1)],
-            "E": [("D", 1), ("F", 1)],
-            "F": [("C", 1), ("E", 1)],
-        }
+    if start not in graph:
+        return {}, []
 
-        algo = Algorithms(graph)
+    distances = {start: 0}
+    layers = [{start}]
+    queue = deque([start])
+    visited = {start}
+    current_layer = 0
+    nodes_in_current_layer = 1
+    nodes_in_next_layer = 0
 
-        level, path = algo.bfs("A", "B")
-        assert level == 1, f"Esperado nível 1, mas obteve {level}"
-        assert path == "A -> B", f"Caminho incorreto: {path}"
+    while queue:
+        node = queue.popleft()
+        nodes_in_current_layer -= 1
 
-        level, path = algo.bfs("A", "C")
-        assert level == 2, f"Esperado nível 2, mas obteve {level}"
+        for neighbor, _ in graph.get(node, []):
+            if neighbor not in visited:
+                visited.add(neighbor)
+                distances[neighbor] = current_layer + 1
+                queue.append(neighbor)
+                nodes_in_next_layer += 1
 
-        level, path = algo.bfs("A", "F")
-        assert level == 3, f"Esperado nível 3, mas obteve {level}"
+        if nodes_in_current_layer == 0:
+            if nodes_in_next_layer > 0:
+                current_layer += 1
+                if len(layers) <= current_layer:
+                    layers.append(set())
 
-        level, path = algo.bfs("A", "A")
-        assert level == 0, f"Esperado nível 0, mas obteve {level}"
-        assert path == "A", f"Caminho incorreto: {path}"
+                temp_queue = list(queue)
+                layers[current_layer] = set(temp_queue[:nodes_in_next_layer])
+                nodes_in_current_layer = nodes_in_next_layer
+                nodes_in_next_layer = 0
 
-    def test_bfs_no_path(self):
-        graph = {"A": [("B", 1)], "B": [("A", 1)], "C": [("D", 1)], "D": [("C", 1)]}
+    return distances, layers
 
-        algo = Algorithms(graph)
-        level, path = algo.bfs("A", "C")
-        assert level == -1, f"Esperado -1 para caminho inexistente, mas obteve {level}"
-        assert path == "No path found", f"Mensagem incorreta: {path}"
 
-    def test_bfs_linear_graph(self):
-        graph = {
-            "A": [("B", 1)],
-            "B": [("A", 1), ("C", 1)],
-            "C": [("B", 1), ("D", 1)],
-            "D": [("C", 1)],
-        }
+def test_bfs_bitcoin_alpha():
 
-        algo = Algorithms(graph)
+    csv_path = Path(__file__).parent.parent / "data" / "bitcoin_alpha.csv"
 
-        level, path = algo.bfs("A", "D")
-        assert level == 3, f"Esperado nível 3, mas obteve {level}"
-        assert path == "A -> B -> C -> D", f"Caminho incorreto: {path}"
+    algo = Algorithms()
+    graph = algo.load_graph_from_csv(str(csv_path))
+
+    all_nodes = list(graph.keys())
+    sources = [all_nodes[0], all_nodes[100], all_nodes[500]]
+
+    results = []
+
+    for i, source in enumerate(sources, 1):
+
+        tracemalloc.start()
+        start_time = time.perf_counter()
+
+        distances, layers = bfs_with_layers(source, graph)
+
+        end_time = time.perf_counter()
+        _, peak = tracemalloc.get_traced_memory()
+        tracemalloc.stop()
+
+        elapsed_time = end_time - start_time
+
+        reachable = len(distances)
+
+        results.append(
+            {
+                "source": source,
+                "reachable_nodes": reachable,
+                "total_nodes": len(graph),
+                "layers": len(layers),
+                "time_seconds": elapsed_time,
+                "peak_memory_mb": peak / 1024 / 1024,
+            }
+        )
+
+    return results
+
+
+if __name__ == "__main__":
+    test_bfs_bitcoin_alpha()

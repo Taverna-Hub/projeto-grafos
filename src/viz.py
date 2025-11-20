@@ -3,14 +3,23 @@ import matplotlib.pyplot as plt
 from pathlib import Path
 from utils.normalize import normalize_name
 from pyvis.network import Network
+import re
 
 from graphs.graph import Graph
-from constants import EGO_BAIRRO_PATH, BAIRROS_UNIQUE_PATH, OUT_DIR
+from constants import (
+    EGO_BAIRRO_PATH,
+    BAIRROS_UNIQUE_PATH,
+    PART1_Q8_DIR,
+    PART1_Q7_DIR,
+    PART1_Q9_DIR,
+)
 
 
 class GraphVisualizer:
 
-    def __init__(self, output_dir: str = OUT_DIR):
+    def __init__(self, output_dir: str = None):
+        if output_dir is None:
+            output_dir = str(PART1_Q8_DIR)
         self.output_dir = Path(output_dir)
         self.output_dir.mkdir(parents=True, exist_ok=True)
 
@@ -83,6 +92,12 @@ class GraphVisualizer:
 
         csv_path = self.output_dir / "ranking_densidade_microrregiao.csv"
         density_by_micro.to_csv(csv_path, index=False, encoding="utf-8")
+
+        self._create_html_wrapper(
+            "ranking_densidade_microrregiao.png",
+            "Ranking de Densidade por Microrregião",
+            "ranking_densidade_microrregiao.html",
+        )
 
         return density_by_micro
 
@@ -186,6 +201,12 @@ class GraphVisualizer:
         plt.savefig(output_path, dpi=300, bbox_inches="tight")
         plt.close()
 
+        self._create_html_wrapper(
+            "subgrafo_top10_bairros.png",
+            "Subgrafo Top 10 Bairros",
+            "subgrafo_top10_bairros.html",
+        )
+
     def viz_histograma_distribuicao_graus(
         self, ego_path: str = EGO_BAIRRO_PATH
     ) -> None:
@@ -246,16 +267,20 @@ class GraphVisualizer:
         plt.savefig(output_path, dpi=300, bbox_inches="tight")
         plt.close()
 
+        self._create_html_wrapper(
+            "histograma_distribuicao_graus.png",
+            "Histograma de Distribuição de Graus",
+            "histograma_distribuicao_graus.html",
+        )
+
         return stats
 
-    def viz_path_tree(
-        self, caminho: str, origem: str, destino: str, custo: float
-    ):
+    def viz_path_tree(self, caminho: str, origem: str, destino: str, custo: float):
         lista = caminho.split("->")
         bairros = [b.strip() for b in lista]
         n = len(bairros)
 
-        _ , ax = plt.subplots(figsize=(16, 10))
+        _, ax = plt.subplots(figsize=(16, 10))
 
         positions = {}
         for i, bairro in enumerate(bairros):
@@ -268,7 +293,7 @@ class GraphVisualizer:
             v = bairros[i + 1]
             x1, y1 = positions[u]
             x2, y2 = positions[v]
-            
+
             ax.annotate(
                 "",
                 xy=(x2, y2),
@@ -284,7 +309,7 @@ class GraphVisualizer:
 
         for i, bairro in enumerate(bairros):
             x, y = positions[bairro]
-            
+
             if i == 0:
                 color = "#4CAF50"
             elif i == n - 1:
@@ -296,11 +321,8 @@ class GraphVisualizer:
             else:
                 label = bairro
 
-            
-            ax.scatter(
-                x, y, s=5000, c=color, edgecolors="black", zorder=2, alpha=0.9
-            )
-            
+            ax.scatter(x, y, s=5000, c=color, edgecolors="black", zorder=2, alpha=0.9)
+
             ax.text(
                 x,
                 y,
@@ -311,7 +333,6 @@ class GraphVisualizer:
                 va="center",
                 zorder=3,
                 color="black",
-                 
             )
 
         ax.set_title(
@@ -321,19 +342,29 @@ class GraphVisualizer:
             fontsize=14,
             pad=20,
         )
-        
+
         ax.axis("equal")
         ax.axis("off")
-        
+
         margin = 1.5
         ax.set_xlim(-margin, (n - 1) * 2 + margin)
         ax.set_ylim(-margin * 3, margin * 3)
 
         plt.tight_layout()
-        output_path = self.output_dir / "arvore_percurso.png"
+        q7_dir = Path(PART1_Q7_DIR)
+        q7_dir.mkdir(parents=True, exist_ok=True)
+        output_path = q7_dir / "arvore_percurso.png"
         plt.savefig(output_path, dpi=300, bbox_inches="tight")
         plt.close()
-        
+
+        q7_html = q7_dir / "arvore_percurso.html"
+        self._create_html_wrapper(
+            "arvore_percurso.png",
+            f"Árvore de Percurso: {origem} → {destino}",
+            str(q7_html),
+            is_q7=True,
+        )
+
         print(f"Visualização salva em: {output_path}")
 
     def viz_interactive_graph(
@@ -341,41 +372,37 @@ class GraphVisualizer:
         graph: Graph,
         ego_path: str = EGO_BAIRRO_PATH,
         bairros_path: str = BAIRROS_UNIQUE_PATH,
-        caminho_destacado: list = None
-    ) :
-        
-        # Carrega dados
+        caminho_destacado: list = None,
+    ):
+
         ego_df = pd.read_csv(ego_path)
         bairros_df = pd.read_csv(bairros_path)
-        
-        # Normaliza nomes
+
         ego_df["bairro"] = ego_df["bairro"].apply(normalize_name)
         bairros_df["bairro"] = bairros_df["bairro"].apply(normalize_name)
-        
-        # Merge dos dados
+
         merged = ego_df.merge(bairros_df, on="bairro", how="left")
-        
-        # Cria dicionários para acesso rápido
+
         info_bairros = {}
         for _, row in merged.iterrows():
             info_bairros[row["bairro"]] = {
                 "grau": row["grau"],
                 "microrregiao": row.get("microrregiao", "N/A"),
-                "densidade_ego": row["densidade_ego"]
+                "densidade_ego": row["densidade_ego"],
             }
-        
+
         net = Network(
             height="800px",
             width="100%",
             bgcolor="#ffffff",
             notebook=False,
-            cdn_resources='in_line',  
-            select_menu=True, 
-            filter_menu=False
+            cdn_resources="in_line",
+            select_menu=True,
+            filter_menu=False,
         )
-        
-        # Configura física para melhor visualização
-        net.set_options("""
+
+        net.set_options(
+            """
         {
           "physics": {
             "barnesHut": {
@@ -393,90 +420,197 @@ class GraphVisualizer:
             "tooltipDelay": 100
           }
         }
-        """)
-        
-        # Define se bairro está no caminho destacado
+        """
+        )
+
         caminho_set = set(caminho_destacado) if caminho_destacado else set()
-        
-        # Adiciona bairros
+
         for vertice in graph.get_vertices():
-            info = info_bairros.get(vertice, {
-                "grau": 0,
-                "microrregiao": "N/A",
-                "densidade_ego": 0.0
-            })
-            
-            # Tooltip com informações
+            info = info_bairros.get(
+                vertice, {"grau": 0, "microrregiao": "N/A", "densidade_ego": 0.0}
+            )
+
             titulo = f"""
             {vertice}
             Grau: {info['grau']}
             Microrregião: {info['microrregiao']}
             Densidade Ego: {info['densidade_ego']:.3f}
             """
-            
-            # Define cor e tamanho baseado no grau
+
             grau = info["grau"]
             tamanho = 20 + grau * 3
-            
-            # Se está no caminho destacado, usa cor especial
+
             if vertice in caminho_set:
-                cor = "#FF4444"  # Vermelho para caminho
+                cor = "#FF4444"
                 tamanho = tamanho * 1.5
             elif grau >= 8:
-                cor = "#FFA500"  
+                cor = "#FFA500"
             elif grau >= 5:
-                cor = "#4CAF50"  
+                cor = "#4CAF50"
             else:
-                cor = "#2196F3"  
-            
-            net.add_node(
-                vertice,
-                label=vertice,
-                title=titulo,
-                size=tamanho,
-                color=cor
-            )
-        
-        # Adiciona arestas
+                cor = "#2196F3"
+
+            net.add_node(vertice, label=vertice, title=titulo, size=tamanho, color=cor)
+
         for u in graph.get_vertices():
             for v in graph.get_neighbors(u):
                 peso = graph.get_weight(u, v)
-                
-                # Se aresta faz parte do caminho, destaca
+
                 if caminho_destacado and len(caminho_destacado) > 1:
                     for i in range(len(caminho_destacado) - 1):
-                        if ((u == caminho_destacado[i] and v == caminho_destacado[i+1]) or
-                            (v == caminho_destacado[i] and u == caminho_destacado[i+1])):
+                        if (
+                            u == caminho_destacado[i] and v == caminho_destacado[i + 1]
+                        ) or (
+                            v == caminho_destacado[i] and u == caminho_destacado[i + 1]
+                        ):
                             net.add_edge(u, v, value=peso, color="#FF0000", width=5)
                             break
                     else:
                         net.add_edge(u, v, value=peso, color="#999999", width=1)
                 else:
                     net.add_edge(u, v, value=peso, color="#999999", width=1)
-        
-        output_path = self.output_dir / "grafo_interativo.html"
+
+        q9_dir = Path(PART1_Q9_DIR)
+        q9_dir.mkdir(parents=True, exist_ok=True)
+        output_path = q9_dir / "grafo_interativo.html"
 
         net.save_graph(str(output_path))
         self._customize_html(output_path, caminho_destacado)
-        
+
         print(f"Grafo interativo salvo em: {output_path}")
         return str(output_path)
-    
+
+    def _create_html_wrapper(
+        self, image_filename: str, title: str, output_filename: str, is_q7: bool = False
+    ):
+        if is_q7:
+            img_path = image_filename
+        else:
+            img_path = image_filename
+
+        html_content = f"""<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{title} - Grafos Recife</title>
+    <style>
+        * {{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }}
+        body {{
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }}
+        header {{
+            background-color: #333;
+            color: white;
+            padding: 1em;
+            text-align: center;
+        }}
+        nav a {{
+            color: white !important;
+            text-decoration: none;
+            padding: 1em;
+            display: inline-block;
+        }}
+        nav a:hover {{
+            background-color: #555;
+        }}
+        .container {{
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }}
+        h1 {{
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }}
+        .image-container {{
+            text-align: center;
+            margin: 20px 0;
+        }}
+        .image-container img {{
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }}
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="../9/grafo_interativo.html">Grafo Interativo</a>
+            <a href="../7/arvore_percurso.html">Árvore de Percurso</a>
+            <a href="../8/histograma_distribuicao_graus.html"
+            >Histograma de Distribuição de Graus</a
+            >
+            <a href="../8/ranking_densidade_microrregiao.html"
+            >Ranking de Densidade por Microrregião</a
+            >
+            <a href="../8/subgrafo_top10_bairros.html">Subgrafo Top 10 Bairros</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1>{title}</h1>
+        <div class="image-container">
+            <img src="{img_path}" alt="{title}">
+        </div>
+    </div>
+</body>
+</html>"""
+
+        if is_q7:
+            output_path = Path(output_filename)
+        else:
+            output_path = self.output_dir / output_filename
+
+        with open(output_path, "w", encoding="utf-8") as f:
+            f.write(html_content)
+
     def _customize_html(self, html_path: Path, caminho: list = None):
-        """Adiciona CSS personalizado e instruções ao HTML"""
-        
+
         with open(html_path, "r", encoding="utf-8") as f:
             content = f.read()
-        
+
+        content = re.sub(r"\s*<center>\s*<h1>\s*</h1>\s*</center>\s*", "", content)
+
         caminho_texto = " → ".join(caminho) if caminho else "N/A"
-        
+
         custom_html = f"""
         <style>
+            * {{
+                margin: 0;
+                padding: 0;
+            }}
             body {{
                 font-family: Arial, sans-serif;
                 margin: 0;
-                padding: 20px;
                 background-color: #f5f5f5;
+            }}
+            header {{
+                background-color: #333;
+                color: white;
+                padding: 1em;
+                text-align: center;
+            }}
+            nav a {{
+                color: white !important;
+                text-decoration: none;
+                padding: 1em;
+                display: inline-block;
+            }}
+            nav a:hover {{
+                background-color: #555;
             }}
             .header {{
                 background: #667eea;
@@ -520,6 +654,19 @@ class GraphVisualizer:
                 margin-top: 10px;
             }}
         </style>
+        <header>
+            <nav>
+                <a href="../9/grafo_interativo.html">Grafo Interativo</a>
+                <a href="../7/arvore_percurso.html">Árvore de Percurso</a>
+                <a href="../8/histograma_distribuicao_graus.html"
+                >Histograma de Distribuição de Graus</a
+                >
+                <a href="../8/ranking_densidade_microrregiao.html"
+                >Ranking de Densidade por Microrregião</a
+                >
+                <a href="../8/subgrafo_top10_bairros.html">Subgrafo Top 10 Bairros</a>
+            </nav>
+        </header>
         <div class="header">
             <h1>Grafo Interativo - Bairros do Recife</h1>
             <p>Análise de conectividade entre bairros da cidade</p>
@@ -547,10 +694,9 @@ class GraphVisualizer:
             </div>
         </div>
         """
-        
-        # Insere após o body
+
         content = content.replace("<body>", f"<body>{custom_html}")
-        
+
         with open(html_path, "w", encoding="utf-8") as f:
             f.write(content)
 

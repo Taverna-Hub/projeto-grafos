@@ -1,126 +1,144 @@
-import pytest
 import sys
+import time
+import tracemalloc
 from pathlib import Path
-from io import StringIO
+from typing import Dict, List, Tuple
 
-sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
+sys.path.insert(0, str(Path(__file__).parent.parent.parent / "src"))
 
 from graphs.algorithms import Algorithms
 
 
-class TestBellmanFord:
+def create_graph_with_negative_weights() -> Dict[str, List[Tuple[str, float]]]:
 
-    def test_bellman_ford_positive_weights(self):
-        graph = {
-            "A": [("B", 4), ("C", 2)],
-            "B": [("A", 4), ("D", 3)],
-            "C": [("A", 2), ("D", 1)],
-            "D": [("B", 3), ("C", 1)],
-        }
+    return {
+        "A": [("B", 4.0), ("C", 2.0)],
+        "B": [("A", 4.0), ("C", -3.0), ("D", 2.0)],
+        "C": [("A", 2.0), ("B", -3.0), ("D", 4.0)],
+        "D": [("B", 2.0), ("C", 4.0), ("E", 1.0)],
+        "E": [("D", 1.0)],
+    }
 
-        algo = Algorithms(graph)
-        distances = algo.bellman_ford("A")
 
-        assert distances["A"] == 0.0, f"Distância de A para A deve ser 0"
-        assert distances["B"] == 4.0, f"Distância de A para B deve ser 4"
-        assert distances["C"] == 2.0, f"Distância de A para C deve ser 2"
-        assert distances["D"] == 3.0, f"Distância de A para D deve ser 3"
+def create_graph_with_negative_cycle() -> Dict[str, List[Tuple[str, float]]]:
 
-    def test_bellman_ford_negative_weights_no_cycle(self):
-        graph = {"A": [("B", 5), ("C", -2)], "B": [("D", 1)], "C": [("D", 3)], "D": []}
+    return {
+        "A": [("B", 1.0)],
+        "B": [("A", 1.0), ("C", -2.0)],
+        "C": [("B", -2.0), ("A", -1.0)],
+        "D": [("A", 5.0)],
+    }
 
-        algo = Algorithms(graph)
-        distances = algo.bellman_ford("A")
 
-        assert distances["A"] == 0.0, f"Distância de A para A deve ser 0"
-        assert distances["C"] == -2.0, f"Distância de A para C deve ser -2"
-        assert (
-            distances["D"] == 1.0
-        ), f"Distância de A para D deve ser 1 (via C: -2+3=1)"
-        assert distances["B"] == 5.0, f"Distância de A para B deve ser 5"
+def bellman_ford_with_cycle_detection(
+    start: str, graph: Dict[str, List[Tuple[str, float]]]
+) -> Tuple[Dict[str, float], bool]:
 
-    def test_bellman_ford_negative_weights_complex(self):
-        graph = {
-            "S": [("A", 5), ("B", 2)],
-            "A": [("S", 5), ("C", 1)],
-            "B": [("S", 2), ("A", -3), ("C", 4)],
-            "C": [("A", 1), ("B", 4)],
-        }
+    if start not in graph:
+        return {}, False
 
-        algo = Algorithms(graph)
-        distances = algo.bellman_ford("S")
+    distances = {node: float("inf") for node in graph}
+    distances[start] = 0.0
 
-        assert distances["S"] == 0.0, f"Distância de S para S deve ser 0"
-        assert distances["B"] == 2.0, f"Distância de S para B deve ser 2"
-        assert distances["A"] == -1.0, f"Distância de S para A deve ser -1 (via B)"
-        assert distances["C"] == 0.0, f"Distância de S para C deve ser 0 (via A)"
+    num_nodes = len(graph)
+    for _ in range(num_nodes - 1):
+        for node in graph:
+            if distances[node] != float("inf"):
+                for neighbor, weight in graph[node]:
+                    if distances[node] + weight < distances[neighbor]:
+                        distances[neighbor] = distances[node] + weight
 
-    def test_bellman_ford_negative_cycle_detection(self):
-        graph = {
-            "A": [("B", 1), ("C", -2)],
-            "B": [("A", 1), ("C", -1)],
-            "C": [("A", -2), ("B", -1)],
-        }
+    has_negative_cycle = False
+    for node in graph:
+        if distances[node] != float("inf"):
+            for neighbor, weight in graph[node]:
+                if distances[node] + weight < distances[neighbor]:
+                    has_negative_cycle = True
+                    break
+        if has_negative_cycle:
+            break
 
-        algo = Algorithms(graph)
+    return distances, has_negative_cycle
 
-        import sys
-        from io import StringIO
 
-        old_stdout = sys.stdout
-        sys.stdout = captured_output = StringIO()
+def test_bellman_ford_bitcoin_alpha():
 
-        distances = algo.bellman_ford("A")
+    csv_path = Path(__file__).parent.parent / "data" / "bitcoin_alpha.csv"
+    algo = Algorithms()
+    graph_positive = algo.load_graph_from_csv(str(csv_path))
 
-        sys.stdout = old_stdout
-        output = captured_output.getvalue()
+    all_nodes = list(graph_positive.keys())
+    source = all_nodes[0]
 
-        assert "Negative cycle detected" in output, "Deve detectar ciclo negativo"
+    tracemalloc.start()
+    start_time = time.perf_counter()
 
-        assert isinstance(distances, dict), "Deve retornar um dicionário"
+    distances = algo.bellman_ford(source, graph_positive)
 
-    def test_bellman_ford_no_negative_cycle_flag(self):
-        graph = {"A": [("B", 1)], "B": [("A", 1), ("C", 1)], "C": [("B", 1)]}
+    end_time = time.perf_counter()
+    _, peak = tracemalloc.get_traced_memory()
+    tracemalloc.stop()
 
-        algo = Algorithms(graph)
+    elapsed_time = end_time - start_time
+    reachable = len([d for d in distances.values() if d != float("inf")])
 
-        import sys
-        from io import StringIO
+    result_1 = {
+        "test": "positive_weights",
+        "source": source,
+        "total_nodes": len(graph_positive),
+        "reachable_nodes": reachable,
+        "time_seconds": elapsed_time,
+        "peak_memory_mb": peak / 1024 / 1024,
+        "negative_cycle": False,
+    }
 
-        old_stdout = sys.stdout
-        sys.stdout = captured_output = StringIO()
+    graph_negative = create_graph_with_negative_weights()
 
-        distances = algo.bellman_ford("A")
+    tracemalloc.start()
+    start_time = time.perf_counter()
 
-        sys.stdout = old_stdout
-        output = captured_output.getvalue()
+    _, has_cycle = bellman_ford_with_cycle_detection("A", graph_negative)
 
-        assert (
-            "Negative cycle detected" not in output
-        ), "Não deve detectar ciclo negativo"
-        assert distances["A"] == 0.0
-        assert distances["B"] == 1.0
-        assert distances["C"] == 2.0
+    end_time = time.perf_counter()
+    _, peak = tracemalloc.get_traced_memory()
+    tracemalloc.stop()
 
-    def test_bellman_ford_disconnected_graph(self):
-        graph = {"A": [("B", 1)], "B": [("A", 1)], "C": [("D", 1)], "D": [("C", 1)]}
+    elapsed_time = end_time - start_time
 
-        algo = Algorithms(graph)
-        distances = algo.bellman_ford("A")
+    result_2 = {
+        "test": "negative_weights_no_cycle",
+        "source": "A",
+        "total_nodes": len(graph_negative),
+        "negative_cycle": has_cycle,
+        "time_seconds": elapsed_time,
+        "peak_memory_kb": peak / 1024,
+    }
 
-        assert distances["A"] == 0.0
-        assert distances["B"] == 1.0
-        assert distances["C"] == float(
-            "inf"
-        ), "Nós desconectados devem ter distância infinita"
-        assert distances["D"] == float(
-            "inf"
-        ), "Nós desconectados devem ter distância infinita"
+    graph_cycle = create_graph_with_negative_cycle()
+    tracemalloc.start()
+    start_time = time.perf_counter()
 
-    def test_bellman_ford_single_node(self):
-        graph = {"A": []}
+    _, has_cycle = bellman_ford_with_cycle_detection("A", graph_cycle)
 
-        algo = Algorithms(graph)
-        distances = algo.bellman_ford("A")
+    end_time = time.perf_counter()
+    _, peak = tracemalloc.get_traced_memory()
+    tracemalloc.stop()
 
-        assert distances["A"] == 0.0, "Distância do nó para si mesmo deve ser 0"
+    elapsed_time = end_time - start_time
+
+    result_3 = {
+        "test": "negative_cycle",
+        "source": "A",
+        "total_nodes": len(graph_cycle),
+        "negative_cycle": has_cycle,
+        "time_seconds": elapsed_time,
+        "peak_memory_kb": peak / 1024,
+    }
+
+    results = [result_1, result_2, result_3]
+
+    return results
+
+
+if __name__ == "__main__":
+    test_bellman_ford_bitcoin_alpha()

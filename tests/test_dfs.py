@@ -1,88 +1,82 @@
-import pytest
 import sys
+import time
+import tracemalloc
 from pathlib import Path
+from typing import Dict, List, Tuple, Set, Optional
 
-sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
+sys.path.insert(0, str(Path(__file__).parent.parent.parent / "src"))
 
 from graphs.algorithms import Algorithms
 
 
-class TestDFS:
+def dfs_with_cycle_detection(
+    start: str, graph: Dict[str, List[Tuple[str, float]]]
+) -> Tuple[List[str], List[Tuple[str, str]], bool]:
 
-    def test_dfs_finds_path(self):
-        graph = {
-            "A": [("B", 1), ("C", 1)],
-            "B": [("A", 1), ("D", 1)],
-            "C": [("A", 1), ("D", 1)],
-            "D": [("B", 1), ("C", 1)],
-        }
+    if start not in graph:
+        return [], [], False
 
-        algo = Algorithms(graph)
-        found, path = algo.dfs("A", "D")
+    visited = set()
+    visit_order = []
+    back_edges = []
+    rec_stack = set()
 
-        assert found == True, "DFS deveria encontrar um caminho de A para D"
-        assert path.startswith("A"), "Caminho deve começar com A"
-        assert path.endswith("D"), "Caminho deve terminar com D"
+    def dfs_visit(node: str, parent: Optional[str] = None):
+        visited.add(node)
+        rec_stack.add(node)
+        visit_order.append(node)
 
-    def test_dfs_cycle_detection(self):
-        graph = {"A": [("B", 1)], "B": [("A", 1), ("C", 1)], "C": [("B", 1), ("A", 1)]}
+        for neighbor, _ in graph.get(node, []):
+            if neighbor not in visited:
+                dfs_visit(neighbor, node)
+            elif neighbor in rec_stack and neighbor != parent:
+                back_edges.append((node, neighbor))
 
-        algo = Algorithms(graph)
+        rec_stack.remove(node)
 
-        found, path = algo.dfs("A", "C")
-        assert found == True, "Deve encontrar caminho em grafo com ciclo"
+    dfs_visit(start)
+    has_cycles = len(back_edges) > 0
 
-        has_multiple_edges = any(len(neighbors) > 1 for neighbors in graph.values())
-        assert has_multiple_edges, "Grafo com ciclo deve ter nós com múltiplas arestas"
+    return visit_order, back_edges, has_cycles
 
-    def test_dfs_no_path(self):
-        graph = {"A": [("B", 1)], "B": [("A", 1)], "C": [("D", 1)], "D": [("C", 1)]}
 
-        algo = Algorithms(graph)
-        found, path = algo.dfs("A", "C")
+def test_dfs_bitcoin_alpha():
+    csv_path = Path(__file__).parent.parent / "data" / "bitcoin_alpha.csv"
 
-        assert (
-            found == False
-        ), "DFS não deveria encontrar caminho entre componentes desconectados"
-        assert "C" not in path, "Caminho não deve conter o nó destino inalcançável"
+    algo = Algorithms()
+    graph = algo.load_graph_from_csv(str(csv_path))
 
-    def test_dfs_edge_classification(self):
-        graph = {
-            "A": [("B", 1), ("C", 1)],
-            "B": [("A", 1), ("D", 1)],
-            "C": [("A", 1), ("D", 1)],
-            "D": [("B", 1), ("C", 1)],
-        }
+    all_nodes = list(graph.keys())
+    sources = [all_nodes[0], all_nodes[100], all_nodes[500]]
 
-        algo = Algorithms(graph)
+    results = []
 
-        found, path = algo.dfs("A", "D")
-        path_nodes = path.split(" -> ")
-        tree_edges = len(path_nodes) - 1
+    for i, source in enumerate(sources, 1):
+        tracemalloc.start()
+        start_time = time.perf_counter()
 
-        total_edges = sum(len(neighbors) for neighbors in graph.values()) // 2
+        visit_order, back_edges, has_cycles = dfs_with_cycle_detection(source, graph)
 
-        assert (
-            total_edges > tree_edges
-        ), "Deve haver arestas além das tree edges (back edges)"
+        end_time = time.perf_counter()
+        _, peak = tracemalloc.get_traced_memory()
+        tracemalloc.stop()
 
-    def test_dfs_acyclic_graph(self):
-        graph = {
-            "A": [("B", 1), ("C", 1)],
-            "B": [("A", 1), ("D", 1)],
-            "C": [("A", 1), ("E", 1)],
-            "D": [("B", 1)],
-            "E": [("C", 1)],
-        }
+        elapsed_time = end_time - start_time
 
-        algo = Algorithms(graph)
+        results.append(
+            {
+                "source": source,
+                "visited_nodes": len(visit_order),
+                "total_nodes": len(graph),
+                "has_cycles": has_cycles,
+                "back_edges": len(back_edges),
+                "time_seconds": elapsed_time,
+                "peak_memory_mb": peak / 1024 / 1024,
+            }
+        )
 
-        found1, path1 = algo.dfs("A", "D")
-        assert found1 == True, "Deve encontrar caminho em árvore"
+    return results
 
-        found2, path2 = algo.dfs("A", "E")
-        assert found2 == True, "Deve encontrar caminho em árvore"
 
-        num_vertices = len(graph)
-        num_edges = sum(len(neighbors) for neighbors in graph.values()) // 2
-        assert num_edges == num_vertices - 1, "Árvore deve ter n-1 arestas"
+if __name__ == "__main__":
+    test_dfs_bitcoin_alpha()

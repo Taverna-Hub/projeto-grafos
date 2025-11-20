@@ -12,9 +12,19 @@ ENDERECOS_PATH = str(DATA_DIR / "enderecos.csv")
 BAIRROS_RECIFE_PATH = str(DATA_DIR / "bairros_recife.csv")
 BAIRROS_UNIQUE_PATH = str(DATA_DIR / "bairros_unique.csv")
 
-DISTANCIAS_ENDERECOS_PATH = str(PART1_DIR / "distancias_enderecos.csv")
-RECIFE_GLOBAL_PATH = str(PART1_DIR / "recife_global.json")
-MICRORREGIOES_PATH = str(PART1_DIR / "microrregioes.json")
-EGO_BAIRRO_PATH = str(PART1_DIR / "ego_bairro.csv")
-GRAUS_PATH = str(PART1_DIR / "graus.csv")
-PERCURSO_NOVA_DESCOBERTA_SETUBAL_PATH = str(PART1_DIR / "percurso_nova_descoberta_setubal.json")
+RECIFE_GLOBAL_PATH = str(PART1_DIR / "3" / "recife_global.json")
+MICRORREGIOES_PATH = str(PART1_DIR / "3" / "microrregioes.json")
+EGO_BAIRRO_PATH = str(PART1_DIR / "3" / "ego_bairro.csv")
+
+GRAUS_PATH = str(PART1_DIR / "4" / "graus.csv")
+
+DISTANCIAS_ENDERECOS_PATH = str(PART1_DIR / "6" / "distancias_enderecos.csv")
+PERCURSO_NOVA_DESCOBERTA_SETUBAL_PATH = str(
+    PART1_DIR / "6" / "percurso_nova_descoberta_setubal.json"
+)
+
+PART1_Q7_DIR = PART1_DIR / "7"
+
+PART1_Q8_DIR = PART1_DIR / "8"
+
+PART1_Q9_DIR = PART1_DIR / "9"
