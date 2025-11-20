@@ -40,6 +40,7 @@ Exemplos de uso:
   %(prog)s visualize [json_file]        # Gera visualização de árvore de percurso a partir de JSON
   %(prog)s interactive                  # Gera grafo interativo HTML com caminho destacado
   %(prog)s plots                        # Gera todos os gráficos estáticos (densidade, subgrafo, histograma)
+  %(prog)s test                         # Executa testes abrangentes (BFS, DFS, Dijkstra, Bellman-Ford)
   %(prog)s info --type global           # Mostra métricas globais
   %(prog)s info --type microregions     # Mostra métricas por microrregião
   %(prog)s info --type ego              # Mostra ranking por densidade ego
@@ -95,6 +96,12 @@ Exemplos de uso:
         plots_parser = subparsers.add_parser(
             "plots",
             help="Gera todos os gráficos estáticos (densidade, subgrafo top10, histograma)",
+        )
+
+        # Comando: test
+        test_parser = subparsers.add_parser(
+            "test",
+            help="Executa testes abrangentes (BFS, DFS, Dijkstra, Bellman-Ford) -> second_part_report.json",
         )
 
         # Comando: info
@@ -233,7 +240,7 @@ Exemplos de uso:
             with open(json_path, "r", encoding="utf-8") as f:
                 data = json.load(f)
 
-            visualizer = GraphVisualizer()  # Will use Q7 dir in viz_path_tree
+            visualizer = GraphVisualizer()
 
             visualizer.viz_path_tree(
                 caminho=data["caminho"],
@@ -261,13 +268,11 @@ Exemplos de uso:
             print("GERAÇÃO DE GRAFO INTERATIVO HTML")
             print("=" * 60)
 
-            # Carrega o grafo
             analyzer = GraphAnalyzer()
             adjacencies_df = analyzer.load_adjacencies()
             analyzer.load_neighborhoods_microregions()
             graph = analyzer.build_graph(adjacencies_df)
 
-            # Carrega o caminho Nova Descoberta -> Boa Viagem
             caminho_destaque = None
             json_path = Path(PERCURSO_NOVA_DESCOBERTA_SETUBAL_PATH)
 
@@ -275,7 +280,6 @@ Exemplos de uso:
                 print(f"Carregando caminho destacado de: {json_path}")
                 with open(json_path, "r", encoding="utf-8") as f:
                     data = json.load(f)
-                    # Converte "A -> B -> C" em ["A", "B", "C"]
                     caminho_destaque = [b.strip() for b in data["caminho"].split("->")]
             else:
                 print("Caminho Nova Descoberta -> Boa Viagem (Setúbal) não encontrado")
@@ -304,7 +308,6 @@ Exemplos de uso:
             print("GERAÇÃO DE GRÁFICOS ESTÁTICOS")
             print("=" * 60)
 
-            # Carrega o grafo
             print("\nCarregando grafo...")
             analyzer = GraphAnalyzer()
             adjacencies_df = analyzer.load_adjacencies()
@@ -314,18 +317,15 @@ Exemplos de uso:
             print("Inicializando visualizador...")
             visualizer = GraphVisualizer(str(PART1_Q8_DIR))
 
-            # Gera ranking de densidade por microrregião
             print("\n1/3 - Gerando ranking de densidade por microrregião...")
             visualizer.viz_ranking_density_ego_per_microregion()
             print("    ✓ ranking_densidade_microrregiao.png")
             print("    ✓ ranking_densidade_microrregiao.csv")
 
-            # Gera subgrafo dos top 10 bairros
             print("\n2/3 - Gerando subgrafo dos top 10 bairros...")
             visualizer.viz_subgraph_top10_neighborhoods(graph)
             print("    ✓ subgrafo_top10_bairros.png")
 
-            # Gera histograma de distribuição de graus
             print("\n3/3 - Gerando histograma de distribuição de graus...")
             stats = visualizer.viz_histograma_distribuicao_graus()
             print("    ✓ histograma_distribuicao_graus.png")
@@ -344,6 +344,65 @@ Exemplos de uso:
 
         except Exception as e:
             print(f"❌ Erro ao gerar gráficos: {e}", file=sys.stderr)
+            import traceback
+
+            traceback.print_exc()
+            return 1
+
+    def cmd_test(self, args) -> int:
+        try:
+            import sys
+            import json
+            from pathlib import Path
+
+            print("=" * 60)
+            print("EXECUÇÃO DE TESTES ABRANGENTES")
+            print("=" * 60)
+
+            tests_dir = Path(__file__).parent.parent / "tests"
+            sys.path.insert(0, str(tests_dir))
+
+            from comprehensive_tests import main as run_comprehensive_tests
+            from constants import PART2_DIR
+
+            print("\nExecutando testes...")
+            print("  • BFS (Busca em Largura)")
+            print("  • DFS (Busca em Profundidade)")
+            print("  • Dijkstra (Caminhos Mínimos)")
+            print("  • Bellman-Ford (Pesos Negativos)")
+            print()
+
+            report = run_comprehensive_tests()
+
+            print("\n" + "=" * 60)
+            print("RESULTADOS DOS TESTES")
+            print("=" * 60)
+
+            for test_name, test_data in report["tests"].items():
+                status_symbol = "✓" if test_data["status"] == "success" else "✗"
+                print(f"\n{status_symbol} {test_name.upper()}")
+                print(f"  Descrição: {test_data.get('description', 'N/A')}")
+                print(f"  Status: {test_data['status']}")
+
+                if test_data["status"] == "failed":
+                    print(f"  Erro: {test_data.get('error', 'N/A')}")
+                elif "results" in test_data:
+                    results = test_data["results"]
+                    if isinstance(results, dict):
+                        if "executions" in results:
+                            print(f"  Execuções: {len(results['executions'])}")
+                        if "pairs_tested" in results:
+                            print(f"  Pares testados: {results['pairs_tested']}")
+
+            report_path = Path(PART2_DIR) / "second_part_report.json"
+            print("\n" + "=" * 60)
+            print(f"✓ Relatório completo salvo em: {report_path}")
+            print("=" * 60)
+
+            return 0
+
+        except Exception as e:
+            print(f"❌ Erro ao executar testes: {e}", file=sys.stderr)
             import traceback
 
             traceback.print_exc()
@@ -445,6 +504,7 @@ Exemplos de uso:
             "visualize": self.cmd_visualize,
             "interactive": self.cmd_interactive,
             "plots": self.cmd_plots,
+            "test": self.cmd_test,
             "info": self.cmd_info,
         }
 
