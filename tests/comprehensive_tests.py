@@ -62,7 +62,7 @@ def main():
 
     output_dir = Path(PART2_DIR)
     output_dir.mkdir(exist_ok=True)
-    report_path = output_dir / "second_part_report.json"
+    report_path = output_dir / "report.json"
 
     with open(report_path, "w", encoding="utf-8") as f:
         json.dump(report, f, indent=2, ensure_ascii=False)

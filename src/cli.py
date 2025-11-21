@@ -37,10 +37,10 @@ Exemplos de uso:
   %(prog)s path "Boa Viagem" "Graças"   # Encontra caminho entre bairros
   %(prog)s process                      # Processa dados de entrada -> bairros_unique.csv
   %(prog)s distances                    # Calcula distâncias em lote -> distancias_enderecos.csv e percurso_nova_descoberta_setubal.json
-  %(prog)s visualize [json_file]        # Gera visualização de árvore de percurso a partir de JSON
-  %(prog)s interactive                  # Gera grafo interativo HTML com caminho destacado
+  %(prog)s visualize [json_file]        # Gera visualização de árvore de percurso a partir de JSON -> arvore_percurso.html e arvore_percurso.png
+  %(prog)s interactive                  # Gera grafo interativo HTML com caminho destacado -> grafo_interativo.html
   %(prog)s plots                        # Gera todos os gráficos estáticos (densidade, subgrafo, histograma)
-  %(prog)s test                         # Executa testes abrangentes (BFS, DFS, Dijkstra, Bellman-Ford)
+  %(prog)s test                         # Executa testes abrangentes (BFS, DFS, Dijkstra, Bellman-Ford) -> report.json
   %(prog)s info --type global           # Mostra métricas globais
   %(prog)s info --type microregions     # Mostra métricas por microrregião
   %(prog)s info --type ego              # Mostra ranking por densidade ego
@@ -77,7 +77,7 @@ Exemplos de uso:
         # Comando: visualize
         visualize_parser = subparsers.add_parser(
             "visualize",
-            help="Gera visualização de árvore de percurso a partir de arquivo JSON",
+            help="Gera visualização de árvore de percurso a partir de arquivo JSON -> arvore_percurso.html e arvore_percurso.png",
         )
         visualize_parser.add_argument(
             "json_file",
@@ -89,7 +89,7 @@ Exemplos de uso:
         # Comando: interactive
         interactive_parser = subparsers.add_parser(
             "interactive",
-            help="Gera grafo interativo HTML com tooltip, busca e caminho destacado",
+            help="Gera grafo interativo HTML com tooltip, busca e caminho destacado -> grafo_interativo.html",
         )
 
         # Comando: plots
@@ -101,7 +101,7 @@ Exemplos de uso:
         # Comando: test
         test_parser = subparsers.add_parser(
             "test",
-            help="Executa testes abrangentes (BFS, DFS, Dijkstra, Bellman-Ford) -> second_part_report.json",
+            help="Executa testes abrangentes (BFS, DFS, Dijkstra, Bellman-Ford) -> report.json",
         )
 
         # Comando: info
@@ -394,7 +394,7 @@ Exemplos de uso:
                         if "pairs_tested" in results:
                             print(f"  Pares testados: {results['pairs_tested']}")
 
-            report_path = Path(PART2_DIR) / "second_part_report.json"
+            report_path = Path(PART2_DIR) / "report.json"
             print("\n" + "=" * 60)
             print(f"✓ Relatório completo salvo em: {report_path}")
             print("=" * 60)

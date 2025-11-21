@@ -8,6 +8,7 @@ import random
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent / "src"))
 
+from constants import PART2_DIR
 from graphs.algorithms import Algorithms
 from graphs.graph import Graph
 
@@ -291,7 +292,7 @@ def visualize_distance_heatmap(
 def main():
     project_root = Path(__file__).parent.parent.parent
     data_path = project_root / "data" / "bitcoin_alpha.csv"
-    output_dir = project_root / "out" / "second_part"
+    output_dir = Path(PART2_DIR)
 
     output_dir.mkdir(parents=True, exist_ok=True)
 

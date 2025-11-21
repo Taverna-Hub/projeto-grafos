@@ -160,14 +160,17 @@ class GraphAnalyzer:
         Path(output_dir).mkdir(parents=True, exist_ok=True)
 
         global_path = Path(RECIFE_GLOBAL_PATH)
+        global_path.parent.mkdir(parents=True, exist_ok=True)
         with open(global_path, "w", encoding="utf-8") as f:
             json.dump(global_metrics, f, indent=2, ensure_ascii=False)
 
         microregion_path = Path(MICRORREGIOES_PATH)
+        microregion_path.parent.mkdir(parents=True, exist_ok=True)
         with open(microregion_path, "w", encoding="utf-8") as f:
             json.dump(microregion_metrics, f, indent=2, ensure_ascii=False)
 
         ego_path = Path(EGO_BAIRRO_PATH)
+        ego_path.parent.mkdir(parents=True, exist_ok=True)
         with open(ego_path, "w", encoding="utf-8", newline="") as f:
             if ego_metrics:
                 fieldnames = ["bairro", "grau", "ordem_ego", "tamanho_ego", "densidade_ego"]
@@ -176,6 +179,7 @@ class GraphAnalyzer:
                 writer.writerows(ego_metrics)
 
         ranking_path = Path(GRAUS_PATH)
+        ranking_path.parent.mkdir(parents=True, exist_ok=True)
         with open(ranking_path, "w", encoding="utf-8", newline="") as f:
             if rank_metrics:
                 fieldnames = ["bairro", "grau"]
