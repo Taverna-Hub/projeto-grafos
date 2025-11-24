@@ -154,33 +154,17 @@ class GraphVisualizer:
             degree = degrees.get(v, 1)
 
             size = 500 + degree * 200
-            if degree >= 8:
-                color = "#ff4444"
-            elif degree >= 6:
-                color = "#ffaa00"
+            if degree >= 9:
+                color = "#FC2103"
+            elif degree >= 8:
+                color = "#FF6929"
+            elif degree >= 7:
+                color = "#FFF538"
             else:
-                color = "#44aa44"
+                color = "#FDF4E3"
 
-            ax.scatter(
-                x,
-                y,
-                s=size,
-                c=color,
-                edgecolors="black",
-                linewidths=2,
-                zorder=2,
-                alpha=0.8,
-            )
-            ax.text(
-                x,
-                y,
-                v,
-                fontsize=9,
-                fontweight="bold",
-                ha="center",
-                va="center",
-                zorder=3,
-            )
+            ax.scatter(x,y,s=size,c=color,edgecolors="black",linewidths=2,zorder=2,alpha=0.8,)
+            ax.text(x,y,v,fontsize=9,fontweight="bold",ha="center",va="center",zorder=3,)
 
         ax.set_title(
             "Subgrafo dos 10 Bairros com Maior Grau (Hubs da Cidade)\n"
