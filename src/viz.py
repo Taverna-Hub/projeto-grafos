@@ -164,7 +164,7 @@ class GraphVisualizer:
                 color = "#FDF4E3"
 
             ax.scatter(x,y,s=size,c=color,edgecolors="black",linewidths=2,zorder=2,alpha=0.8,)
-            ax.text(x,y,v,fontsize=9,fontweight="bold",ha="center",va="center",zorder=3,)
+            ax.text(x,y,v.replace(" ", "\n"),fontsize=9,fontweight="bold",ha="center",va="center",zorder=3,)
 
         ax.set_title(
             "Subgrafo dos 10 Bairros com Maior Grau (Hubs da Cidade)\n"
