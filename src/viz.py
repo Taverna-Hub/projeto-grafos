@@ -36,8 +36,8 @@ class GraphVisualizer:
         ego_df = pd.read_csv(ego_path)
         bairros_df = pd.read_csv(bairros_path)
 
-        bairros_df["bairro"].apply(normalize_name)
-        ego_df["bairro"].apply(normalize_name)
+        bairros_df["bairro"] = bairros_df["bairro"].apply(normalize_name)
+        ego_df["bairro"] = ego_df["bairro"].apply(normalize_name)
 
         merged = ego_df.merge(bairros_df, on="bairro", how="left")
 
@@ -56,20 +56,29 @@ class GraphVisualizer:
             "densidade_media_ego", ascending=False
         )
 
-        fig, ax = plt.subplots(figsize=(14, 8))
+        num_micro = len(density_by_micro)
+        fig_height = max(8, num_micro * 0.6)
+        
+        fig, ax = plt.subplots(figsize=(14, fig_height))
 
+        y_positions = range(len(density_by_micro))
+        
         bars = ax.barh(
-            density_by_micro["microrregiao"],
+            y_positions, 
             density_by_micro["densidade_media_ego"],
             color="steelblue",
             edgecolor="navy",
             linewidth=1.2,
+            height=0.7, 
         )
 
-        for i, (idx, row) in enumerate(density_by_micro.iterrows()):
+        ax.set_yticks(y_positions)
+        ax.set_yticklabels(density_by_micro["microrregiao"])
+
+        for idx, (_, row) in enumerate(density_by_micro.iterrows()):
             ax.text(
                 row["densidade_media_ego"] + 0.01,
-                i,
+                idx,
                 f"{row['densidade_media_ego']:.3f}",
                 va="center",
                 fontsize=9,
