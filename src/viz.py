@@ -58,18 +58,18 @@ class GraphVisualizer:
 
         num_micro = len(density_by_micro)
         fig_height = max(8, num_micro * 0.6)
-        
+
         fig, ax = plt.subplots(figsize=(14, fig_height))
 
         y_positions = range(len(density_by_micro))
-        
+
         bars = ax.barh(
-            y_positions, 
+            y_positions,
             density_by_micro["densidade_media_ego"],
             color="steelblue",
             edgecolor="navy",
             linewidth=1.2,
-            height=0.7, 
+            height=0.7,
         )
 
         ax.set_yticks(y_positions)
@@ -557,15 +557,15 @@ class GraphVisualizer:
 <body>
     <header>
         <nav>
-            <a href="../9/grafo_interativo.html">Grafo Interativo</a>
-            <a href="../7/arvore_percurso.html">Árvore de Percurso</a>
-            <a href="../8/histograma_distribuicao_graus.html"
+            <a href="../1.9 Apresentação interativa do grafo/grafo_interativo.html">Grafo Interativo</a>
+            <a href="../1.7 Transforme o percurso em árvore e mostre/arvore_percurso.html">Árvore de Percurso</a>
+            <a href="../1.8 Explorações e visualizações analíticas/histograma_distribuicao_graus.html"
             >Histograma de Distribuição de Graus</a
             >
-            <a href="../8/ranking_densidade_microrregiao.html"
+            <a href="../1.8 Explorações e visualizações analíticas/ranking_densidade_microrregiao.html"
             >Ranking de Densidade por Microrregião</a
             >
-            <a href="../8/subgrafo_top10_bairros.html">Subgrafo Top 10 Bairros</a>
+            <a href="../1.8 Explorações e visualizações analíticas/subgrafo_top10_bairros.html">Subgrafo Top 10 Bairros</a>
         </nav>
     </header>
 
@@ -665,15 +665,15 @@ class GraphVisualizer:
         </style>
         <header>
             <nav>
-                <a href="../9/grafo_interativo.html">Grafo Interativo</a>
-                <a href="../7/arvore_percurso.html">Árvore de Percurso</a>
-                <a href="../8/histograma_distribuicao_graus.html"
+                <a href="../1.9 Apresentação interativa do grafo/grafo_interativo.html">Grafo Interativo</a>
+                <a href="../1.7 Transforme o percurso em árvore e mostre/arvore_percurso.html">Árvore de Percurso</a>
+                <a href="../1.8 Explorações e visualizações analíticas/histograma_distribuicao_graus.html"
                 >Histograma de Distribuição de Graus</a
                 >
-                <a href="../8/ranking_densidade_microrregiao.html"
+                <a href="../1.8 Explorações e visualizações analíticas/ranking_densidade_microrregiao.html"
                 >Ranking de Densidade por Microrregião</a
                 >
-                <a href="../8/subgrafo_top10_bairros.html">Subgrafo Top 10 Bairros</a>
+                <a href="../1.8 Explorações e visualizações analíticas/subgrafo_top10_bairros.html">Subgrafo Top 10 Bairros</a>
             </nav>
         </header>
         <div class="header">
