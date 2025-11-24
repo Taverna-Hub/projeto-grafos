@@ -163,8 +163,26 @@ class GraphVisualizer:
             else:
                 color = "#FDF4E3"
 
-            ax.scatter(x,y,s=size,c=color,edgecolors="black",linewidths=2,zorder=2,alpha=0.8,)
-            ax.text(x,y,v.replace(" ", "\n"),fontsize=9,fontweight="bold",ha="center",va="center",zorder=3,)
+            ax.scatter(
+                x,
+                y,
+                s=size,
+                c=color,
+                edgecolors="black",
+                linewidths=2,
+                zorder=2,
+                alpha=0.8,
+            )
+            ax.text(
+                x,
+                y,
+                v.replace(" ", "\n"),
+                fontsize=9,
+                fontweight="bold",
+                ha="center",
+                va="center",
+                zorder=3,
+            )
 
         ax.set_title(
             "Subgrafo dos 10 Bairros com Maior Grau (Hubs da Cidade)\n"
@@ -200,7 +218,7 @@ class GraphVisualizer:
             "subgrafo_top10_bairros.html",
         )
 
-    def viz_histograma_distribuicao_graus(
+    def viz_degree_distribution_histogram(
         self, ego_path: str = EGO_BAIRRO_PATH
     ) -> None:
         ego_df = pd.read_csv(ego_path)
@@ -706,7 +724,7 @@ def main():
 
     visualizer.viz_ranking_density_ego_per_microregion()
     visualizer.viz_subgraph_top10_neighborhoods(graph)
-    visualizer.viz_histograma_distribuicao_graus()
+    visualizer.viz_degree_distribution_histogram()
 
 
 if __name__ == "__main__":

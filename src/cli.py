@@ -327,7 +327,7 @@ Exemplos de uso:
             print("    ✓ subgrafo_top10_bairros.png")
 
             print("\n3/3 - Gerando histograma de distribuição de graus...")
-            stats = visualizer.viz_histograma_distribuicao_graus()
+            stats = visualizer.viz_degree_distribution_histogram()
             print("    ✓ histograma_distribuicao_graus.png")
             print(f"\n    Estatísticas de grau:")
             print(f"      • Média: {stats['média']:.2f}")
