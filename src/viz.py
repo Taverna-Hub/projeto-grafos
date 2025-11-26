@@ -510,22 +510,22 @@ class GraphVisualizer:
         * {{
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
         }}
         body {{
             font-family: Arial, sans-serif;
+            margin: 0;
             background-color: #f5f5f5;
         }}
         header {{
             background-color: #333;
             color: white;
-            padding: 1em;
+            padding: 1rem;
             text-align: center;
         }}
         nav a {{
             color: white !important;
             text-decoration: none;
-            padding: 1em;
+            padding: 1rem;
             display: inline-block;
         }}
         nav a:hover {{
@@ -569,6 +569,7 @@ class GraphVisualizer:
             >Ranking de Densidade por Microrregião</a
             >
             <a href="../1.8 Explorações e visualizações analíticas/subgrafo_top10_bairros.html">Subgrafo Top 10 Bairros</a>
+            <a href="../../2. Dataset Maior e Comparação de Algoritmos/report.html">Relatório de Testes</a>
         </nav>
     </header>
 
@@ -615,13 +616,13 @@ class GraphVisualizer:
             header {{
                 background-color: #333;
                 color: white;
-                padding: 1em;
+                padding: 1rem;
                 text-align: center;
             }}
             nav a {{
                 color: white !important;
                 text-decoration: none;
-                padding: 1em;
+                padding: 1rem;
                 display: inline-block;
             }}
             nav a:hover {{
@@ -788,6 +789,7 @@ class GraphVisualizer:
                 >Ranking de Densidade por Microrregião</a
                 >
                 <a href="../1.8 Explorações e visualizações analíticas/subgrafo_top10_bairros.html">Subgrafo Top 10 Bairros</a>
+                <a href="../../2. Dataset Maior e Comparação de Algoritmos/report.html">Relatório de Testes</a>
             </nav>
         </header>
         

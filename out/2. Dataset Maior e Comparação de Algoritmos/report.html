@@ -1,30 +1,4 @@
-import sys
-import json
-from pathlib import Path
-from datetime import datetime
-
-sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
-
-from test_bfs import test_bfs_bitcoin_alpha
-from test_dfs import test_dfs_bitcoin_alpha
-from test_dijkstra import test_dijkstra_bitcoin_alpha
-from test_bellman_ford import test_bellman_ford_bitcoin_alpha
-from constants import PART2_DIR
-
-
-def generate_html_report(report: dict, output_path: Path) -> None:
-    timestamp_raw = report.get("timestamp", "N/A")
-    if timestamp_raw != "N/A":
-        try:
-            dt = datetime.fromisoformat(timestamp_raw)
-            timestamp_formatted = dt.strftime("%d/%m/%Y às %H:%M:%S")
-        except:
-            timestamp_formatted = timestamp_raw
-    else:
-        timestamp_formatted = timestamp_raw
-
-    html_content = (
-        """<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -371,82 +345,29 @@ def generate_html_report(report: dict, output_path: Path) -> None:
             <div class="metadata-grid">
                 <div class="metadata-item">
                     <strong>⏰ Timestamp</strong>
-                    <span>"""
-        + timestamp_formatted
-        + """</span>
+                    <span>25/11/2025 às 22:46:14</span>
                 </div>
                 <div class="metadata-item">
                     <strong>📁 Dataset</strong>
-                    <span>"""
-        + report.get("dataset", "N/A")
-        + """</span>
+                    <span>bitcoin_alpha.csv</span>
                 </div>
                 <div class="metadata-item">
                     <strong>🧪 Total de Testes</strong>
-                    <span>"""
-        + str(len(report.get("tests", {})))
-        + """ algoritmos testados</span>
+                    <span>4 algoritmos testados</span>
                 </div>
             </div>
         </div>
-"""
-    )
 
-    tests = report.get("tests", {})
-
-    if "bfs" in tests:
-        html_content += generate_bfs_section(tests["bfs"])
-
-    if "dfs" in tests:
-        html_content += generate_dfs_section(tests["dfs"])
-
-    if "dijkstra" in tests:
-        html_content += generate_dijkstra_section(tests["dijkstra"])
-
-    if "bellman_ford" in tests:
-        html_content += generate_bellman_ford_section(tests["bellman_ford"])
-
-    html_content += generate_summary(tests)
-
-    html_content += (
-        """
-        
-        <footer>
-            <p>Gerado automaticamente em """
-        + datetime.now().strftime("%d/%m/%Y às %H:%M:%S")
-        + """</p>
-            <p>Projeto de Grafos - Análise de Algoritmos</p>
-        </footer>
-    </div>
-</body>
-</html>"""
-    )
-
-    with open(output_path, "w", encoding="utf-8") as f:
-        f.write(html_content)
-
-
-def generate_bfs_section(bfs_data: dict) -> str:
-    status = bfs_data.get("status", "unknown")
-    status_class = (
-        "status-success" if status in ["success", "sucesso"] else "status-failed"
-    )
-
-    section = f"""
             <div class="test-section">
                 <div class="test-header bfs">
                     <h2>BFS - Breadth-First Search</h2>
-                    <span class="status-badge {status_class}">{status.upper()}</span>
+                    <span class="status-badge status-success">SUCESSO</span>
                 </div>
                 <div class="test-description">
-                    {bfs_data.get('description', '')}
+                    BFS a partir de ≥3 fontes distintas com análise de camadas
                 </div>
                 <div class="test-body">
-"""
 
-    if status in ["success", "sucesso"] and "results" in bfs_data:
-        results = bfs_data["results"]
-        section += """
                     <table>
                         <thead>
                             <tr>
@@ -459,70 +380,50 @@ def generate_bfs_section(bfs_data: dict) -> str:
                             </tr>
                         </thead>
                         <tbody>
-"""
 
-        for result in results:
-            time_str = (
-                f"{result.get('time_seconds', 0):.6f}"
-                if "time_seconds" in result
-                else "N/A"
-            )
-            memory_str = (
-                f"{result.get('peak_memory_mb', 0):.2f}"
-                if "peak_memory_mb" in result
-                else "N/A"
-            )
-
-            section += f"""
                             <tr>
-                                <td class="number-cell">{result.get('source', 'N/A')}</td>
-                                <td class="number-cell">{result.get('reachable_nodes', 0)}</td>
-                                <td class="number-cell">{result.get('total_nodes', 0)}</td>
-                                <td class="number-cell">{result.get('layers', 0)}</td>
-                                <td class="number-cell">{time_str}</td>
-                                <td class="number-cell">{memory_str}</td>
+                                <td class="number-cell">7188</td>
+                                <td class="number-cell">3775</td>
+                                <td class="number-cell">3783</td>
+                                <td class="number-cell">7</td>
+                                <td class="number-cell">0.026909</td>
+                                <td class="number-cell">0.58</td>
                             </tr>
-"""
 
-        section += """
+                            <tr>
+                                <td class="number-cell">1063</td>
+                                <td class="number-cell">3775</td>
+                                <td class="number-cell">3783</td>
+                                <td class="number-cell">7</td>
+                                <td class="number-cell">0.013659</td>
+                                <td class="number-cell">0.46</td>
+                            </tr>
+
+                            <tr>
+                                <td class="number-cell">2713</td>
+                                <td class="number-cell">3775</td>
+                                <td class="number-cell">3783</td>
+                                <td class="number-cell">7</td>
+                                <td class="number-cell">0.015647</td>
+                                <td class="number-cell">0.58</td>
+                            </tr>
+
                         </tbody>
                     </table>
-"""
-    else:
-        section += f"""
-                    <div class="error-message">
-                        <strong>Erro:</strong> {bfs_data.get('error', 'Erro desconhecido')}
-                    </div>
-"""
 
-    section += """
                 </div>
             </div>
-"""
-    return section
 
-
-def generate_dfs_section(dfs_data: dict) -> str:
-    status = dfs_data.get("status", "unknown")
-    status_class = (
-        "status-success" if status in ["success", "sucesso"] else "status-failed"
-    )
-
-    section = f"""
             <div class="test-section">
                 <div class="test-header dfs">
                     <h2>DFS - Depth-First Search</h2>
-                    <span class="status-badge {status_class}">{status.upper()}</span>
+                    <span class="status-badge status-success">SUCESSO</span>
                 </div>
                 <div class="test-description">
-                    {dfs_data.get('description', '')}
+                    DFS a partir de ≥3 fontes distintas com detecção de ciclos
                 </div>
                 <div class="test-body">
-"""
 
-    if status in ["success", "sucesso"] and "results" in dfs_data:
-        results = dfs_data["results"]
-        section += """
                     <table>
                         <thead>
                             <tr>
@@ -536,83 +437,60 @@ def generate_dfs_section(dfs_data: dict) -> str:
                             </tr>
                         </thead>
                         <tbody>
-"""
 
-        for result in results:
-            has_cycles = result.get("has_cycles", False)
-            cycle_badge = "Sim" if has_cycles else "❌ Não"
-            time_str = (
-                f"{result.get('time_seconds', 0):.6f}"
-                if "time_seconds" in result
-                else "N/A"
-            )
-            memory_str = (
-                f"{result.get('peak_memory_mb', 0):.2f}"
-                if "peak_memory_mb" in result
-                else "N/A"
-            )
-
-            section += f"""
                             <tr>
-                                <td class="number-cell">{result.get('source', 'N/A')}</td>
-                                <td class="number-cell">{result.get('visited_nodes', 0)}</td>
-                                <td class="number-cell">{result.get('total_nodes', 0)}</td>
-                                <td><strong>{cycle_badge}</strong></td>
-                                <td class="number-cell">{result.get('back_edges', 0)}</td>
-                                <td class="number-cell">{time_str}</td>
-                                <td class="number-cell">{memory_str}</td>
+                                <td class="number-cell">7188</td>
+                                <td class="number-cell">3775</td>
+                                <td class="number-cell">3783</td>
+                                <td><strong>Sim</strong></td>
+                                <td class="number-cell">17677</td>
+                                <td class="number-cell">0.098839</td>
+                                <td class="number-cell">1.31</td>
                             </tr>
-"""
 
-        section += """
+                            <tr>
+                                <td class="number-cell">1063</td>
+                                <td class="number-cell">3775</td>
+                                <td class="number-cell">3783</td>
+                                <td><strong>Sim</strong></td>
+                                <td class="number-cell">17678</td>
+                                <td class="number-cell">0.094545</td>
+                                <td class="number-cell">1.31</td>
+                            </tr>
+
+                            <tr>
+                                <td class="number-cell">2713</td>
+                                <td class="number-cell">3775</td>
+                                <td class="number-cell">3783</td>
+                                <td><strong>Sim</strong></td>
+                                <td class="number-cell">17677</td>
+                                <td class="number-cell">0.089777</td>
+                                <td class="number-cell">1.31</td>
+                            </tr>
+
                         </tbody>
                     </table>
-"""
 
-        if any(r.get("has_cycles", False) for r in results):
-            section += """
                     <div class="cycle-detected">
                         <div class="cycle-info">
                             <strong>Ciclo Detectado no Grafo!</strong>
                             <p>O algoritmo DFS identificou pelo menos um ciclo no grafo analisado.</p>
                         </div>
                     </div>
-"""
-    else:
-        section += f"""
-                    <div class="error-message">
-                        <strong>Erro:</strong> {dfs_data.get('error', 'Erro desconhecido')}
-                    </div>
-"""
 
-    section += """
                 </div>
             </div>
-"""
-    return section
 
-
-def generate_dijkstra_section(dijkstra_data: dict) -> str:
-    status = dijkstra_data.get("status", "unknown")
-    status_class = (
-        "status-success" if status in ["success", "sucesso"] else "status-failed"
-    )
-
-    section = f"""
             <div class="test-section">
                 <div class="test-header dijkstra">
                     <h2>Dijkstra - Caminho Mínimo</h2>
-                    <span class="status-badge {status_class}">{status.upper()}</span>
+                    <span class="status-badge status-success">SUCESSO</span>
                 </div>
                 <div class="test-description">
-                    {dijkstra_data.get('description', '')}
+                    Dijkstra com ≥5 pares origem-destino (pesos ≥ 0)
                 </div>
                 <div class="test-body">
-"""
 
-    if status in ["success", "sucesso"] and "results" in dijkstra_data:
-        results = dijkstra_data["results"]
-        section += """
                     <table>
                         <thead>
                             <tr>
@@ -626,75 +504,73 @@ def generate_dijkstra_section(dijkstra_data: dict) -> str:
                             </tr>
                         </thead>
                         <tbody>
-"""
 
-        for result in results:
-            weight = result.get("weight", float("inf"))
-            weight_str = f"{weight:.2f}" if weight != float("inf") else "∞"
-            found = result.get("found", False)
-            found_badge = "Sim" if found else "❌ Não"
-            time_str = (
-                f"{result.get('time_seconds', 0):.6f}"
-                if "time_seconds" in result
-                else "N/A"
-            )
-            memory_str = (
-                f"{result.get('peak_memory_mb', 0):.2f}"
-                if "peak_memory_mb" in result
-                else "N/A"
-            )
-
-            section += f"""
                             <tr>
-                                <td class="number-cell">{result.get('origin', 'N/A')}</td>
-                                <td class="number-cell">{result.get('destination', 'N/A')}</td>
-                                <td class="number-cell">{weight_str}</td>
-                                <td class="number-cell">{result.get('path_length', 0)}</td>
-                                <td><strong>{found_badge}</strong></td>
-                                <td class="number-cell">{time_str}</td>
-                                <td class="number-cell">{memory_str}</td>
+                                <td class="number-cell">7188</td>
+                                <td class="number-cell">888</td>
+                                <td class="number-cell">2773123200.00</td>
+                                <td class="number-cell">3</td>
+                                <td><strong>Sim</strong></td>
+                                <td class="number-cell">0.016814</td>
+                                <td class="number-cell">0.69</td>
                             </tr>
-"""
 
-        section += """
+                            <tr>
+                                <td class="number-cell">113</td>
+                                <td class="number-cell">1063</td>
+                                <td class="number-cell">2656918800.00</td>
+                                <td class="number-cell">3</td>
+                                <td><strong>Sim</strong></td>
+                                <td class="number-cell">0.037385</td>
+                                <td class="number-cell">1.38</td>
+                            </tr>
+
+                            <tr>
+                                <td class="number-cell">3193</td>
+                                <td class="number-cell">636</td>
+                                <td class="number-cell">2700201600.00</td>
+                                <td class="number-cell">3</td>
+                                <td><strong>Sim</strong></td>
+                                <td class="number-cell">0.006809</td>
+                                <td class="number-cell">0.33</td>
+                            </tr>
+
+                            <tr>
+                                <td class="number-cell">2713</td>
+                                <td class="number-cell">1409</td>
+                                <td class="number-cell">3906622800.00</td>
+                                <td class="number-cell">4</td>
+                                <td><strong>Sim</strong></td>
+                                <td class="number-cell">0.021496</td>
+                                <td class="number-cell">0.85</td>
+                            </tr>
+
+                            <tr>
+                                <td class="number-cell">380</td>
+                                <td class="number-cell">569</td>
+                                <td class="number-cell">3899106000.00</td>
+                                <td class="number-cell">4</td>
+                                <td><strong>Sim</strong></td>
+                                <td class="number-cell">0.027086</td>
+                                <td class="number-cell">1.16</td>
+                            </tr>
+
                         </tbody>
                     </table>
-"""
-    else:
-        section += f"""
-                    <div class="error-message">
-                        <strong>Erro:</strong> {dijkstra_data.get('error', 'Erro desconhecido')}
-                    </div>
-"""
 
-    section += """
                 </div>
             </div>
-"""
-    return section
 
-
-def generate_bellman_ford_section(bellman_data: dict) -> str:
-    status = bellman_data.get("status", "unknown")
-    status_class = (
-        "status-success" if status in ["success", "sucesso"] else "status-failed"
-    )
-
-    section = f"""
             <div class="test-section">
                 <div class="test-header bellman_ford">
                     <h2>Bellman-Ford - Pesos Negativos</h2>
-                    <span class="status-badge {status_class}">{status.upper()}</span>
+                    <span class="status-badge status-success">SUCESSO</span>
                 </div>
                 <div class="test-description">
-                    {bellman_data.get('description', '')}
+                    Bellman-Ford com pesos positivos, negativos e ciclo negativo
                 </div>
                 <div class="test-body">
-"""
 
-    if status in ["success", "sucesso"] and "results" in bellman_data:
-        results = bellman_data["results"]
-        section += """
                     <table>
                         <thead>
                             <tr>
@@ -708,172 +584,77 @@ def generate_bellman_ford_section(bellman_data: dict) -> str:
                             </tr>
                         </thead>
                         <tbody>
-"""
 
-        for result in results:
-            negative_cycle = result.get("negative_cycle", False)
-            cycle_badge = "Sim" if negative_cycle else "Não"
-            time_str = (
-                f"{result.get('time_seconds', 0):.6f}"
-                if "time_seconds" in result
-                else "N/A"
-            )
-
-            if "peak_memory_mb" in result:
-                memory_str = f"{result.get('peak_memory_mb', 0):.2f} MB"
-            elif "peak_memory_kb" in result:
-                memory_str = f"{result.get('peak_memory_kb', 0):.2f} KB"
-            else:
-                memory_str = "N/A"
-
-            reachable_nodes = result.get("reachable_nodes", "N/A")
-            test_name = result.get("test", "N/A").replace("_", " ").title()
-
-            translations = {
-                "Positive Weights": "Pesos Positivos",
-                "Negative Weights No Cycle": "Pesos Negativos sem Ciclo",
-                "Negative Cycle": "Ciclo Negativo",
-            }
-            test_name = translations.get(test_name, test_name)
-
-            section += f"""
                             <tr>
-                                <td>{test_name}</td>
-                                <td class="number-cell">{result.get('source', 'N/A')}</td>
-                                <td class="number-cell">{result.get('total_nodes', 0)}</td>
-                                <td class="number-cell">{reachable_nodes}</td>
-                                <td><strong>{cycle_badge}</strong></td>
-                                <td class="number-cell">{time_str}</td>
-                                <td class="number-cell">{memory_str}</td>
+                                <td>Pesos Positivos</td>
+                                <td class="number-cell">7188</td>
+                                <td class="number-cell">3783</td>
+                                <td class="number-cell">3775</td>
+                                <td><strong>Não</strong></td>
+                                <td class="number-cell">88.779353</td>
+                                <td class="number-cell">0.21 MB</td>
                             </tr>
-"""
 
-        section += """
+                            <tr>
+                                <td>Pesos Negativos sem Ciclo</td>
+                                <td class="number-cell">A</td>
+                                <td class="number-cell">5</td>
+                                <td class="number-cell">N/A</td>
+                                <td><strong>Sim</strong></td>
+                                <td class="number-cell">0.000063</td>
+                                <td class="number-cell">0.30 KB</td>
+                            </tr>
+
+                            <tr>
+                                <td>Ciclo Negativo</td>
+                                <td class="number-cell">A</td>
+                                <td class="number-cell">4</td>
+                                <td class="number-cell">N/A</td>
+                                <td><strong>Sim</strong></td>
+                                <td class="number-cell">0.000023</td>
+                                <td class="number-cell">0.36 KB</td>
+                            </tr>
+
                         </tbody>
                     </table>
-"""
 
-        if any(r.get("negative_cycle", False) for r in results):
-            section += """
                     <div class="negative-cycle">
                         <div class="cycle-info">
                             <strong>Ciclo Negativo Detectado!</strong>
                             <p>O algoritmo Bellman-Ford identificou um ciclo negativo no grafo. Isso significa que não há caminho mínimo bem definido para alguns pares de vértices.</p>
                         </div>
                     </div>
-"""
-    else:
-        section += f"""
-                    <div class="error-message">
-                        <strong>Erro:</strong> {bellman_data.get('error', 'Erro desconhecido')}
-                    </div>
-"""
 
-    section += """
                 </div>
             </div>
-"""
-    return section
 
-
-def generate_summary(tests: dict) -> str:
-    total_tests = len(tests)
-    successful_tests = sum(
-        1 for test in tests.values() if test.get("status") in ["success", "sucesso"]
-    )
-    failed_tests = total_tests - successful_tests
-
-    total_executions = 0
-    for test_name, test_data in tests.items():
-        if test_data.get("status") in ["success", "sucesso"] and "results" in test_data:
-            total_executions += len(test_data["results"])
-
-    summary = f"""
             <div class="summary">
-                <h2>Resumo da Execução</h2>
+                <h2>📈 Resumo da Execução</h2>
                 <div class="summary-stats">
                     <div class="stat-box">
-                        <span class="number">{total_tests}</span>
+                        <span class="number">4</span>
                         <span class="label">Algoritmos Testados</span>
                     </div>
                     <div class="stat-box">
-                        <span class="number">{successful_tests}</span>
+                        <span class="number">4</span>
                         <span class="label">Testes Bem-Sucedidos</span>
                     </div>
                     <div class="stat-box">
-                        <span class="number">{failed_tests}</span>
+                        <span class="number">0</span>
                         <span class="label">Testes Falhados</span>
                     </div>
                     <div class="stat-box">
-                        <span class="number">{total_executions}</span>
+                        <span class="number">14</span>
                         <span class="label">Total de Execuções</span>
                     </div>
                 </div>
             </div>
-"""
-    return summary
 
-
-def main():
-
-    report = {
-        "timestamp": datetime.now().isoformat(),
-        "dataset": "bitcoin_alpha.csv",
-        "tests": {},
-    }
-
-    try:
-        bfs_results = test_bfs_bitcoin_alpha()
-        report["tests"]["bfs"] = {
-            "description": "BFS a partir de ≥3 fontes distintas com análise de camadas",
-            "status": "sucesso",
-            "results": bfs_results,
-        }
-    except Exception as e:
-        report["tests"]["bfs"] = {"status": "falhou", "error": str(e)}
-
-    try:
-        dfs_results = test_dfs_bitcoin_alpha()
-        report["tests"]["dfs"] = {
-            "description": "DFS a partir de ≥3 fontes distintas com detecção de ciclos",
-            "status": "sucesso",
-            "results": dfs_results,
-        }
-    except Exception as e:
-        report["tests"]["dfs"] = {"status": "falhou", "error": str(e)}
-
-    try:
-        dijkstra_results = test_dijkstra_bitcoin_alpha()
-        report["tests"]["dijkstra"] = {
-            "description": "Dijkstra com ≥5 pares origem-destino (pesos ≥ 0)",
-            "status": "sucesso",
-            "results": dijkstra_results,
-        }
-    except Exception as e:
-        report["tests"]["dijkstra"] = {"status": "falhou", "error": str(e)}
-
-    try:
-        bellman_results = test_bellman_ford_bitcoin_alpha()
-        report["tests"]["bellman_ford"] = {
-            "description": "Bellman-Ford com pesos positivos, negativos e ciclo negativo",
-            "status": "sucesso",
-            "results": bellman_results,
-        }
-    except Exception as e:
-        report["tests"]["bellman_ford"] = {"status": "falhou", "error": str(e)}
-
-    output_dir = Path(PART2_DIR)
-    output_dir.mkdir(exist_ok=True)
-    report_path = output_dir / "report.json"
-
-    with open(report_path, "w", encoding="utf-8") as f:
-        json.dump(report, f, indent=2, ensure_ascii=False)
-
-    html_path = output_dir / "report.html"
-    generate_html_report(report, html_path)
-
-    return report
-
-
-if __name__ == "__main__":
-    main()
+        
+        <footer>
+            <p>Gerado automaticamente em 25/11/2025 às 22:47:43</p>
+            <p>Projeto de Grafos - Análise de Algoritmos</p>
+        </footer>
+    </div>
+</body>
+</html>
