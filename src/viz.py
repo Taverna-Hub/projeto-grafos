@@ -462,7 +462,9 @@ class GraphVisualizer:
                 cor = "#2196F3"
 
             # Adicionar grau como atributo personalizado para acesso no JavaScript
-            net.add_node(vertice, label=vertice, title=titulo, size=tamanho, color=cor, grau=grau)
+            net.add_node(
+                vertice, label=vertice, title=titulo, size=tamanho, color=cor, grau=grau
+            )
 
         for u in graph.get_vertices():
             for v in graph.get_neighbors(u):
@@ -590,7 +592,9 @@ class GraphVisualizer:
         with open(output_path, "w", encoding="utf-8") as f:
             f.write(html_content)
 
-    def _customize_html(self, html_path: Path, caminho: list = None, info_bairros: dict = None):
+    def _customize_html(
+        self, html_path: Path, caminho: list = None, info_bairros: dict = None
+    ):
 
         with open(html_path, "r", encoding="utf-8") as f:
             content = f.read()
@@ -598,9 +602,11 @@ class GraphVisualizer:
         content = re.sub(r"\s*<center>\s*<h1>\s*</h1>\s*</center>\s*", "", content)
 
         caminho_texto = " → ".join(caminho) if caminho else "N/A"
-        
+
         bairros_list = sorted(info_bairros.keys()) if info_bairros else []
-        bairros_options = "".join([f'<option value="{b}">{b}</option>' for b in bairros_list])
+        bairros_options = "".join(
+            [f'<option value="{b}">{b}</option>' for b in bairros_list]
+        )
 
         custom_html = f"""
         <style>
@@ -651,11 +657,12 @@ class GraphVisualizer:
                 font-size: 16px;
             }}
             .graph-section {{
-                min-height: 600px;
+                min-height: calc(600px + 40px);
             }}
             .graph-section #mynetwork {{
                 border: 1px solid #e0e0e0;
                 border-radius: 5px;
+                height: 600px;
             }}
             .legenda-section h3 {{
                 margin-top: 0px;
@@ -850,71 +857,68 @@ class GraphVisualizer:
                 <a href="../../2. Dataset Maior e Comparação de Algoritmos/report.html">Relatório de Testes</a>
             </nav>
         </header>
-        
-        <div class="content-section page-title">
-            <h1>Grafo Interativo - Bairros do Recife</h1>
-            <p>Visualização da conectividade e caminhos entre os bairros da cidade</p>
-        </div>
-        
-        <div class="content-section graph-section" id="graph-container">
-        </div>
-        
-        <div class="content-section legenda-section">
-            <h3>Legenda</h3>
-            <div class="legenda-item">
-                <span class="legenda-cor" style="background: #FF4444;"></span>
-                <strong>Vermelho:</strong> Caminho destacado
-            </div>
-            <div class="legenda-item">
-                <span class="legenda-cor" style="background: #FFA500;"></span>
-                <strong>Laranja:</strong> Hubs (≥8 conexões)
-            </div>
-            <div class="legenda-item">
-                <span class="legenda-cor" style="background: #4CAF50;"></span>
-                <strong>Verde:</strong> Bem conectados (5-7 conexões)
-            </div>
-            <div class="legenda-item">
-                <span class="legenda-cor" style="background: #2196F3;"></span>
-                <strong>Azul:</strong> Conexões normais (<5)
-            </div>
-        </div>
-        
-        <div class="content-section select-node-section">
-            <h3>🔍 Selecione um nó para visualizar sua vizinhança</h3>
-            <div class="select-controls">
-                <select id="nodeSelect">
-                    <option value="">-- Selecione um bairro --</option>
-                    {bairros_options}
-                </select>
-                <button id="resetNodeSelection">Resetar Seleção</button>
-            </div>
-        </div>
-        
-        <div class="content-section path-finder-section">
-            <h3>🗺️ Calcular Novo Percurso</h3>
-            <div class="path-controls">
-                <div class="path-control-group">
-                    <label for="origemSelect">Bairro de Origem:</label>
-                    <select id="origemSelect">
-                        <option value="">-- Selecione --</option>
+
+        <div style="display: flex; justify-content: space-between">
+            <div class="content-section select-node-section">
+                <h3>🔍 Selecione um nó para visualizar sua vizinhança</h3>
+                <div class="select-controls">
+                    <select id="nodeSelect">
+                        <option value="">-- Selecione um bairro --</option>
                         {bairros_options}
                     </select>
-                </div>
-                <div class="path-control-group">
-                    <label for="destinoSelect">Bairro de Destino:</label>
-                    <select id="destinoSelect">
-                        <option value="">-- Selecione --</option>
-                        {bairros_options}
-                    </select>
+                    <button id="resetNodeSelection">Resetar Seleção</button>
                 </div>
             </div>
-            <div class="button-group">
-                <button id="calcularCaminho">Calcular Caminho Mais Curto</button>
-                <button id="resetarCaminho">Resetar para Padrão</button>
+            
+            <div class="content-section path-finder-section">
+                <h3>🗺️ Calcular Novo Percurso</h3>
+                <div class="path-controls">
+                    <div class="path-control-group">
+                        <label for="origemSelect">Bairro de Origem:</label>
+                        <select id="origemSelect">
+                            <option value="">-- Selecione --</option>
+                            {bairros_options}
+                        </select>
+                    </div>
+                    <div class="path-control-group">
+                        <label for="destinoSelect">Bairro de Destino:</label>
+                        <select id="destinoSelect">
+                            <option value="">-- Selecione --</option>
+                            {bairros_options}
+                        </select>
+                    </div>
+                    <button id="calcularCaminho">Calcular Caminho Mais Curto</button>
+                    <button id="resetarCaminho">Resetar para Padrão</button>
+                </div>
+                <div id="resultadoCaminho"></div>
             </div>
-            <div id="resultadoCaminho"></div>
         </div>
         
+        
+        <div class="content-section">
+            <div class="graph-section" id="graph-container"></div>
+            
+            <div class="legenda-section">
+                <h3>Legenda</h3>
+                <div class="legenda-item">
+                    <span class="legenda-cor" style="background: #FF4444;"></span>
+                    <strong>Vermelho:</strong> Caminho destacado
+                </div>
+                <div class="legenda-item">
+                    <span class="legenda-cor" style="background: #FFA500;"></span>
+                    <strong>Laranja:</strong> Hubs (≥8 conexões)
+                </div>
+                <div class="legenda-item">
+                    <span class="legenda-cor" style="background: #4CAF50;"></span>
+                    <strong>Verde:</strong> Bem conectados (5-7 conexões)
+                </div>
+                <div class="legenda-item">
+                    <span class="legenda-cor" style="background: #2196F3;"></span>
+                    <strong>Azul:</strong> Conexões normais (<5)
+                </div>
+            </div>
+        </div>
+ 
         <script>
             window.addEventListener('DOMContentLoaded', function() {{
                 const mynetwork = document.getElementById('mynetwork');
