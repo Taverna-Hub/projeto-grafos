@@ -16,19 +16,30 @@ class Algorithms:
         graph = {}
         with open(file_path, "r", encoding="utf-8") as file:
             reader = csv.reader(file)
-            next(reader)  
-            for row in reader:
-                if len(row) < 3:
-                    continue
-                source, destination, *_, weight = row
-                if weight.strip():
-                    weight = float(weight)
+            next(reader)
+            if 'bitcoin' in file_path:
+                for row in reader:
+                    if len(row) < 3:
+                        continue
+                    source, destination, weight = row[0], row[1], float(row[2])
                     if source not in graph:
                         graph[source] = []
                     if destination not in graph:
                         graph[destination] = []
                     graph[source].append((destination, weight))
-                    graph[destination].append((source, weight))
+            else:  
+                for row in reader:
+                    if len(row) < 3:
+                        continue
+                    source, destination, *_, weight = row
+                    if weight.strip():
+                        weight = float(weight)
+                        if source not in graph:
+                            graph[source] = []
+                        if destination not in graph:
+                            graph[destination] = []
+                        graph[source].append((destination, weight))
+                        graph[destination].append((source, weight))
         
         self.graph = graph
         return graph

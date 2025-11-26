@@ -2,15 +2,13 @@ import sys
 import time
 import tracemalloc
 from pathlib import Path
-
 sys.path.insert(0, str(Path(__file__).parent.parent.parent / "src"))
 
 from graphs.algorithms import Algorithms
 
 
 def test_dijkstra_bitcoin_alpha():
-    csv_path = Path(__file__).parent.parent / "data" / "bitcoin_alpha.csv"
-
+    csv_path = Path(__file__).parent.parent / "data" / "bitcoin_alpha_no_negative.csv"
     algo = Algorithms()
     graph = algo.load_graph_from_csv(str(csv_path))
 

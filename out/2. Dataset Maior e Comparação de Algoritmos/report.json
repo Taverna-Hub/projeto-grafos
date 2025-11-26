@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-11-25T22:46:14.085749",
+  "timestamp": "2025-11-26T20:28:37.401771",
   "dataset": "bitcoin_alpha.csv",
   "tests": {
     "bfs": {
@@ -8,27 +8,27 @@
       "results": [
         {
           "source": "7188",
-          "reachable_nodes": 3775,
+          "reachable_nodes": 3749,
           "total_nodes": 3783,
           "layers": 7,
-          "time_seconds": 0.026909356000032858,
-          "peak_memory_mb": 0.58050537109375
+          "time_seconds": 0.011548255999969115,
+          "peak_memory_mb": 0.5819549560546875
         },
         {
           "source": "1063",
-          "reachable_nodes": 3775,
+          "reachable_nodes": 3748,
           "total_nodes": 3783,
           "layers": 7,
-          "time_seconds": 0.013658895999469678,
-          "peak_memory_mb": 0.4608306884765625
+          "time_seconds": 0.011883023000336834,
+          "peak_memory_mb": 0.46250152587890625
         },
         {
           "source": "2713",
-          "reachable_nodes": 3775,
+          "reachable_nodes": 1,
           "total_nodes": 3783,
-          "layers": 7,
-          "time_seconds": 0.015646597001250484,
-          "peak_memory_mb": 0.5804290771484375
+          "layers": 1,
+          "time_seconds": 6.526600009237882e-05,
+          "peak_memory_mb": 0.001190185546875
         }
       ]
     },
@@ -38,30 +38,30 @@
       "results": [
         {
           "source": "7188",
-          "visited_nodes": 3775,
+          "visited_nodes": 3749,
           "total_nodes": 3783,
           "has_cycles": true,
-          "back_edges": 17677,
-          "time_seconds": 0.09883873100079654,
-          "peak_memory_mb": 1.31085205078125
+          "back_edges": 8307,
+          "time_seconds": 0.04809767599999759,
+          "peak_memory_mb": 0.7279052734375
         },
         {
           "source": "1063",
-          "visited_nodes": 3775,
+          "visited_nodes": 3748,
           "total_nodes": 3783,
           "has_cycles": true,
-          "back_edges": 17678,
-          "time_seconds": 0.0945450899998832,
-          "peak_memory_mb": 1.3108291625976562
+          "back_edges": 8307,
+          "time_seconds": 0.04580426800021087,
+          "peak_memory_mb": 0.72784423828125
         },
         {
           "source": "2713",
-          "visited_nodes": 3775,
+          "visited_nodes": 1,
           "total_nodes": 3783,
-          "has_cycles": true,
-          "back_edges": 17677,
-          "time_seconds": 0.08977727599994978,
-          "peak_memory_mb": 1.3107757568359375
+          "has_cycles": false,
+          "back_edges": 0,
+          "time_seconds": 3.611600004660431e-05,
+          "peak_memory_mb": 0.001129150390625
         }
       ]
     },
@@ -72,46 +72,46 @@
         {
           "origin": "7188",
           "destination": "888",
-          "weight": 2773123200.0,
-          "path_length": 3,
-          "time_seconds": 0.016814421000162838,
-          "peak_memory_mb": 0.6941919326782227,
+          "weight": 12.0,
+          "path_length": 4,
+          "time_seconds": 0.03273260400010258,
+          "peak_memory_mb": 0.9132776260375977,
           "found": true
         },
         {
           "origin": "113",
           "destination": "1063",
-          "weight": 2656918800.0,
-          "path_length": 3,
-          "time_seconds": 0.03738520499973674,
-          "peak_memory_mb": 1.3822565078735352,
+          "weight": 3.0,
+          "path_length": 4,
+          "time_seconds": 0.01762575500015373,
+          "peak_memory_mb": 0.6315994262695312,
           "found": true
         },
         {
           "origin": "3193",
           "destination": "636",
-          "weight": 2700201600.0,
+          "weight": 2.0,
           "path_length": 3,
-          "time_seconds": 0.006808952000938007,
-          "peak_memory_mb": 0.3309793472290039,
+          "time_seconds": 0.004779590999987704,
+          "peak_memory_mb": 0.11444950103759766,
           "found": true
         },
         {
           "origin": "2713",
           "destination": "1409",
-          "weight": 3906622800.0,
-          "path_length": 4,
-          "time_seconds": 0.021495691000382067,
-          "peak_memory_mb": 0.8454122543334961,
-          "found": true
+          "weight": Infinity,
+          "path_length": 0,
+          "time_seconds": 1.0083000233862549e-05,
+          "peak_memory_mb": 0.0002593994140625,
+          "found": false
         },
         {
           "origin": "380",
           "destination": "569",
-          "weight": 3899106000.0,
+          "weight": 3.0,
           "path_length": 4,
-          "time_seconds": 0.027085603000159608,
-          "peak_memory_mb": 1.161581039428711,
+          "time_seconds": 0.020705022000129247,
+          "peak_memory_mb": 0.6842498779296875,
           "found": true
         }
       ]
@@ -124,8 +124,8 @@
           "test": "positive_weights",
           "source": "7188",
           "total_nodes": 3783,
-          "reachable_nodes": 3775,
-          "time_seconds": 88.779353205,
+          "reachable_nodes": 3749,
+          "time_seconds": 61.17999999799986,
           "peak_memory_mb": 0.21108245849609375,
           "negative_cycle": false
         },
@@ -133,17 +133,17 @@
           "test": "negative_weights_no_cycle",
           "source": "A",
           "total_nodes": 5,
-          "negative_cycle": true,
-          "time_seconds": 6.323799971141852e-05,
-          "peak_memory_kb": 0.296875
+          "negative_cycle": false,
+          "time_seconds": 9.909100026561646e-05,
+          "peak_memory_kb": 0.359375
         },
         {
           "test": "negative_cycle",
           "source": "A",
           "total_nodes": 4,
           "negative_cycle": true,
-          "time_seconds": 2.342100015084725e-05,
-          "peak_memory_kb": 0.359375
+          "time_seconds": 2.7957999918726273e-05,
+          "peak_memory_kb": 0.265625
         }
       ]
     }
