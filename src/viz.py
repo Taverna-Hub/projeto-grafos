@@ -461,7 +461,8 @@ class GraphVisualizer:
             else:
                 cor = "#2196F3"
 
-            net.add_node(vertice, label=vertice, title=titulo, size=tamanho, color=cor)
+            # Adicionar grau como atributo personalizado para acesso no JavaScript
+            net.add_node(vertice, label=vertice, title=titulo, size=tamanho, color=cor, grau=grau)
 
         for u in graph.get_vertices():
             for v in graph.get_neighbors(u):
@@ -486,7 +487,7 @@ class GraphVisualizer:
         output_path = q9_dir / "grafo_interativo.html"
 
         net.save_graph(str(output_path))
-        self._customize_html(output_path, caminho_destacado)
+        self._customize_html(output_path, caminho_destacado, info_bairros)
 
         print(f"Grafo interativo salvo em: {output_path}")
         return str(output_path)
@@ -588,7 +589,7 @@ class GraphVisualizer:
         with open(output_path, "w", encoding="utf-8") as f:
             f.write(html_content)
 
-    def _customize_html(self, html_path: Path, caminho: list = None):
+    def _customize_html(self, html_path: Path, caminho: list = None, info_bairros: dict = None):
 
         with open(html_path, "r", encoding="utf-8") as f:
             content = f.read()
@@ -596,6 +597,9 @@ class GraphVisualizer:
         content = re.sub(r"\s*<center>\s*<h1>\s*</h1>\s*</center>\s*", "", content)
 
         caminho_texto = " → ".join(caminho) if caminho else "N/A"
+        
+        bairros_list = sorted(info_bairros.keys()) if info_bairros else []
+        bairros_options = "".join([f'<option value="{b}">{b}</option>' for b in bairros_list])
 
         custom_html = f"""
         <style>
@@ -623,26 +627,141 @@ class GraphVisualizer:
             nav a:hover {{
                 background-color: #555;
             }}
-            .header {{
-                background: #667eea;
-                color: white;
+            .content-section {{
+                background: white;
                 padding: 20px;
                 border-radius: 10px;
-                margin-bottom: 20px;
-                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            }}
-            .header h1 {{
-                margin: 0 0 10px 0;
-            }}
-            .legenda {{
-                background: white;
-                padding: 15px;
-                border-radius: 10px;
-                margin-bottom: 20px;
+                margin: 20px;
                 box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             }}
-            .legenda h3 {{
+            .page-title {{
+                text-align: center;
+                padding: 30px 20px;
+            }}
+            .page-title h1 {{
+                margin: 0;
+                color: #333;
+                font-size: 32px;
+                font-weight: bold;
+            }}
+            .page-title p {{
+                margin: 10px 0 0 0;
+                color: #666;
+                font-size: 16px;
+            }}
+            .graph-section {{
+                min-height: 600px;
+            }}
+            .graph-section #mynetwork {{
+                border: 1px solid #e0e0e0;
+                border-radius: 5px;
+            }}
+            .legenda-section h3 {{
+                margin-top: 0px;
+                margin-bottom: 15px;
+                color: #333;
+            }}
+            .select-node-section {{
+                padding: 15px 20px;
+            }}
+            .select-node-section h3 {{
                 margin-top: 0;
+                margin-bottom: 15px;
+                color: #333;
+            }}
+            .path-finder-section h3 {{
+                margin-top: 0;
+                margin-bottom: 15px;
+                color: #333;
+            }}
+            .path-controls {{
+                display: flex;
+                gap: 15px;
+                align-items: flex-end;
+                flex-wrap: wrap;
+                margin-bottom: 15px;
+            }}
+            .path-control-group {{
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+            }}
+            .path-control-group label {{
+                font-weight: bold;
+                font-size: 14px;
+                color: #555;
+            }}
+            .path-control-group select {{
+                padding: 10px;
+                border: 2px solid #ddd;
+                border-radius: 5px;
+                font-size: 14px;
+                min-width: 200px;
+                cursor: pointer;
+            }}
+            .path-control-group select:focus {{
+                outline: none;
+                border-color: #667eea;
+            }}
+            .vis-network {{
+                outline: none;
+            }}
+            .vis-network {{
+                outline: none;
+            }}
+            .button-group {{
+                display: flex;
+                gap: 10px;
+                flex-wrap: wrap;
+            }}
+            #calcularCaminho {{
+                padding: 10px 25px;
+                background: #667eea;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                font-size: 14px;
+                font-weight: bold;
+                cursor: pointer;
+                transition: background 0.3s;
+            }}
+            #calcularCaminho:hover {{
+                background: #5568d3;
+            }}
+            #calcularCaminho:active {{
+                background: #4450b0;
+            }}
+            #resetarCaminho {{
+                padding: 10px 25px;
+                background: #6c757d;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                font-size: 14px;
+                font-weight: bold;
+                cursor: pointer;
+                transition: background 0.3s;
+            }}
+            #resetarCaminho:hover {{
+                background: #5a6268;
+            }}
+            #resetarCaminho:active {{
+                background: #4e555b;
+            }}
+            #resultadoCaminho {{
+                margin-top: 15px;
+                padding: 15px;
+                background: #e8f4f8;
+                border-left: 4px solid #2196F3;
+                border-radius: 5px;
+                display: none;
+            }}
+            #resultadoCaminho.show {{
+                display: block;
+            }}
+            #resultadoCaminho.error {{
+                background: #ffe8e8;
+                border-left-color: #f44336;
             }}
             .legenda-item {{
                 display: inline-block;
@@ -656,13 +775,6 @@ class GraphVisualizer:
                 border-radius: 50%;
                 margin-right: 5px;
                 vertical-align: middle;
-            }}
-            .caminho-destaque {{
-                background: #fff3cd;
-                border: 2px solid #ffc107;
-                padding: 10px;
-                border-radius: 5px;
-                margin-top: 10px;
             }}
         </style>
         <header>
@@ -678,11 +790,16 @@ class GraphVisualizer:
                 <a href="../1.8 Explorações e visualizações analíticas/subgrafo_top10_bairros.html">Subgrafo Top 10 Bairros</a>
             </nav>
         </header>
-        <div class="header">
+        
+        <div class="content-section page-title">
             <h1>Grafo Interativo - Bairros do Recife</h1>
-            <p>Análise de conectividade entre bairros da cidade</p>
+            <p>Visualização da conectividade e caminhos entre os bairros da cidade</p>
         </div>
-        <div class="legenda">
+        
+        <div class="content-section graph-section" id="graph-container">
+        </div>
+        
+        <div class="content-section legenda-section">
             <h3>Legenda</h3>
             <div class="legenda-item">
                 <span class="legenda-cor" style="background: #FF4444;"></span>
@@ -700,10 +817,238 @@ class GraphVisualizer:
                 <span class="legenda-cor" style="background: #2196F3;"></span>
                 <strong>Azul:</strong> Conexões normais (<5)
             </div>
-            <div class="caminho-destaque">
-                <strong>🚩 Caminho Destacado:</strong> {caminho_texto}
-            </div>
         </div>
+        
+        <div class="content-section select-node-section" id="select-node-container">
+            <h3>🔍 Selecione um nó para visualizar sua vizinhança</h3>
+        </div>
+        
+        <div class="content-section path-finder-section">
+            <h3>🗺️ Calcular Novo Percurso</h3>
+            <div class="path-controls">
+                <div class="path-control-group">
+                    <label for="origemSelect">Bairro de Origem:</label>
+                    <select id="origemSelect">
+                        <option value="">-- Selecione --</option>
+                        {bairros_options}
+                    </select>
+                </div>
+                <div class="path-control-group">
+                    <label for="destinoSelect">Bairro de Destino:</label>
+                    <select id="destinoSelect">
+                        <option value="">-- Selecione --</option>
+                        {bairros_options}
+                    </select>
+                </div>
+            </div>
+            <div class="button-group">
+                <button id="calcularCaminho">Calcular Caminho Mais Curto</button>
+                <button id="resetarCaminho">Resetar para Padrão</button>
+            </div>
+            <div id="resultadoCaminho"></div>
+        </div>
+        
+        <script>
+            window.addEventListener('DOMContentLoaded', function() {{
+                const mynetwork = document.getElementById('mynetwork');
+                if (mynetwork) {{
+                    const graphContainer = document.getElementById('graph-container');
+                    graphContainer.appendChild(mynetwork);
+                }}
+                
+                const allDivs = document.querySelectorAll('body > div');
+                let nodeSelectDiv = null;
+                
+                allDivs.forEach(div => {{
+                    const select = div.querySelector('select[id*="node"]');
+                    if (select && div.id !== 'graph-container' && div.id !== 'select-node-container') {{
+                        nodeSelectDiv = div;
+                    }}
+                }});
+                
+                if (nodeSelectDiv) {{
+                    const selectNodeContainer = document.getElementById('select-node-container');
+                    selectNodeContainer.appendChild(nodeSelectDiv);
+                    nodeSelectDiv.removeAttribute('style');
+                }} else {{
+                    console.log('Select do pyvis não encontrado');
+                }}
+                
+                document.getElementById('origemSelect').value = 'Nova Descoberta';
+                document.getElementById('destinoSelect').value = 'Boa Viagem (Setúbal)';
+                document.getElementById('calcularCaminho').click();
+            }});
+            
+            // Implementação do algoritmo de Dijkstra
+            function dijkstra(network, origem, destino) {{
+                const nodes = network.body.data.nodes;
+                const edges = network.body.data.edges;
+                
+                // Construir grafo de adjacências
+                const grafo = {{}};
+                edges.forEach(edge => {{
+                    if (!grafo[edge.from]) grafo[edge.from] = [];
+                    if (!grafo[edge.to]) grafo[edge.to] = [];
+                    
+                    const peso = edge.value || 1;
+                    grafo[edge.from].push({{ node: edge.to, peso: peso }});
+                    grafo[edge.to].push({{ node: edge.from, peso: peso }});
+                }});
+                
+                // Inicializar distâncias
+                const distancias = {{}};
+                const anteriores = {{}};
+                const visitados = new Set();
+                const fila = [];
+                
+                nodes.forEach(node => {{
+                    distancias[node.id] = Infinity;
+                    anteriores[node.id] = null;
+                }});
+                
+                distancias[origem] = 0;
+                fila.push({{ node: origem, dist: 0 }});
+                
+                while (fila.length > 0) {{
+                    // Ordenar fila por distância
+                    fila.sort((a, b) => a.dist - b.dist);
+                    const {{ node: atual }} = fila.shift();
+                    
+                    if (visitados.has(atual)) continue;
+                    visitados.add(atual);
+                    
+                    if (atual === destino) break;
+                    
+                    if (!grafo[atual]) continue;
+                    
+                    grafo[atual].forEach(vizinho => {{
+                        if (visitados.has(vizinho.node)) return;
+                        
+                        const novaDist = distancias[atual] + vizinho.peso;
+                        if (novaDist < distancias[vizinho.node]) {{
+                            distancias[vizinho.node] = novaDist;
+                            anteriores[vizinho.node] = atual;
+                            fila.push({{ node: vizinho.node, dist: novaDist }});
+                        }}
+                    }});
+                }}
+                
+                // Reconstruir caminho
+                if (distancias[destino] === Infinity) {{
+                    return null;
+                }}
+                
+                const caminho = [];
+                let atual = destino;
+                while (atual !== null) {{
+                    caminho.unshift(atual);
+                    atual = anteriores[atual];
+                }}
+                
+                return {{
+                    caminho: caminho,
+                    custo: distancias[destino]
+                }};
+            }}
+            
+            // Handler do botão
+            document.getElementById('calcularCaminho').addEventListener('click', function() {{
+                const origem = document.getElementById('origemSelect').value;
+                const destino = document.getElementById('destinoSelect').value;
+                const resultado = document.getElementById('resultadoCaminho');
+                
+                if (!origem || !destino) {{
+                    resultado.className = 'error show';
+                    resultado.innerHTML = '<strong>⚠️ Erro:</strong> Por favor, selecione origem e destino.';
+                    return;
+                }}
+                
+                if (origem === destino) {{
+                    resultado.className = 'error show';
+                    resultado.innerHTML = '<strong>⚠️ Erro:</strong> Origem e destino devem ser diferentes.';
+                    return;
+                }}
+                
+                // Calcular caminho
+                const pathResult = dijkstra(network, origem, destino);
+                
+                if (!pathResult) {{
+                    resultado.className = 'error show';
+                    resultado.innerHTML = '<strong>❌ Erro:</strong> Não existe caminho entre esses bairros.';
+                    return;
+                }}
+                
+                // Resetar cores anteriores
+                network.body.data.nodes.forEach(node => {{
+                    const info = node.grau !== undefined ? node.grau : 0;
+                    let cor = '#2196F3';
+                    if (info >= 8) cor = '#FFA500';
+                    else if (info >= 5) cor = '#4CAF50';
+                    
+                    network.body.data.nodes.update({{
+                        id: node.id,
+                        color: cor,
+                        size: 20 + info * 3
+                    }});
+                }});
+                
+                network.body.data.edges.forEach(edge => {{
+                    network.body.data.edges.update({{
+                        id: edge.id,
+                        color: '#999999',
+                        width: 1
+                    }});
+                }});
+                
+                // Destacar caminho
+                pathResult.caminho.forEach(nodeId => {{
+                    const node = network.body.data.nodes.get(nodeId);
+                    const info = node.grau !== undefined ? node.grau : 0;
+                    network.body.data.nodes.update({{
+                        id: nodeId,
+                        color: '#FF4444',
+                        size: (20 + info * 3) * 1.5
+                    }});
+                }});
+                
+                // Destacar arestas do caminho
+                for (let i = 0; i < pathResult.caminho.length - 1; i++) {{
+                    const from = pathResult.caminho[i];
+                    const to = pathResult.caminho[i + 1];
+                    
+                    const edge = network.body.data.edges.get({{
+                        filter: function(item) {{
+                            return (item.from === from && item.to === to) || 
+                                   (item.from === to && item.to === from);
+                        }}
+                    }})[0];
+                    
+                    if (edge) {{
+                        network.body.data.edges.update({{
+                            id: edge.id,
+                            color: '#FF0000',
+                            width: 5
+                        }});
+                    }}
+                }}
+                
+                // Mostrar resultado
+                resultado.className = 'show';
+                resultado.innerHTML = `
+                    <strong>✅ Caminho Encontrado!</strong><br>
+                    <strong>Percurso:</strong> ${{pathResult.caminho.join(' → ')}}<br>
+                    <strong>Número de passos:</strong> ${{pathResult.caminho.length - 1}}<br>
+                    <strong>Custo total:</strong> ${{pathResult.custo.toFixed(2)}}
+                `;
+            }});
+            
+            // Handler do botão resetar
+            document.getElementById('resetarCaminho').addEventListener('click', function() {{
+                document.getElementById('origemSelect').value = 'Nova Descoberta';
+                document.getElementById('destinoSelect').value = 'Boa Viagem (Setúbal)';
+                document.getElementById('calcularCaminho').click();
+            }});
+        </script>
         """
 
         content = content.replace("<body>", f"<body>{custom_html}")
