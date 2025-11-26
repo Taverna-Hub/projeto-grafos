@@ -408,7 +408,7 @@ class GraphVisualizer:
             bgcolor="#ffffff",
             notebook=False,
             cdn_resources="in_line",
-            select_menu=True,
+            select_menu=False,
             filter_menu=False,
         )
 
@@ -663,12 +663,70 @@ class GraphVisualizer:
                 color: #333;
             }}
             .select-node-section {{
-                padding: 15px 20px;
+                padding: 20px;
             }}
             .select-node-section h3 {{
                 margin-top: 0;
                 margin-bottom: 15px;
                 color: #333;
+            }}
+            .select-controls {{
+                display: flex;
+                gap: 10px;
+                align-items: center;
+                flex-wrap: wrap;
+            }}
+            #nodeSelect {{
+                padding: 10px 15px;
+                border: 2px solid #ddd;
+                border-radius: 5px;
+                font-size: 14px;
+                min-width: 300px;
+                flex: 1;
+                max-width: 500px;
+                cursor: pointer;
+                background: white;
+                font-family: Arial, sans-serif;
+                appearance: none;
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                background-image: url('data:image/svg+xml;charset=UTF-8,%3csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"%3e%3cpolyline points="6 9 12 15 18 9"%3e%3c/polyline%3e%3c/svg%3e');
+                background-repeat: no-repeat;
+                background-position: right 10px center;
+                background-size: 20px;
+                padding-right: 40px;
+            }}
+            #nodeSelect:focus {{
+                outline: none;
+                border-color: #667eea;
+                box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            }}
+            #nodeSelect option {{
+                padding: 10px;
+                font-size: 14px;
+            }}
+            #nodeSelect option:hover {{
+                background-color: #f0f0f0;
+            }}
+            #resetNodeSelection {{
+                padding: 10px 20px;
+                background: #2196F3;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                font-size: 14px;
+                font-weight: bold;
+                cursor: pointer;
+                transition: all 0.3s;
+                white-space: nowrap;
+            }}
+            #resetNodeSelection:hover {{
+                background: #1976D2;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            }}
+            #resetNodeSelection:active {{
+                background: #1565C0;
+                transform: translateY(1px);
             }}
             .path-finder-section h3 {{
                 margin-top: 0;
@@ -821,8 +879,15 @@ class GraphVisualizer:
             </div>
         </div>
         
-        <div class="content-section select-node-section" id="select-node-container">
+        <div class="content-section select-node-section">
             <h3>🔍 Selecione um nó para visualizar sua vizinhança</h3>
+            <div class="select-controls">
+                <select id="nodeSelect">
+                    <option value="">-- Selecione um bairro --</option>
+                    {bairros_options}
+                </select>
+                <button id="resetNodeSelection">Resetar Seleção</button>
+            </div>
         </div>
         
         <div class="content-section path-finder-section">
@@ -858,27 +923,113 @@ class GraphVisualizer:
                     graphContainer.appendChild(mynetwork);
                 }}
                 
-                const allDivs = document.querySelectorAll('body > div');
-                let nodeSelectDiv = null;
-                
-                allDivs.forEach(div => {{
-                    const select = div.querySelector('select[id*="node"]');
-                    if (select && div.id !== 'graph-container' && div.id !== 'select-node-container') {{
-                        nodeSelectDiv = div;
-                    }}
-                }});
-                
-                if (nodeSelectDiv) {{
-                    const selectNodeContainer = document.getElementById('select-node-container');
-                    selectNodeContainer.appendChild(nodeSelectDiv);
-                    nodeSelectDiv.removeAttribute('style');
-                }} else {{
-                    console.log('Select do pyvis não encontrado');
-                }}
-                
                 document.getElementById('origemSelect').value = 'Nova Descoberta';
                 document.getElementById('destinoSelect').value = 'Boa Viagem (Setúbal)';
                 document.getElementById('calcularCaminho').click();
+            }});
+            
+            document.getElementById('nodeSelect').addEventListener('change', function() {{
+                const selectedNode = this.value;
+                if (!selectedNode) return;
+                
+                const edges = network.body.data.edges;
+                const neighbors = new Set();
+                
+                edges.forEach(edge => {{
+                    if (edge.from === selectedNode) {{
+                        neighbors.add(edge.to);
+                    }}
+                    if (edge.to === selectedNode) {{
+                        neighbors.add(edge.from);
+                    }}
+                }});
+                
+                network.body.data.nodes.forEach(node => {{
+                    const info = node.grau !== undefined ? node.grau : 0;
+                    let cor, tamanho, opacity;
+                    
+                    if (node.id === selectedNode) {{
+                        if (info >= 8) cor = '#FFA500';
+                        else if (info >= 5) cor = '#4CAF50';
+                        else cor = '#2196F3';
+                        tamanho = 20 + info * 3;
+                        opacity = 1;
+                    }} else if (neighbors.has(node.id)) {{
+                        cor = '#FF4444';
+                        tamanho = (20 + info * 3) * 1.3;
+                        opacity = 1;
+                    }} else {{
+                        if (info >= 8) cor = '#FFA500';
+                        else if (info >= 5) cor = '#4CAF50';
+                        else cor = '#2196F3';
+                        tamanho = 20 + info * 3;
+                        opacity = 0.2;
+                    }}
+                    
+                    network.body.data.nodes.update({{
+                        id: node.id,
+                        color: {{ background: cor, border: cor }},
+                        size: tamanho,
+                        opacity: opacity
+                    }});
+                }});
+                
+                network.body.data.edges.forEach(edge => {{
+                    if (edge.from === selectedNode || edge.to === selectedNode) {{
+                        network.body.data.edges.update({{
+                            id: edge.id,
+                            color: '#999999',
+                            width: 3
+                        }});
+                    }} else {{
+                        network.body.data.edges.update({{
+                            id: edge.id,
+                            color: {{ color: '#999999', opacity: 0.1 }},
+                            width: 1
+                        }});
+                    }}
+                }});
+                
+                network.focus(selectedNode, {{
+                    scale: 1.1,
+                    animation: {{
+                        duration: 1000,
+                        easingFunction: 'easeInOutQuad'
+                    }}
+                }});
+            }});
+            
+            document.getElementById('resetNodeSelection').addEventListener('click', function() {{
+                document.getElementById('nodeSelect').value = '';
+                
+                network.body.data.nodes.forEach(node => {{
+                    const info = node.grau !== undefined ? node.grau : 0;
+                    let cor = '#2196F3';
+                    if (info >= 8) cor = '#FFA500';
+                    else if (info >= 5) cor = '#4CAF50';
+                    
+                    network.body.data.nodes.update({{
+                        id: node.id,
+                        color: cor,
+                        size: 20 + info * 3,
+                        opacity: 1
+                    }});
+                }});
+                
+                network.body.data.edges.forEach(edge => {{
+                    network.body.data.edges.update({{
+                        id: edge.id,
+                        color: '#999999',
+                        width: 1
+                    }});
+                }});
+                
+                network.fit({{
+                    animation: {{
+                        duration: 1000,
+                        easingFunction: 'easeInOutQuad'
+                    }}
+                }});
             }});
             
             // Implementação do algoritmo de Dijkstra
