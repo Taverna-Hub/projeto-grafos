@@ -260,13 +260,12 @@ def visualize_distance_heatmap(
     distance_matrix = np.full((n, n), np.inf)
 
     for i, source in enumerate(sample_nodes):
+        distances, _ = algo.bfs(source, graph_dict)
         for j, target in enumerate(sample_nodes):
             if i == j:
                 distance_matrix[i][j] = 0
-            else:
-                level, _ = algo.bfs(source, target, graph_dict)
-                if level != -1:
-                    distance_matrix[i][j] = level
+            elif target in distances:
+                distance_matrix[i][j] = distances[target]
 
     max_finite = np.max(distance_matrix[distance_matrix != np.inf])
     distance_matrix[distance_matrix == np.inf] = max_finite + 1

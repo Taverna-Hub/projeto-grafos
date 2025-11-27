@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-11-26T22:28:18.602294",
+  "timestamp": "2025-11-26T23:47:36.709508",
   "dataset": "bitcoin_alpha.csv",
   "tests": {
     "bfs": {
@@ -11,7 +11,7 @@
           "reachable_nodes": 3749,
           "total_nodes": 3783,
           "layers": 7,
-          "time_seconds": 0.010627920000843005,
+          "time_seconds": 0.030680820000270614,
           "peak_memory_mb": 0.5819549560546875
         },
         {
@@ -19,7 +19,7 @@
           "reachable_nodes": 3748,
           "total_nodes": 3783,
           "layers": 7,
-          "time_seconds": 0.01299312000082864,
+          "time_seconds": 0.01682081999933871,
           "peak_memory_mb": 0.46250152587890625
         },
         {
@@ -27,7 +27,7 @@
           "reachable_nodes": 1,
           "total_nodes": 3783,
           "layers": 1,
-          "time_seconds": 6.6059999880963e-05,
+          "time_seconds": 7.05599995853845e-05,
           "peak_memory_mb": 0.001190185546875
         }
       ]
@@ -42,8 +42,8 @@
           "total_nodes": 3783,
           "has_cycles": true,
           "back_edges": 8307,
-          "time_seconds": 0.04978602000119281,
-          "peak_memory_mb": 0.7278213500976562
+          "time_seconds": 0.059636429999955,
+          "peak_memory_mb": 0.7279052734375
         },
         {
           "source": "1063",
@@ -51,7 +51,7 @@
           "total_nodes": 3783,
           "has_cycles": true,
           "back_edges": 8307,
-          "time_seconds": 0.0494363699999667,
+          "time_seconds": 0.05985657000019273,
           "peak_memory_mb": 0.72784423828125
         },
         {
@@ -60,8 +60,8 @@
           "total_nodes": 3783,
           "has_cycles": false,
           "back_edges": 0,
-          "time_seconds": 6.39000008959556e-05,
-          "peak_memory_mb": 0.001129150390625
+          "time_seconds": 4.184999852441251e-05,
+          "peak_memory_mb": 0.001190185546875
         }
       ]
     },
@@ -74,8 +74,8 @@
           "destination": "888",
           "weight": 12.0,
           "path_length": 4,
-          "time_seconds": 0.0367686000008689,
-          "peak_memory_mb": 0.9129724502563477,
+          "time_seconds": 0.042056999998749234,
+          "peak_memory_mb": 0.9132776260375977,
           "found": true
         },
         {
@@ -83,7 +83,7 @@
           "destination": "1063",
           "weight": 3.0,
           "path_length": 4,
-          "time_seconds": 0.021052890000646585,
+          "time_seconds": 0.029704680000577355,
           "peak_memory_mb": 0.6315994262695312,
           "found": true
         },
@@ -92,7 +92,7 @@
           "destination": "636",
           "weight": 2.0,
           "path_length": 3,
-          "time_seconds": 0.004800689999683527,
+          "time_seconds": 0.007654590001038741,
           "peak_memory_mb": 0.11444950103759766,
           "found": true
         },
@@ -101,7 +101,7 @@
           "destination": "1409",
           "weight": Infinity,
           "path_length": 0,
-          "time_seconds": 1.2960001186002046e-05,
+          "time_seconds": 1.3950000720797107e-05,
           "peak_memory_mb": 0.0002593994140625,
           "found": false
         },
@@ -110,7 +110,7 @@
           "destination": "569",
           "weight": 3.0,
           "path_length": 4,
-          "time_seconds": 0.023688179999226122,
+          "time_seconds": 0.03237164999882225,
           "peak_memory_mb": 0.6842498779296875,
           "found": true
         }
@@ -125,7 +125,7 @@
           "source": "7188",
           "total_nodes": 3783,
           "reachable_nodes": 3749,
-          "time_seconds": 50.77124279999953,
+          "time_seconds": 49.60003877999952,
           "peak_memory_mb": 0.21108245849609375,
           "negative_cycle": false
         },
@@ -134,15 +134,15 @@
           "source": "A",
           "total_nodes": 4,
           "negative_cycle": false,
-          "time_seconds": 2.3130000045057386e-05,
-          "peak_memory_kb": 0.046875
+          "time_seconds": 6.479998774011619e-06,
+          "peak_memory_kb": 0.109375
         },
         {
           "test": "negative_cycle",
           "source": "7188",
           "total_nodes": 3783,
           "reachable_nodes": 3749,
-          "time_seconds": 72.87155360999895,
+          "time_seconds": 67.99290254999869,
           "peak_memory_mb": 0.21710205078125,
           "negative_cycle": true
         }

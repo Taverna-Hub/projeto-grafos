@@ -10,48 +10,10 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent / "src"))
 from graphs.algorithms import Algorithms
 
 
-def bfs_with_layers(
-    start: str, graph: Dict[str, List[Tuple[str, float]]]
-) -> Tuple[Dict[str, int], List[Set[str]]]:
-
-    if start not in graph:
-        return {}, []
-
-    distances = {start: 0}
-    layers = [{start}]
-    queue = deque([start])
-    visited = {start}
-    current_layer = 0
-    nodes_in_current_layer = 1
-    nodes_in_next_layer = 0
-
-    while queue:
-        node = queue.popleft()
-        nodes_in_current_layer -= 1
-
-        for neighbor, _ in graph.get(node, []):
-            if neighbor not in visited:
-                visited.add(neighbor)
-                distances[neighbor] = current_layer + 1
-                queue.append(neighbor)
-                nodes_in_next_layer += 1
-
-        if nodes_in_current_layer == 0:
-            if nodes_in_next_layer > 0:
-                current_layer += 1
-                if len(layers) <= current_layer:
-                    layers.append(set())
-
-                temp_queue = list(queue)
-                layers[current_layer] = set(temp_queue[:nodes_in_next_layer])
-                nodes_in_current_layer = nodes_in_next_layer
-                nodes_in_next_layer = 0
-
-    return distances, layers
 
 
 def test_bfs_bitcoin_alpha():
-
+    algo = Algorithms()
     csv_path = Path(__file__).parent.parent / "data" / "bitcoin_alpha.csv"
 
     algo = Algorithms()
@@ -67,7 +29,7 @@ def test_bfs_bitcoin_alpha():
         tracemalloc.start()
         start_time = time.perf_counter()
 
-        distances, layers = bfs_with_layers(source, graph)
+        distances, layers = algo.bfs(source, graph)
 
         end_time = time.perf_counter()
         _, peak = tracemalloc.get_traced_memory()

@@ -72,47 +72,75 @@ class Algorithms:
 
         return float("inf"), "No path found"
     
-    def bfs(self, start: str, end: str, graph: Optional[Dict[str, List[Tuple[str, float]]]] = None) -> Tuple[int, str]:
-        graph = graph or self.graph
-        queue = deque([(start, [start])])
+    def bfs(self,
+        start: str, graph: Dict[str, List[Tuple[str, float]]]
+    ) -> Tuple[Dict[str, int], List[Set[str]]]:
+
+        if start not in graph:
+            return {}, []
+
+        distances = {start: 0}
+        layers = [{start}]
+        queue = deque([start])
         visited = {start}
-        
+        current_layer = 0
+        nodes_in_current_layer = 1
+        nodes_in_next_layer = 0
+
         while queue:
-            current_node, path = queue.popleft()
-            
-            if current_node == end:
-                return len(path) - 1, " -> ".join(path)
-            
-            for neighbor, _ in graph.get(current_node, []):
-                if neighbor not in visited:
-                    visited.add(neighbor)
-                    queue.append((neighbor, path + [neighbor]))
-        
-        return -1, "No path found"
-    
-    def dfs(self, start: str, end: str, graph: Optional[Dict[str, List[Tuple[str, float]]]] = None) -> Tuple[bool, str]:   
-        graph = graph or self.graph
-        visited = set()
-        path = []
-        
-        def dfs_recursive(node: str) -> bool:
-            visited.add(node)
-            path.append(node)
-            
-            if node == end:
-                return True
-            
+            node = queue.popleft()
+            nodes_in_current_layer -= 1
+
             for neighbor, _ in graph.get(node, []):
                 if neighbor not in visited:
-                    if dfs_recursive(neighbor):
-                        return True
-            
-            path.pop()
-            return False
-        
-        found = dfs_recursive(start)
-        return found, " -> ".join(path)
+                    visited.add(neighbor)
+                    distances[neighbor] = current_layer + 1
+                    queue.append(neighbor)
+                    nodes_in_next_layer += 1
+
+            if nodes_in_current_layer == 0:
+                if nodes_in_next_layer > 0:
+                    current_layer += 1
+                    if len(layers) <= current_layer:
+                        layers.append(set())
+
+                    temp_queue = list(queue)
+                    layers[current_layer] = set(temp_queue[:nodes_in_next_layer])
+                    nodes_in_current_layer = nodes_in_next_layer
+                    nodes_in_next_layer = 0
+
+        return distances, layers
     
+    def dfs(self,
+        start: str, graph: Dict[str, List[Tuple[str, float]]]
+    ) -> Tuple[List[str], List[Tuple[str, str]], bool]:
+
+        if start not in graph:
+            return [], [], False
+
+        visited = set()
+        visit_order = []
+        back_edges = []
+        rec_stack = set()
+
+        def dfs_visit(node: str, parent: Optional[str] = None):
+            visited.add(node)
+            rec_stack.add(node)
+            visit_order.append(node)
+
+            for neighbor, _ in graph.get(node, []):
+                if neighbor not in visited:
+                    dfs_visit(neighbor, node)
+                elif neighbor in rec_stack and neighbor != parent:
+                    back_edges.append((node, neighbor))
+
+            rec_stack.remove(node)
+
+        dfs_visit(start)
+        has_cycles = len(back_edges) > 0
+
+        return visit_order, back_edges, has_cycles
+
     
     def bellman_ford(self, start: str, graph: Optional[Dict[str, List[Tuple[str, float]]]] = None) -> Dict[str, float]:
         graph = graph or self.graph

@@ -9,38 +9,9 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent / "src"))
 from graphs.algorithms import Algorithms
 
 
-def dfs_with_cycle_detection(
-    start: str, graph: Dict[str, List[Tuple[str, float]]]
-) -> Tuple[List[str], List[Tuple[str, str]], bool]:
-
-    if start not in graph:
-        return [], [], False
-
-    visited = set()
-    visit_order = []
-    back_edges = []
-    rec_stack = set()
-
-    def dfs_visit(node: str, parent: Optional[str] = None):
-        visited.add(node)
-        rec_stack.add(node)
-        visit_order.append(node)
-
-        for neighbor, _ in graph.get(node, []):
-            if neighbor not in visited:
-                dfs_visit(neighbor, node)
-            elif neighbor in rec_stack and neighbor != parent:
-                back_edges.append((node, neighbor))
-
-        rec_stack.remove(node)
-
-    dfs_visit(start)
-    has_cycles = len(back_edges) > 0
-
-    return visit_order, back_edges, has_cycles
-
 
 def test_dfs_bitcoin_alpha():
+    algo = Algorithms()
     csv_path = Path(__file__).parent.parent / "data" / "bitcoin_alpha.csv"
 
     algo = Algorithms()
@@ -55,7 +26,7 @@ def test_dfs_bitcoin_alpha():
         tracemalloc.start()
         start_time = time.perf_counter()
 
-        visit_order, back_edges, has_cycles = dfs_with_cycle_detection(source, graph)
+        visit_order, back_edges, has_cycles = algo.dfs(source, graph)
 
         end_time = time.perf_counter()
         _, peak = tracemalloc.get_traced_memory()
