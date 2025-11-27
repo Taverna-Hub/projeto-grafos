@@ -76,7 +76,6 @@ projeto-grafos/
 │   ├── test_dijkstra.py            # Testes específicos de Dijkstra
 │   └── test_bellman_ford.py        # Testes específicos de Bellman-Ford
 ├── out/                            # Resultados gerados (criado automaticamente)
-├── main.py                         # Script principal (alternativa ao CLI)
 ├── requirements.txt                # Dependências do projeto
 └── README.md                       # Este arquivo
 ```
@@ -387,18 +386,26 @@ out/
     │   └── arvore_percurso.png
     │
     ├── 1.8 Explorações e visualizações analíticas/
+    │   ├── ranking_densidade_microrregiao.html
     │   ├── ranking_densidade_microrregiao.png
     │   ├── ranking_densidade_microrregiao.csv
-    │   ├── subgrafo_top10_bairros.png
-    │   ├── subgrafo_top10_metricas.txt
-    │   ├── histograma_distribuicao_graus.png
-    │   └── estatisticas_graus.txt
+    │   ├── subgrafo_top10_bairros.html
+    │   ├── subgrafo_top10_bairros.
+    │   ├── histograma_distribuicao_graus.html
+    │   └── histograma_distribuicao_graus.png
     │
     └── 1.9 Apresentação interativa do grafo/
         └── grafo_interativo.html
 
 └── 2. Dataset Maior e Comparação de Algoritmos/
-    └── report.json                 
+    ├── report.html
+    ├── report.json
+    ├── bitcoin_degree_distribution.html
+    ├── bitcoin_degree_distribution.png
+    ├── bitcoin_distance_heatmap.html
+    ├── bitcoin_distance_heatmap.png
+    ├── bitcoin_graph_sample.html
+    └── bitcoin_graph_sample.png
 ```
 
 
