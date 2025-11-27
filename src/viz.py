@@ -524,14 +524,46 @@ class GraphVisualizer:
             padding: 1rem;
             text-align: center;
         }}
-        nav a {{
+        nav {{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }}
+        .menu-item {{
+            position: relative;
+            display: inline-block;
+        }}
+        .menu-item > a {{
             color: white !important;
             text-decoration: none;
             padding: 1rem;
             display: inline-block;
         }}
-        nav a:hover {{
+        .menu-item:hover > a {{
             background-color: #555;
+        }}
+        .submenu {{
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #444;
+            min-width: 300px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            z-index: 1;
+        }}
+        .submenu a {{
+            color: white !important;
+            text-decoration: none;
+            padding: 12px 16px;
+            display: block;
+            text-align: left;
+        }}
+        .submenu a:hover {{
+            background-color: #555;
+        }}
+        .menu-item:hover .submenu {{
+            display: block;
         }}
         .container {{
             max-width: 1400px;
@@ -562,16 +594,25 @@ class GraphVisualizer:
 <body>
     <header>
         <nav>
-            <a href="../1.9 Apresentação interativa do grafo/grafo_interativo.html">Grafo Interativo</a>
-            <a href="../1.7 Transforme o percurso em árvore e mostre/arvore_percurso.html">Árvore de Percurso</a>
-            <a href="../1.8 Explorações e visualizações analíticas/histograma_distribuicao_graus.html"
-            >Histograma de Distribuição de Graus</a
-            >
-            <a href="../1.8 Explorações e visualizações analíticas/ranking_densidade_microrregiao.html"
-            >Ranking de Densidade por Microrregião</a
-            >
-            <a href="../1.8 Explorações e visualizações analíticas/subgrafo_top10_bairros.html">Subgrafo Top 10 Bairros</a>
-            <a href="../../2. Dataset Maior e Comparação de Algoritmos/report.html">Relatório de Testes</a>
+            <div class="menu-item">
+                <a href="#">Grafo dos Bairros do Recife</a>
+                <div class="submenu">
+                    <a href="../1.9 Apresentação interativa do grafo/grafo_interativo.html">Grafo Interativo</a>
+                    <a href="../1.7 Transforme o percurso em árvore e mostre/arvore_percurso.html">Árvore de Percurso</a>
+                    <a href="../1.8 Explorações e visualizações analíticas/histograma_distribuicao_graus.html">Histograma de Distribuição de Graus</a>
+                    <a href="../1.8 Explorações e visualizações analíticas/ranking_densidade_microrregiao.html">Ranking de Densidade por Microrregião</a>
+                    <a href="../1.8 Explorações e visualizações analíticas/subgrafo_top10_bairros.html">Subgrafo Top 10 Bairros</a>
+                </div>
+            </div>
+            <div class="menu-item">
+                <a href="#">Dataset de Histórico de Transações Bitcoin</a>
+                <div class="submenu">
+                    <a href="../../2. Dataset Maior e Comparação de Algoritmos/bitcoin_degree_distribution.html">Distribuição de Graus</a>
+                    <a href="../../2. Dataset Maior e Comparação de Algoritmos/bitcoin_distance_heatmap.html">Mapa de Distâncias</a>
+                    <a href="../../2. Dataset Maior e Comparação de Algoritmos/bitcoin_graph_sample.html">Amostra do Grafo</a>
+                    <a href="../../2. Dataset Maior e Comparação de Algoritmos/report.html">Relatório de Testes</a>
+                </div>
+            </div>
         </nav>
     </header>
 
@@ -625,14 +666,46 @@ class GraphVisualizer:
                 padding: 1rem;
                 text-align: center;
             }}
-            nav a {{
+            nav {{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }}
+            .menu-item {{
+                position: relative;
+                display: inline-block;
+            }}
+            .menu-item > a {{
                 color: white !important;
                 text-decoration: none;
                 padding: 1rem;
                 display: inline-block;
             }}
-            nav a:hover {{
+            .menu-item:hover > a {{
                 background-color: #555;
+            }}
+            .submenu {{
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                background-color: #444;
+                min-width: 300px;
+                box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+                z-index: 1;
+            }}
+            .submenu a {{
+                color: white !important;
+                text-decoration: none;
+                padding: 12px 16px;
+                display: block;
+                text-align: left;
+            }}
+            .submenu a:hover {{
+                background-color: #555;
+            }}
+            .menu-item:hover .submenu {{
+                display: block;
             }}
             .content-section {{
                 background: white;
@@ -845,16 +918,26 @@ class GraphVisualizer:
         </style>
         <header>
             <nav>
-                <a href="../1.9 Apresentação interativa do grafo/grafo_interativo.html">Grafo Interativo</a>
-                <a href="../1.7 Transforme o percurso em árvore e mostre/arvore_percurso.html">Árvore de Percurso</a>
-                <a href="../1.8 Explorações e visualizações analíticas/histograma_distribuicao_graus.html"
-                >Histograma de Distribuição de Graus</a
-                >
-                <a href="../1.8 Explorações e visualizações analíticas/ranking_densidade_microrregiao.html"
-                >Ranking de Densidade por Microrregião</a
-                >
-                <a href="../1.8 Explorações e visualizações analíticas/subgrafo_top10_bairros.html">Subgrafo Top 10 Bairros</a>
-                <a href="../../2. Dataset Maior e Comparação de Algoritmos/report.html">Relatório de Testes</a>
+                <div class="menu-item">
+                    <a href="#">Grafo dos Bairros do Recife</a>
+                    <div class="submenu">
+                        <a href="../1.9 Apresentação interativa do grafo/grafo_interativo.html">Grafo Interativo</a>
+                        <a href="../1.7 Transforme o percurso em árvore e mostre/arvore_percurso.html">Árvore de Percurso</a>
+                        <a href="../1.8 Explorações e visualizações analíticas/histograma_distribuicao_graus.html">Histograma de Distribuição de Graus</a>
+                        <a href="../1.8 Explorações e visualizações analíticas/ranking_densidade_microrregiao.html">Ranking de Densidade por Microrregião</a>
+                        <a href="../1.8 Explorações e visualizações analíticas/subgrafo_top10_bairros.html">Subgrafo Top 10 Bairros</a>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <a href="#">Dataset de Histórico de Transações Bitcoin</a>
+                    <div class="submenu">
+                        <a href="../../2. Dataset Maior e Comparação de Algoritmos/bitcoin_degree_distribution.html">Distribuição de Graus</a>
+                        <a href="../../2. Dataset Maior e Comparação de Algoritmos/bitcoin_distance_heatmap.html">Mapa de Distâncias</a>
+                        <a href="../../2. Dataset Maior e Comparação de Algoritmos/bitcoin_graph_sample.html">Amostra do Grafo</a>
+                        <a href="../../2. Dataset Maior e Comparação de Algoritmos/bitcoin_graph_sample_interactive.html">Grafo Interativo</a>
+                        <a href="../../2. Dataset Maior e Comparação de Algoritmos/report.html">Relatório de Testes</a>
+                    </div>
+                </div>
             </nav>
         </header>
 

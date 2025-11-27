@@ -6,7 +6,7 @@ import numpy as np
 from collections import Counter, defaultdict
 import random
 
-sys.path.insert(0, str(Path(__file__).parent.parent.parent / "src"))
+sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
 from constants import PART2_DIR
 from graphs.algorithms import Algorithms
@@ -99,20 +99,39 @@ def visualize_graph_sample(
     max_nodes: int = 50,
     output_path: str = "bitcoin_graph_sample.png",
 ):
-
-    nodes_to_include = set()
-    filtered_edges = []
-
+    adjacency = defaultdict(list)
     for source, target, weight in edges_data:
-        if len(nodes_to_include) < max_nodes:
-            nodes_to_include.add(source)
-            nodes_to_include.add(target)
+        adjacency[source].append((target, weight))
+        adjacency[target].append((source, weight))
 
+    if not adjacency:
+        return
+
+    nodes_by_degree = sorted(
+        adjacency.keys(), key=lambda n: len(adjacency[n]), reverse=True
+    )
+    initial_node = (
+        nodes_by_degree[0] if nodes_by_degree else random.choice(list(adjacency.keys()))
+    )
+
+    nodes_to_include = set([initial_node])
+    frontier = [initial_node]
+
+    while len(nodes_to_include) < max_nodes and frontier:
+        current_node = frontier.pop(0)
+
+        for neighbor, _ in adjacency[current_node]:
+            if neighbor not in nodes_to_include:
+                nodes_to_include.add(neighbor)
+                frontier.append(neighbor)
+
+                if len(nodes_to_include) >= max_nodes:
+                    break
+
+    filtered_edges = []
+    for source, target, weight in edges_data:
         if source in nodes_to_include and target in nodes_to_include:
             filtered_edges.append((source, target, weight))
-
-        if len(nodes_to_include) >= max_nodes:
-            break
 
     nodes_list = list(nodes_to_include)
     edges_for_layout = [(s, t) for s, t, _ in filtered_edges]
@@ -196,40 +215,28 @@ def visualize_degree_distribution(
     avg_degree = np.mean(degrees)
     median_degree = np.median(degrees)
 
-    _, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 6))
+    fig, ax = plt.subplots(figsize=(14, 10))
 
-    ax1.hist(degrees, bins=50, color="steelblue", alpha=0.7, edgecolor="black")
-    ax1.axvline(
+    ax.hist(degrees, bins=50, color="steelblue", alpha=0.7, edgecolor="black")
+    ax.axvline(
         avg_degree,
         color="red",
         linestyle="--",
         linewidth=2,
         label=f"Média: {avg_degree:.2f}",
     )
-    ax1.axvline(
+    ax.axvline(
         median_degree,
         color="orange",
         linestyle="--",
         linewidth=2,
         label=f"Mediana: {median_degree:.2f}",
     )
-    ax1.set_xlabel("Grau", fontsize=12)
-    ax1.set_ylabel("Frequência", fontsize=12)
-    ax1.set_title("Distribuição de Graus - Histograma", fontsize=14, fontweight="bold")
-    ax1.legend()
-    ax1.grid(True, alpha=0.3)
-
-    sorted_degrees = sorted(degree_counter.items())
-    degrees_x = [d for d, _ in sorted_degrees]
-    counts_y = [c for _, c in sorted_degrees]
-
-    ax2.loglog(degrees_x, counts_y, "o-", color="darkgreen", markersize=6, alpha=0.7)
-    ax2.set_xlabel("Grau (log)", fontsize=12)
-    ax2.set_ylabel("Frequência (log)", fontsize=12)
-    ax2.set_title(
-        "Distribuição de Graus - Escala Log-Log", fontsize=14, fontweight="bold"
-    )
-    ax2.grid(True, alpha=0.3, which="both")
+    ax.set_xlabel("Grau", fontsize=12)
+    ax.set_ylabel("Frequência", fontsize=12)
+    ax.set_title("Distribuição de Graus - Histograma", fontsize=14, fontweight="bold")
+    ax.legend()
+    ax.grid(True, alpha=0.3)
 
     plt.tight_layout()
     plt.savefig(output_path, dpi=300, bbox_inches="tight")
@@ -239,7 +246,7 @@ def visualize_degree_distribution(
 def visualize_distance_heatmap(
     graph_dict: dict,
     sample_size: int = 30,
-    output_path: str = "../../out/bitcoin_distance_heatmap.png",
+    output_path: str = "bitcoin_distance_heatmap.png",
 ):
 
     algo = Algorithms(graph_dict)
@@ -289,8 +296,151 @@ def visualize_distance_heatmap(
     finite_distances = distance_matrix[distance_matrix <= max_finite]
 
 
+def create_html_wrapper_part2(
+    image_filename: str, title: str, output_path: str, description: str = ""
+):
+
+    html_content = f"""<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{title} - Bitcoin Alpha Network</title>
+    <style>
+        * {{
+            margin: 0;
+            padding: 0;
+        }}
+        body {{
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f5f5f5;
+        }}
+        header {{
+            background-color: #333;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }}
+        nav {{
+            display: flex;
+            justify-content: center;
+            gap: 0;
+        }}
+        .menu-item {{
+            position: relative;
+        }}
+        .menu-item > a {{
+            color: white !important;
+            text-decoration: none;
+            padding: 1rem;
+            display: block;
+        }}
+        .menu-item:hover {{
+            background-color: #555;
+        }}
+        .submenu {{
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #444;
+            min-width: 250px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            z-index: 1000;
+        }}
+        .menu-item:hover .submenu {{
+            display: block;
+        }}
+        .submenu a {{
+            color: white !important;
+            text-decoration: none;
+            padding: 0.75rem 1rem;
+            display: block;
+            white-space: nowrap;
+        }}
+        .submenu a:hover {{
+            background-color: #666;
+        }}
+        .container {{
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }}
+        h1 {{
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }}
+        .description {{
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 16px;
+            line-height: 1.6;
+        }}
+        .image-container {{
+            text-align: center;
+            margin: 20px 0;
+        }}
+        .image-container img {{
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }}
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="menu-item">
+                <a href="#">Grafo dos Bairros do Recife</a>
+                <div class="submenu">
+                    <a href="../1. Grafo dos Bairros do Recife/1.9 Apresentação interativa do grafo/grafo_interativo.html">Grafo Interativo</a>
+                    <a href="../1. Grafo dos Bairros do Recife/1.7 Transforme o percurso em árvore e mostre/arvore_percurso.html">Árvore de Percurso</a>
+                    <a href="../1. Grafo dos Bairros do Recife/1.8 Explorações e visualizações analíticas/histograma_distribuicao_graus.html">Histograma de Distribuição de Graus</a>
+                    <a href="../1. Grafo dos Bairros do Recife/1.8 Explorações e visualizações analíticas/ranking_densidade_microrregiao.html">Ranking de Densidade por Microrregião</a>
+                    <a href="../1. Grafo dos Bairros do Recife/1.8 Explorações e visualizações analíticas/subgrafo_top10_bairros.html">Subgrafo Top 10 Bairros</a>
+                </div>
+            </div>
+            <div class="menu-item">
+                <a href="#">Dataset de Histórico de Transações Bitcoin</a>
+                <div class="submenu">
+                    <a href="bitcoin_degree_distribution.html">Distribuicao de Graus</a>
+                    <a href="bitcoin_distance_heatmap.html">Heatmap de Distancias</a>
+                    <a href="bitcoin_graph_sample.html">Amostra do Grafo</a>
+                    <a href="report.html">Relatorio de Testes</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1>{title}</h1>
+        {f'<p class="description">{description}</p>' if description else ''}
+        <div class="image-container">
+            <img src="{image_filename}" alt="{title}">
+        </div>
+    </div>
+</body>
+</html>"""
+
+    output_path = Path(output_path)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+
+    with open(output_path, "w", encoding="utf-8") as f:
+        f.write(html_content)
+
+    print(f"HTML wrapper criado: {output_path}")
+
+
 def main():
-    project_root = Path(__file__).parent.parent.parent
+    project_root = Path(__file__).parent.parent
     data_path = project_root / "data" / "bitcoin_alpha.csv"
     output_dir = Path(PART2_DIR)
 
@@ -300,6 +450,35 @@ def main():
 
     visualize_degree_distribution(
         graph_obj, output_path=str(output_dir / "bitcoin_degree_distribution.png")
+    )
+    create_html_wrapper_part2(
+        "bitcoin_degree_distribution.png",
+        "Distribuição de Graus - Bitcoin Alpha",
+        str(output_dir / "bitcoin_degree_distribution.html"),
+        "Análise da distribuição de graus dos nós na rede Bitcoin Alpha. "
+        "O histograma mostra a frequência de cada grau.",
+    )
+
+    visualize_distance_heatmap(
+        graph_dict, output_path=str(output_dir / "bitcoin_distance_heatmap.png")
+    )
+    create_html_wrapper_part2(
+        "bitcoin_distance_heatmap.png",
+        "Heatmap de Distâncias - Bitcoin Alpha",
+        str(output_dir / "bitcoin_distance_heatmap.html"),
+        "Matriz de distâncias (número de arestas) entre os 30 nós mais conectados da rede. "
+        "Cores mais quentes indicam distâncias maiores entre os nós.",
+    )
+
+    visualize_graph_sample(
+        edges_data, output_path=str(output_dir / "bitcoin_graph_sample.png")
+    )
+    create_html_wrapper_part2(
+        "bitcoin_graph_sample.png",
+        "Amostra do Grafo - Bitcoin Alpha",
+        str(output_dir / "bitcoin_graph_sample.html"),
+        "Visualização de uma amostra de 50 nós usando o método Snowball (Bola de Neve). "
+        "As cores das arestas representam o rating de confiança entre os usuários.",
     )
 
 

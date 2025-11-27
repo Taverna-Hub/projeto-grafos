@@ -18,6 +18,7 @@ from constants import (
     GRAUS_PATH,
     DISTANCIAS_ENDERECOS_PATH,
     PERCURSO_NOVA_DESCOBERTA_SETUBAL_PATH,
+    DATA_DIR,
 )
 
 
@@ -40,7 +41,7 @@ Exemplos de uso:
   %(prog)s visualize [json_file]        # Gera visualização de árvore de percurso a partir de JSON -> arvore_percurso.html e arvore_percurso.png
   %(prog)s interactive                  # Gera grafo interativo HTML com caminho destacado -> grafo_interativo.html
   %(prog)s plots                        # Gera todos os gráficos estáticos (densidade, subgrafo, histograma)
-  %(prog)s test                         # Executa testes abrangentes (BFS, DFS, Dijkstra, Bellman-Ford) -> report.json
+  %(prog)s test                         # Executa testes (BFS, DFS, Dijkstra, Bellman-Ford) + visualizações do dataset maior
   %(prog)s info --type global           # Mostra métricas globais
   %(prog)s info --type microregions     # Mostra métricas por microrregião
   %(prog)s info --type ego              # Mostra ranking por densidade ego
@@ -101,7 +102,7 @@ Exemplos de uso:
         # Comando: test
         test_parser = subparsers.add_parser(
             "test",
-            help="Executa testes abrangentes (BFS, DFS, Dijkstra, Bellman-Ford) -> report.json",
+            help="Executa testes (BFS, DFS, Dijkstra, Bellman-Ford) + visualizações do dataset maior",
         )
 
         # Comando: info
@@ -365,7 +366,7 @@ Exemplos de uso:
             from comprehensive_tests import main as run_comprehensive_tests
             from constants import PART2_DIR
 
-            print("\nExecutando testes...")
+            print("\nExecutando testes dos algoritmos...")
             print("  • BFS (Busca em Largura)")
             print("  • DFS (Busca em Profundidade)")
             print("  • Dijkstra (Caminhos Mínimos)")
@@ -398,6 +399,88 @@ Exemplos de uso:
             print("\n" + "=" * 60)
             print(f"✓ Relatório completo salvo em: {report_path}")
             print("=" * 60)
+
+            # Generate visualizations
+            print("\n" + "=" * 60)
+            print("GERANDO VISUALIZAÇÕES DO DATASET MAIOR")
+            print("=" * 60)
+
+            try:
+                from visualize import (
+                    load_bitcoin_graph,
+                    visualize_degree_distribution,
+                    visualize_distance_heatmap,
+                    visualize_graph_sample,
+                    create_html_wrapper_part2,
+                )
+
+                bitcoin_alpha_path = str(DATA_DIR / "bitcoin_alpha.csv")
+                output_dir = Path(PART2_DIR)
+
+                print("\nCarregando grafo Bitcoin Alpha...")
+                graph_dict, graph_obj, edges_data = load_bitcoin_graph(
+                    bitcoin_alpha_path
+                )
+                print(f"  ✓ {len(graph_dict)} nós carregados")
+                print(f"  ✓ {len(edges_data)} arestas carregadas")
+
+                print("\n1/3 - Gerando distribuição de graus...")
+                visualize_degree_distribution(
+                    graph_obj,
+                    output_path=str(output_dir / "bitcoin_degree_distribution.png"),
+                )
+                create_html_wrapper_part2(
+                    "bitcoin_degree_distribution.png",
+                    "Distribuição de Graus - Bitcoin Alpha",
+                    str(output_dir / "bitcoin_degree_distribution.html"),
+                    "Análise da distribuição de graus dos nós na rede Bitcoin Alpha. "
+                    "O histograma mostra a frequência de cada grau.",
+                )
+                print("    ✓ bitcoin_degree_distribution.html")
+                print("    ✓ bitcoin_degree_distribution.png")
+
+                print("\n2/3 - Gerando mapa de calor de distâncias...")
+                visualize_distance_heatmap(
+                    graph_dict,
+                    output_path=str(output_dir / "bitcoin_distance_heatmap.png"),
+                )
+                create_html_wrapper_part2(
+                    "bitcoin_distance_heatmap.png",
+                    "Heatmap de Distâncias - Bitcoin Alpha",
+                    str(output_dir / "bitcoin_distance_heatmap.html"),
+                    "Matriz de distâncias (número de arestas) entre os 30 nós mais conectados da rede. "
+                    "Cores mais quentes indicam distâncias maiores entre os nós.",
+                )
+                print("    ✓ bitcoin_distance_heatmap.html")
+                print("    ✓ bitcoin_distance_heatmap.png")
+
+                print("\n3/3 - Gerando amostra do grafo (Snowball)...")
+                visualize_graph_sample(
+                    edges_data, output_path=str(output_dir / "bitcoin_graph_sample.png")
+                )
+                create_html_wrapper_part2(
+                    "bitcoin_graph_sample.png",
+                    "Amostra do Grafo - Bitcoin Alpha",
+                    str(output_dir / "bitcoin_graph_sample.html"),
+                    "Visualização de uma amostra de 50 nós usando o método Snowball (Bola de Neve). "
+                    "As cores das arestas representam o rating de confiança entre os usuários.",
+                )
+                print("    ✓ bitcoin_graph_sample.html")
+                print("    ✓ bitcoin_graph_sample.png")
+
+                print("\n" + "=" * 60)
+                print("✓ Todas as visualizações foram geradas com sucesso!")
+                print(f"✓ Arquivos salvos em: {PART2_DIR}")
+                print("=" * 60)
+
+            except Exception as viz_error:
+                print(f"\n⚠️  Aviso: Erro ao gerar visualizações: {viz_error}")
+                import traceback
+
+                traceback.print_exc()
+                print(
+                    "    Os testes foram executados com sucesso, mas as visualizações falharam."
+                )
 
             return 0
 
