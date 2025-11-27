@@ -63,8 +63,9 @@ def bellman_ford_with_cycle_detection(
 
 def test_bellman_ford_bitcoin_alpha():
 
-    csv_path = Path(__file__).parent.parent / "data" / "bitcoin_alpha.csv"
     algo = Algorithms()
+    
+    csv_path = Path(__file__).parent.parent / "data" / "bitcoin_alpha_no_negative.csv"
     graph_positive = algo.load_graph_from_csv(str(csv_path))
 
     all_nodes = list(graph_positive.keys())
@@ -92,12 +93,12 @@ def test_bellman_ford_bitcoin_alpha():
         "negative_cycle": False,
     }
 
-    graph_negative = create_graph_with_negative_weights()
+    graph_negative = create_graph_with_negative_cycle()
 
     tracemalloc.start()
     start_time = time.perf_counter()
 
-    _, has_cycle = bellman_ford_with_cycle_detection("A", graph_negative)
+    _, has_cycle = bellman_ford_with_cycle_detection(source, graph_negative)
 
     end_time = time.perf_counter()
     _, peak = tracemalloc.get_traced_memory()
@@ -114,25 +115,30 @@ def test_bellman_ford_bitcoin_alpha():
         "peak_memory_kb": peak / 1024,
     }
 
-    graph_cycle = create_graph_with_negative_cycle()
+    csv_path_negative = Path(__file__).parent.parent / "data" / "bitcoin_alpha.csv"
+    graph_cycle = algo.load_graph_from_csv(str(csv_path_negative))
+
     tracemalloc.start()
     start_time = time.perf_counter()
 
-    _, has_cycle = bellman_ford_with_cycle_detection("A", graph_cycle)
+    distances = algo.bellman_ford(source, graph_cycle)
+    reachable = len([d for d in distances.values() if d != float("inf")])
 
     end_time = time.perf_counter()
     _, peak = tracemalloc.get_traced_memory()
     tracemalloc.stop()
 
+    _, has_cycle = bellman_ford_with_cycle_detection(source, graph_cycle)
     elapsed_time = end_time - start_time
 
     result_3 = {
         "test": "negative_cycle",
-        "source": "A",
-        "total_nodes": len(graph_cycle),
-        "negative_cycle": has_cycle,
+        "source": source,
+        "total_nodes": len(graph_positive),
+        "reachable_nodes": reachable,
         "time_seconds": elapsed_time,
-        "peak_memory_kb": peak / 1024,
+        "peak_memory_mb": peak / 1024 / 1024,
+        "negative_cycle": has_cycle ,
     }
 
     results = [result_1, result_2, result_3]
